@@ -1,0 +1,21 @@
+Sub-tasks:
+The temperature of a given day (Emelie)
+The warmest and coldest day of each year (Shi)
+The mean temperature of each year depending on latitude (Alex) 
+    - 3D plot 
+The day seasons start for each year (Jessamy)
+    - day to year diagram 
+    - or entries to day histogram 
+
+Dataset: Lund
+         all datasets for 3D plot 
+
+files:
+rootlogon.C
+    - merge all files
+project.cpp
+    - using class and functions 
+tempTrender.h
+    - define class 
+tempTrender.cpp
+    - define functions
