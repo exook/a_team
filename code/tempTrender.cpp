@@ -13,3 +13,5 @@ void tempTrender::startDaySeasons(){
     cout << endl;
     cout << "Calculating on which day the seasons start each year" << endl;
 }
+
+
