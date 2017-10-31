@@ -2,11 +2,14 @@
 #define TEMPTRENDER_H
 
 #include <string>
+using namespace std;
 
 class tempTrender {
 	public:
-	tempTrender(std::string filePath); //Construct using the specified file
+	tempTrender(string filePath); //Construct using the specified file
 	~tempTrender() {} //Destructor
+    
+    void startDaySeasons(); 
 	
 	//void tempOnDay(int monthToCalculate, int dayToCalculate); //Make a histogram of the temperature on this day
 	//void tempOnDay(int dateToCalculate); //Make a histogram of the temperature on this date
@@ -15,7 +18,7 @@ class tempTrender {
 	//void tempPerYear(int yearToExtrapolate); //Make a histogram of average temperature per year, then fit and extrapolate to the given year
 
 	private:
-	
+    string path;
 };
 
 #endif

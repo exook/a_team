@@ -1,0 +1,28 @@
+git pull upstream master
+-> pull latest version of the shared github folder
+
+(code) 
+
+git status
+-> shows which files are new and not just being tracks and the files that have changed
+
+git add . 
+-> start tracking (add) all changes made (listed by git status)
+
+git commit -m “commit message”
+-> commit all changes added with a message
+
+git push origin master 
+-> push the changes (in the master branch) to your own github 
+
+or
+
+git push origin <branch name>
+-> push the changes (in the branch with name <branch name>) to your own github
+
+(create pull request)
+
+
+
+git remote -v 
+-> shows which remote connections you have (e.i origin and upstream) with url
