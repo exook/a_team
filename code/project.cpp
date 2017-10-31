@@ -2,8 +2,10 @@
 #include <string>
 
 void project() {
-	string pathToFile = "/home/path/to/file/"; //Put the path to your data file here
-	//tempTrender t(pathToFile); //Instantiate your analysis object
+	string pathToFile = "/Users/jessamymol/Desktop/Code/MNXB01_Project/a_team/datasets"; //Put the path to your data file here
+	tempTrender t(pathToFile); //Instantiate your analysis object
+    
+    t.startDaySeasons();
 	
 	//t.tempOnDay(8, 23); //Call some functions that you've implemented
 	//t.tempOnDay(235);
