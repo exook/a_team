@@ -1,0 +1,39 @@
+﻿Stationsnamn;Klimatnummer;Mäthöjd (meter över marken)
+Lund;53430;2.0
+
+Parameternamn;Beskrivning;Enhet
+Lufttemperatur;momentanvärde, 1 gång/tim;degree celsius
+
+Tidsperiod (fr.o.m);Tidsperiod (t.o.m);Höjd (meter över havet);Latitud (decimalgrader);Longitud (decimalgrader)
+1992-12-07 00:00:00;2015-11-30 23:59:59;25.0;55.693;13.229
+1974-06-01 00:00:00;1992-12-06 23:59:59;50.0;55.7089;13.2026
+1961-01-01 00:00:00;1974-05-31 23:59:59;73.0;55.7089;13.2026
+
+Datum;Tid (UTC);Lufttemperatur;Kvalitet;;Tidsutsnitt:
+1961-01-01;06:00:00;0.4;G;;Kvalitetskontrollerade historiska data (utom de senaste 3 mån)
+1961-01-01;12:00:00;0.6;G;;Tidsperiod (fr.o.m.) = 1961-01-01 00:00:00 (UTC)
+1961-01-01;18:00:00;1.8;G;;Tidsperiod (t.o.m.) = 2015-09-01 06:00:00 (UTC)
+1961-01-02;06:00:00;3.0;G;;Samplingstid = Ej angivet
+1961-01-02;12:00:00;2.6;G;;
+1961-01-02;18:00:00;0.8;G;;Kvalitetskoderna:
+1961-01-03;06:00:00;2.0;G;;Grön (G) = Kontrollerade och godkända värden.
+1961-01-03;12:00:00;0.8;G;;Gul (Y) = Misstänkta eller aggregerade värden. Grovt kontrollerade arkivdata och okontrollerade realtidsdata (senaste 2 tim).
+1961-01-03;18:00:00;3.8;G;;
+1961-01-04;06:00:00;1.4;G;;Orsaker till saknade data:
+1961-01-04;12:00:00;2.5;G;;  stationen eller givaren har varit ur funktion.
+1961-01-04;18:00:00;2.5;G;;  kvalitetskontrollerna har felmarkerat data (röd kvalitetskod). Efterföljande manuell granskning godkänner, rättar eller underkänner data.
+1961-01-05;06:00:00;1.8;G
+1961-01-05;12:00:00;2.8;G
+1961-01-05;18:00:00;2.2;G
+1961-01-06;06:00:00;1.8;G
+1961-01-06;12:00:00;2.4;G
+1961-01-06;18:00:00;1.6;G
+1961-01-07;06:00:00;2.0;G
+1961-01-07;12:00:00;2.4;G
+1961-01-07;18:00:00;0.6;G
+1961-01-08;06:00:00;0.2;G
+1961-01-08;12:00:00;0.4;G
+1961-01-08;18:00:00;0.4;G
+1961-01-09;06:00:00;0.8;G
+1961-01-09;12:00:00;2.8;G
+1961-01-09;18:00:00;3.0;G
