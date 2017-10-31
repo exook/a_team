@@ -11,6 +11,7 @@ class tempTrender {
 	tempTrender(string filePath); //Construct using the specified file
 	~tempTrender() {} //Destructor
     
+    void openFile(string fileName);
     void startDaySeasons(); 
 	
 	//void tempOnDay(int monthToCalculate, int dayToCalculate); //Make a histogram of the temperature on this day
