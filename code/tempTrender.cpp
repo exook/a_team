@@ -1,5 +1,6 @@
 #include <iostream>
 #include "tempTrender.h"
+#include <fstream>
 
 tempTrender::tempTrender(string filePath) {
     cout << endl;
@@ -9,9 +10,34 @@ tempTrender::tempTrender(string filePath) {
     path = filePath;
 }
 
+void tempTrender::openFile(string fileName){
+    ifstream dataFile(path + fileName);
+    
+    if (!dataFile) {
+        cout << "Error could not read data file" << endl;
+        //return 0;
+    }
+    else {
+        cout << "Succesfully opened data file" << endl;
+    }
+    
+    /*
+    string date;
+    string time;
+    double T;
+    char kvali;
+    
+    while (dataFile.good()) {
+        getline(dataFile, date, ';');
+        cout << "Date: " <<
+    }
+    */
+    
+    dataFile.close();
+}
+
 void tempTrender::startDaySeasons(){
     cout << endl;
     cout << "Calculating on which day the seasons start each year" << endl;
+    openFile("smhi-opendata_Lund.csv");
 }
-
-

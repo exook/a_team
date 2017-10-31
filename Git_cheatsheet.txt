@@ -9,6 +9,11 @@ git status
 git add . 
 -> start tracking (add) all changes made (listed by git status)
 
+or 
+
+git add <file name>
+-> start tracking (add) changes made in file <file name>
+
 git commit -m “commit message”
 -> commit all changes added with a message
 
