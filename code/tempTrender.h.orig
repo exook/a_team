@@ -2,8 +2,11 @@
 #define TEMPTRENDER_H
 
 #include <string>
+<<<<<<< HEAD
 #include <vector>
 
+=======
+>>>>>>> a1f6de945f261c559c2218466a440f44b8e8aaf9
 using namespace std;
 
 class tempTrender {
