@@ -8,7 +8,7 @@ void tempTrender::startDaySeasons(){
     vector <vector <string> > dataSeasons;
     readData("smhi-opendata_Lund.csv", dataSeasons);
     
-    print(dataSeasons);
+    print(dataSeasons, 10);
 }
 
 
