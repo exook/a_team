@@ -23,6 +23,7 @@ void tempTrender::readData(string fileName, vector <vector <string> > &data) {
     }
     
     string line;
+    bool save = false; //to skip the first lines
     //read in data
     while (getline(dataFile, line)) {
         // skip empty lines
@@ -32,6 +33,15 @@ void tempTrender::readData(string fileName, vector <vector <string> > &data) {
             // break a row into different different parts based on the data structure
             while (helpstring) {
                 string data_of_row;
+                
+                if (!save) {
+                    getline(helpstring, data_of_row, ';');
+                    if (data_of_row == "Datum"){
+                        save = true;
+                        break;
+                    }
+                    break;
+                }
                 
                 for (int ii = 0; ii<2; ii++) {
                     // break time into year month and day
@@ -52,7 +62,9 @@ void tempTrender::readData(string fileName, vector <vector <string> > &data) {
                     record_of_row.push_back(data_of_row);
                 }
             }
-            data.push_back(record_of_row);
+            if (save) {
+                data.push_back(record_of_row);
+            }
         }
     }
     
@@ -67,15 +79,17 @@ void tempTrender::print(const vector <vector <string> > vec){
     //prints the values in the vector
     cout << endl;
     
-    for (int i=0; i < int(vec.size()); i++)
+    //int lines = int(vec.size());
+    int lines = 10;
+    
+    for (int i=0; i < lines; i++)
     {
         for (int j = 0; j < int(vec.at(i).size()); j++)
         {
-            //cout << vec.at(i).at(j) << " ";
+            cout << vec.at(i).at(j) << " ";
         }
-        //cout << endl;
+        cout << endl;
     }
-    cout << "print" << endl;
 }
 
 
