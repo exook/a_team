@@ -21,18 +21,6 @@ void tempTrender::openFile(string fileName){
         cout << "Succesfully opened data file" << endl;
     }
     
-    /*
-    string date;
-    string time;
-    double T;
-    char kvali;
-    
-    while (dataFile.good()) {
-        getline(dataFile, date, ';');
-        cout << "Date: " <<
-    }
-    */
-    
     dataFile.close();
 }
 
