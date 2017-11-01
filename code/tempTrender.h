@@ -24,7 +24,7 @@ class tempTrender {
 	private:
     string path;
     void readData(string fileName, vector <vector <string> > &data);
-    void print(vector <vector <string> > vec);
+    void print(const vector <vector <string> > vec,int lines);
 };
 
 #endif
