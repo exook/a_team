@@ -1,28 +1,35 @@
 #include <iostream>
 #include "tempTrender.h"
 
+//prints data in vector for the first given number of lines
+void printVector(const vector <vector <double> > vec, int lines){
+    
+    for (int i=0; i < lines; i++)
+    {
+        for (int j = 0; j < int(vec.at(i).size()); j++)
+        {
+            cout << vec.at(i).at(j) << " ";
+        }
+        cout << endl;
+    }
+}
+
 //calculate average temperature on each day
 void calcAverageTemp(const vector <vector <string> > &data, vector <vector <double> > &averageTemp){
-//    int year;
-//    int month;
+
     int day;
-    int yearPrevius = 0;
-    int monthPrevius = 0;
-    int dayPrevius = 0;
     
-    double tempSum = 0;
-    int counterTimes = 0;
+    //load data first day
+    int yearPrevius = stoi(data.at(0).at(0));
+    int monthPrevius = stoi(data.at(0).at(1));
+    int dayPrevius = stoi(data.at(0).at(2));
     
-    cout << int(data.size()) << endl;
-    cout << int(data.at(0).size()) << endl;
-    cout << int(data.at(1).size()) << endl;
-    cout << int(data.at(2).size()) << endl;
+    double tempSum = stod(data.at(0).at(6));
+    int counterTimes = 1;
     
     //loop through lines in the data
-    for (int i=0; i < int(data.size()); i++)
+    for (int i=1; i < int(data.size()); i++)
     {
-//        year = int(data.at(i).at(0));
-//        month = int(data.at(i).at(1));
         day = stoi(data.at(i).at(2)); //stoi converts str to int
         
         vector<double> outputLine;
@@ -40,13 +47,13 @@ void calcAverageTemp(const vector <vector <string> > &data, vector <vector <doub
             //calc average temperature of a date and save to vector
             outputLine.push_back(tempSum/counterTimes);
             
+            //save date and average temperature in vector
+            averageTemp.push_back(outputLine);
+            
             //start temperature summation for new date
             tempSum = stod(data.at(i).at(6)); //stod converts str to double
             counterTimes = 1;
         }
-        
-        //save date and average temperature in vector
-        averageTemp.push_back(outputLine);
         
         yearPrevius = stoi(data.at(i).at(0));
         monthPrevius = stoi(data.at(i).at(1));
@@ -65,9 +72,13 @@ void tempTrender::startDaySeasons(){
     
     readData("smhi-opendata_Lund.csv", dataSeasons);
     
-    //calcAverageTemp(dataSeasons, averageTempDay);
+    calcAverageTemp(dataSeasons, averageTempDay);
     
-    print(dataSeasons, 1);
+    print(dataSeasons, 10);
+    
+    cout << endl << endl;
+    
+    printVector(averageTempDay, 10);
 }
 
 

@@ -86,7 +86,7 @@ void tempTrender::readData(string fileName, vector <vector <string> > &data) {
 }
 
 //prints data in vector for the first given number of lines
-void tempTrender::print(const vector <vector <string> > vec,int lines){
+void tempTrender::print(const vector <vector <string> > vec, int lines){
     cout << endl;
     
     //loop through elements in the vector and print them
