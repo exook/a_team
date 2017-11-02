@@ -1,3 +1,4 @@
 2017-10-30 : Created change log, created Workplan and discussed plan and setup github.
 2017-10-31 : Created git cheatsheet, made changes in the constructor and a few other minor changes. 
 2017-11-01 : Create separate files, integrate readData function, set up structure with new files.
+2017-11-02 : Created the function for temperature on a certain day, that takes day and month as input

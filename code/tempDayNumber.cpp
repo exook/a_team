@@ -1,17 +1,17 @@
 #include <iostream>
 #include "tempTrender.h"
 #include <sstream> // maybe include in tempTrender.h instead
-// ROOT library obejcts
+// ROOT library objects
 #include <TF1.h> // 1d function class
 #include <TH1.h> // 1d histogram classes
 #include <TStyle.h>  // style object
 #include <TMath.h>   // math functions
 #include <TCanvas.h> // canvas object
 
-// lägga till att man kan välja tid på dygnet?
-//add your functions :)
+// Adding the possibility to choose time of day?
 
-void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
+
+void tempTrender::tempOnDayNumber(int dateToCalculate){
     cout << endl;
     cout << "Calculating the temperature for a certain day in Lund" << endl;
     
@@ -24,7 +24,18 @@ void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
     // Create histogram
     TH1F* hist = new TH1F("hist", "Temperature;Temperature [#circC];Entries", 300, -20, 40);
     
-    // DataOnDay is a string vector, input month and day are integers
+    // Get date (dayToCalculate and monthToCalculate) from the input day number
+    int dayToCalculate;
+    int monthToCalculate = 0;
+    int months[13] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365};
+    while (months[monthToCalculate] < dateToCalculate) {
+        monthToCalculate++;
+    }
+    
+    dayToCalculate = dateToCalculate - months[monthToCalculate - 1];
+    
+    
+    // DataOnDay is a string vector, monthToCalculate and dayToCalculate are integers
     stringstream ss;
     ss << monthToCalculate;
     string month = ss.str(); // Converts month int to string, needed in for-loop condition
