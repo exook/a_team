@@ -3,6 +3,7 @@
 #include <sstream>
 #include "tempTrender.h"
 
+//constructor
 tempTrender::tempTrender(string filePath) {
     cout << endl;
     cout << "This program calculates trends in the temparture datasets." << endl;
@@ -11,10 +12,12 @@ tempTrender::tempTrender(string filePath) {
     path = filePath;
 }
 
+//read in data from file into 2D vector
 void tempTrender::readData(string fileName, vector <vector <string> > &data) {
-    
+    //open file
     ifstream dataFile(path + fileName);
     
+    //check if opened correctly
     if (!dataFile) {
         cout << "Error could not read data file" << endl;
     }
@@ -24,6 +27,7 @@ void tempTrender::readData(string fileName, vector <vector <string> > &data) {
     
     string line;
     bool save = false; //to skip the first lines
+    
     //read in data
     while (getline(dataFile, line)) {
         // skip empty lines
@@ -34,6 +38,7 @@ void tempTrender::readData(string fileName, vector <vector <string> > &data) {
             while (helpstring) {
                 string data_of_row;
                 
+                //find the end of the header lines
                 if (!save) {
                     getline(helpstring, data_of_row, ';');
                     if (data_of_row == "Datum"){
@@ -72,16 +77,15 @@ void tempTrender::readData(string fileName, vector <vector <string> > &data) {
         cerr<< "Error reading the file!\n";
     }
     
+    //close file 
     dataFile.close();
 }
 
-void tempTrender::print(const vector <vector <string> > vec){
-    //prints the values in the vector
+//prints data in vector for the first given number of lines
+void tempTrender::print(const vector <vector <string> > vec,int lines){
     cout << endl;
     
-    //int lines = int(vec.size());
-    int lines = 10;
-    
+    //loop through elements in the vector and print them
     for (int i=0; i < lines; i++)
     {
         for (int j = 0; j < int(vec.at(i).size()); j++)
