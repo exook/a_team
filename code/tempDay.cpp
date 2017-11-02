@@ -1,15 +1,15 @@
 #include <iostream>
 #include "tempTrender.h"
 #include <sstream> // maybe include in tempTrender.h instead
-// ROOT library obejcts
+// ROOT library objects
 #include <TF1.h> // 1d function class
 #include <TH1.h> // 1d histogram classes
 #include <TStyle.h>  // style object
 #include <TMath.h>   // math functions
 #include <TCanvas.h> // canvas object
 
-// lägga till att man kan välja tid på dygnet?
-//add your functions :)
+// Adding the possibility to choose time of day?
+
 
 void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
     cout << endl;
