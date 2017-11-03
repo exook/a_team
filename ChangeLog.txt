@@ -3,6 +3,6 @@
 2017-11-01 : Create separate files, integrate readData function, set up structure with new files.
 Branch off and start working on average temperature function (Jessamy)
 2017-11-02 : Finished average temperature per day function (Jessamy)
-2017-11-02 : Created the function for temperature on a certain day, that takes day and month as input
+2017-11-02 : Created the function for temperature on a certain day, that takes day and month as input. Also the same function with day number as input (Emelie)
 2017-11-03 : Finished function finding first day of winter (Jessamy) 
 
