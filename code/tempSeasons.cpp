@@ -74,11 +74,14 @@ void calcAverageTemp(const vector <vector <string> > &data, vector <vector <doub
     }
 }
 
-//finds the first day of winter for each year and saves the date in a vector 
+//finds the first day of each winter and saves the date in a vector
 void beginingWinter(const vector <vector <double> > &averageTemp, vector <vector <int> > &beginDayWinter){
     
     int yearPrevius = averageTemp.at(0).at(0)-1; //first year in data -1
-    int year;
+    int monthPrevius = 0;
+    int yearFirst;
+    int monthFirst;
+    int dayFirst;
     bool winterTemp;
     int counterDays = 0;
     
@@ -87,22 +90,34 @@ void beginingWinter(const vector <vector <double> > &averageTemp, vector <vector
         
         //is it a wintertemperature
         if (averageTemp.at(i).at(3) <= 0){
+            if (counterDays == 0) {
+                yearFirst = averageTemp.at(i).at(0);
+                monthFirst = averageTemp.at(i).at(1);
+                dayFirst = averageTemp.at(i).at(2);
+            }
             winterTemp = true;
             counterDays++;
             
+            //it is a different winter if it is in a different year
+            //but the beginning of two winters can be in the same year as long
+            //as one starts in month 1-5 and the other in month 7-12
+            bool differentYear = averageTemp.at(i).at(0) != yearPrevius;
+            bool differentWinter = monthPrevius<6 && averageTemp.at(i).at(1)>6;
+            
             //definition begining of winter
-            if (counterDays == 5 && (averageTemp.at(i).at(0) != yearPrevius)) {
+            if (counterDays == 5 && (differentYear || differentWinter)) {
                 
                 vector<int> outputLine;
                 
                 //save date first day winter of a year
-                outputLine.push_back(averageTemp.at(i).at(0));
-                outputLine.push_back(averageTemp.at(i).at(1));
-                outputLine.push_back(averageTemp.at(i).at(2));
+                outputLine.push_back(yearFirst);
+                outputLine.push_back(monthFirst);
+                outputLine.push_back(dayFirst);
                 
                 beginDayWinter.push_back(outputLine);
                 
                 yearPrevius = averageTemp.at(i).at(0);
+                monthPrevius = averageTemp.at(i).at(1);
             }
         }
         else {

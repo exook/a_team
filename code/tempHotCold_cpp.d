@@ -18,12 +18,12 @@
 ./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/type_traits
 ./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/utility
 ./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tuple
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tuple_03
 ./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/memory
 ./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/typeinfo
 ./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/exception
 ./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cstdint
 ./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/new
-./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__undef___deallocate
 ./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/limits
 ./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__undef_min_max
 ./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/iterator
@@ -53,5 +53,5 @@
 ./tempHotCold_cpp.so: tempTrender.h
 ./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector
 ./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__split_buffer
-./tempHotCold_cpp.so: /opt/local/libexec/root6/include/root/RVersion.h /opt/local/libexec/root6/include/root/RConfig.h /opt/local/libexec/root6/include/root/TClass.h /opt/local/libexec/root6/include/root/TDictAttributeMap.h /opt/local/libexec/root6/include/root/TInterpreter.h /opt/local/libexec/root6/include/root/TROOT.h /opt/local/libexec/root6/include/root/TBuffer.h /opt/local/libexec/root6/include/root/TMemberInspector.h /opt/local/libexec/root6/include/root/TError.h /opt/local/libexec/root6/include/root/RtypesImp.h /opt/local/libexec/root6/include/root/TIsAProxy.h /opt/local/libexec/root6/include/root/TFileMergeInfo.h /opt/local/libexec/root6/include/root/TCollectionProxyInfo.h /opt/local/bin/rootcling
+./tempHotCold_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/RVersion.h /usr/local/Cellar/root/6.10.08/include/root/RConfig.h /usr/local/Cellar/root/6.10.08/include/root/TClass.h /usr/local/Cellar/root/6.10.08/include/root/TDictAttributeMap.h /usr/local/Cellar/root/6.10.08/include/root/TInterpreter.h /usr/local/Cellar/root/6.10.08/include/root/TROOT.h /usr/local/Cellar/root/6.10.08/include/root/TBuffer.h /usr/local/Cellar/root/6.10.08/include/root/TMemberInspector.h /usr/local/Cellar/root/6.10.08/include/root/TError.h /usr/local/Cellar/root/6.10.08/include/root/RtypesImp.h /usr/local/Cellar/root/6.10.08/include/root/TIsAProxy.h /usr/local/Cellar/root/6.10.08/include/root/TFileMergeInfo.h /usr/local/Cellar/root/6.10.08/include/root/TCollectionProxyInfo.h /usr/local/Cellar/root/6.10.08/bin/rootcling
 tempHotCold_cpp__ROOTBUILDVERSION= 6.10/08
