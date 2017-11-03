@@ -74,11 +74,16 @@ void calcAverageTemp(const vector <vector <string> > &data, vector <vector <doub
     }
 }
 
-//finds the first day of winter for each year and saves the date in a vector 
+//finds the first day of each winter and saves the date in a vector
 void beginingWinter(const vector <vector <double> > &averageTemp, vector <vector <int> > &beginDayWinter){
     
     int yearPrevius = averageTemp.at(0).at(0)-1; //first year in data -1
-    int year;
+    int monthPrevius = 0;
+    int currentYear;
+    int currentMonth;
+    int yearFirst;
+    int monthFirst;
+    int dayFirst;
     bool winterTemp;
     int counterDays = 0;
     
@@ -87,22 +92,46 @@ void beginingWinter(const vector <vector <double> > &averageTemp, vector <vector
         
         //is it a wintertemperature
         if (averageTemp.at(i).at(3) <= 0){
+            //remember date of first winter day
+            if (counterDays == 0) {
+                yearFirst = averageTemp.at(i).at(0);
+                monthFirst = averageTemp.at(i).at(1);
+                dayFirst = averageTemp.at(i).at(2);
+            }
             winterTemp = true;
             counterDays++;
             
-            //definition begining of winter
-            if (counterDays == 5 && (averageTemp.at(i).at(0) != yearPrevius)) {
+            currentYear = averageTemp.at(i).at(0);
+            currentMonth = averageTemp.at(i).at(1);
+            
+            //The winter does not always start once per year (month 1 to 12)
+            //There are 4 cases of how the begin days of winters can follow
+            
+            //successive winters both early in year (month < 6)
+            bool case1 = (currentYear != yearPrevius) &&
+                         ((monthPrevius < 6) && (currentMonth < 6));
+            //successive winters both late in year (month > 6)
+            bool case2 = (currentYear != yearPrevius) &&
+                         ((monthPrevius > 6) && (currentMonth > 6));
+            //succesive winters are in the same year (one early the other late)
+            bool case3 = (monthPrevius < 6) && (currentMonth > 6);
+            //succesive winters skip a year (one winter late, the next early)
+            bool case4 = (monthPrevius > 6) && (currentYear - yearPrevius == 2);
+            
+            //definition begining of a new winter
+            if (counterDays == 5 && (case1 || case2 || case3 || case4)) {
                 
                 vector<int> outputLine;
                 
                 //save date first day winter of a year
-                outputLine.push_back(averageTemp.at(i).at(0));
-                outputLine.push_back(averageTemp.at(i).at(1));
-                outputLine.push_back(averageTemp.at(i).at(2));
+                outputLine.push_back(yearFirst);
+                outputLine.push_back(monthFirst);
+                outputLine.push_back(dayFirst);
                 
                 beginDayWinter.push_back(outputLine);
                 
                 yearPrevius = averageTemp.at(i).at(0);
+                monthPrevius = averageTemp.at(i).at(1);
             }
         }
         else {
