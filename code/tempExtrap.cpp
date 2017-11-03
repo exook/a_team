@@ -1,4 +1,6 @@
 #include <iostream>
 #include "tempTrender.h"
 
-//add your functions :)
+void tempTrender::tempEx(){
+	cout<<"i'm alex"<<endl;
+}
