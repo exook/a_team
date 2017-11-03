@@ -31,3 +31,29 @@ git push origin <branch name>
 
 git remote -v 
 -> shows which remote connections you have (e.i origin and upstream) with url
+
+
+git branch
+-> shows which branches exits and which one is the current branch (with star)
+
+git checkout -b <branch name>
+-> creates new local branch
+
+git push -u origin <branch name>
+-> creates the same new branch on the remote github 
+
+(code in branch and commit) 
+
+git checkout master 
+-> switch to master branch
+
+git merge <branch name> 
+-> locally merges the branches (conflict can occur but also be solved)
+
+git checkout -b <branch name>
+-> delete branch locally after merging
+
+git push -u origin <branch>
+-> delete branch on remote github after merging 
+
+
