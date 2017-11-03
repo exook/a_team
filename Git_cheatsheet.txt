@@ -50,10 +50,10 @@ git checkout master
 git merge <branch name> 
 -> locally merges the branches (conflict can occur but also be solved)
 
-git checkout -b <branch name>
+git branch -d <branch name>
 -> delete branch locally after merging
 
-git push -u origin <branch>
+git push origin :<branch name>
 -> delete branch on remote github after merging 
 
 
