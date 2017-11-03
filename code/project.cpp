@@ -2,7 +2,7 @@
 #include <string>
 
 void project() {
-	sstring pathToFile = "../datasets/";
+	string pathToFile = "../datasets/";
     tempTrender t(pathToFile); //Instantiate your analysis object
     
     //t.startDaySeasons();
