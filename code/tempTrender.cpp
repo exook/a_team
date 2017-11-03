@@ -27,6 +27,7 @@ void tempTrender::readData(string fileName, vector <vector <string> > &data) {
     
     string line;
     bool save = false; //to skip the first lines
+    bool start = false;
     
     //read in data
     while (getline(dataFile, line)) {
@@ -67,8 +68,11 @@ void tempTrender::readData(string fileName, vector <vector <string> > &data) {
                     record_of_row.push_back(data_of_row);
                 }
             }
-            if (save) {
+            if (save && start) {
                 data.push_back(record_of_row);
+            }
+            else if (save) {
+                start = true;
             }
         }
     }
@@ -82,7 +86,7 @@ void tempTrender::readData(string fileName, vector <vector <string> > &data) {
 }
 
 //prints data in vector for the first given number of lines
-void tempTrender::print(const vector <vector <string> > vec,int lines){
+void tempTrender::print(const vector <vector <string> > vec, int lines){
     cout << endl;
     
     //loop through elements in the vector and print them
