@@ -113,6 +113,47 @@ void beginingWinter(const vector <vector <double> > &averageTemp, vector <vector
     }
 }
 
+//finds the first day of winter for each year and saves the date in a vector
+void beginingSprint(const vector <vector <double> > &averageTemp, vector <vector <int> > &beginDaySpring){
+    
+    int yearPrevius = averageTemp.at(0).at(0)-1; //first year in data -1
+    int year;
+    bool springTemp;
+    int counterDays = 0;
+    int counterYear = 0;
+    
+    //loop through dates in the vector
+    for (int i=1; i < int(averageTemp.size()); i++){
+        
+        //is it a springtemperature
+        if (averageTemp.at(i).at(3) > 0 && averageTemp.at(i).at(3) < 10){
+            springTemp = true;
+            counterDays++;
+            
+            //definition begining of winter
+            if (counterDays == 7 && (averageTemp.at(i).at(0) != yearPrevius)) {
+                
+                vector<int> outputLine;
+                
+                //save date first day winter of a year
+                outputLine.push_back(averageTemp.at(i).at(0));
+                outputLine.push_back(averageTemp.at(i).at(1));
+                outputLine.push_back(averageTemp.at(i).at(2));
+                
+                beginDayWinter.push_back(outputLine);
+                
+                yearPrevius = averageTemp.at(i).at(0);
+            }
+        }
+        else {
+            winterTemp = false;
+            counterDays = 0;
+        }
+        
+    }
+}
+
+
 //creates day a season starts to year histograms for all seasons
 void tempTrender::startDaySeasons(){
     cout << endl;
