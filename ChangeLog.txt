@@ -2,4 +2,6 @@
 2017-10-31 : Created git cheatsheet, made changes in the constructor and a few other minor changes. 
 2017-11-01 : Create separate files, integrate readData function, set up structure with new files.
 Branch off and start working on average temperature function (Jessamy) 
-2017-11-02 : Finished average temperature per day function (Jessamy) 
+2017-11-02 : Finished average temperature per day function (Jessamy)
+2017-11-03 : Finished function finding first day of winter (Jessamy) 
+ 
