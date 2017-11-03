@@ -2,7 +2,20 @@
 #include "tempTrender.h"
 
 //prints data in vector for the first given number of lines
-void printVector(const vector <vector <double> > vec, int lines){
+void printDoubleVector(const vector <vector <double> > vec, int lines){
+    
+    for (int i=0; i < lines; i++)
+    {
+        for (int j = 0; j < int(vec.at(i).size()); j++)
+        {
+            cout << vec.at(i).at(j) << " ";
+        }
+        cout << endl;
+    }
+}
+
+//prints data in vector for the first given number of lines
+void printIntVector(const vector <vector <int> > vec, int lines){
     
     for (int i=0; i < lines; i++)
     {
@@ -61,6 +74,45 @@ void calcAverageTemp(const vector <vector <string> > &data, vector <vector <doub
     }
 }
 
+//finds the first day of winter for each year and saves the date in a vector 
+void beginingWinter(const vector <vector <double> > &averageTemp, vector <vector <int> > &beginDayWinter){
+    
+    int yearPrevius = averageTemp.at(0).at(0)-1; //first year in data -1
+    int year;
+    bool winterTemp;
+    int counterDays = 0;
+    
+    //loop through dates in the vector
+    for (int i=1; i < int(averageTemp.size()); i++){
+        
+        //is it a wintertemperature
+        if (averageTemp.at(i).at(3) <= 0){
+            winterTemp = true;
+            counterDays++;
+            
+            //definition begining of winter
+            if (counterDays == 5 && (averageTemp.at(i).at(0) != yearPrevius)) {
+                
+                vector<int> outputLine;
+                
+                //save date first day winter of a year
+                outputLine.push_back(averageTemp.at(i).at(0));
+                outputLine.push_back(averageTemp.at(i).at(1));
+                outputLine.push_back(averageTemp.at(i).at(2));
+                
+                beginDayWinter.push_back(outputLine);
+                
+                yearPrevius = averageTemp.at(i).at(0);
+            }
+        }
+        else {
+            winterTemp = false;
+            counterDays = 0;
+        }
+        
+    }
+}
+
 //creates day a season starts to year histograms for all seasons
 void tempTrender::startDaySeasons(){
     cout << endl;
@@ -76,16 +128,18 @@ void tempTrender::startDaySeasons(){
     
     vector <vector <string> > dataSeasons;
     vector <vector <double> > averageTempDay;
+    vector <vector <int> > firstDayWinter;
     
     readData("smhi-opendata_Lund.csv", dataSeasons);
-    
     calcAverageTemp(dataSeasons, averageTempDay);
+    beginingWinter(averageTempDay, firstDayWinter);
     
-    print(dataSeasons, 10);
-    
+    print(dataSeasons, 5);
     cout << endl << endl;
+    printDoubleVector(averageTempDay, 5);
+    cout << endl << endl;
+    printIntVector(firstDayWinter, 10);
     
-    printVector(averageTempDay, 10);
 }
 
 
