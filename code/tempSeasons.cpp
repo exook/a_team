@@ -67,6 +67,13 @@ void tempTrender::startDaySeasons(){
     cout << "Calculating on which day the seasons start each year" << endl;
     cout << endl;
     
+    //https://www.smhi.se/kunskapsbanken/meteorologi/arstider-1.1082
+    //winter t_average =< 0 for 5 days -> first of those days season begins
+    //spring 0< t_average <10 for 7 days
+    //summer t_average >= 10 for 5 days
+    //fall 0< t_average <10 for 5 days
+    
+    
     vector <vector <string> > dataSeasons;
     vector <vector <double> > averageTempDay;
     
