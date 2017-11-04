@@ -75,7 +75,7 @@ void calcAverageTemp(const vector <vector <string> > &data, vector <vector <doub
 }
 
 //finds the first day of each winter and saves the date in a vector
-void beginingWinter(const vector <vector <double> > &averageTemp, vector <vector <int> > &beginDayWinter){
+void beginningWinter(const vector <vector <double> > &averageTemp, vector <vector <int> > &beginDayWinter){
     
     int yearPrevius = averageTemp.at(0).at(0)-1; //first year in data -1
     int monthPrevius = 0;
@@ -143,13 +143,12 @@ void beginingWinter(const vector <vector <double> > &averageTemp, vector <vector
 }
 
 //finds the first day of winter for each year and saves the date in a vector
-void beginingSprint(const vector <vector <double> > &averageTemp, vector <vector <int> > &beginDaySpring){
+void beginningSpring(const vector <vector <double> > &averageTemp, vector <vector <int> > &beginDaySpring){
     
     int yearPrevius = averageTemp.at(0).at(0)-1; //first year in data -1
     int year;
     bool springTemp;
     int counterDays = 0;
-    int counterYear = 0;
     
     //loop through dates in the vector
     for (int i=1; i < int(averageTemp.size()); i++){
@@ -159,7 +158,8 @@ void beginingSprint(const vector <vector <double> > &averageTemp, vector <vector
             springTemp = true;
             counterDays++;
             
-            //definition begining of winter
+            //definition begining of spring
+            //TODO: check if after start winter??
             if (counterDays == 7 && (averageTemp.at(i).at(0) != yearPrevius)) {
                 
                 vector<int> outputLine;
@@ -169,13 +169,13 @@ void beginingSprint(const vector <vector <double> > &averageTemp, vector <vector
                 outputLine.push_back(averageTemp.at(i).at(1));
                 outputLine.push_back(averageTemp.at(i).at(2));
                 
-                beginDayWinter.push_back(outputLine);
+                beginDaySpring.push_back(outputLine);
                 
                 yearPrevius = averageTemp.at(i).at(0);
             }
         }
         else {
-            winterTemp = false;
+            springTemp = false;
             counterDays = 0;
         }
         
@@ -199,16 +199,20 @@ void tempTrender::startDaySeasons(){
     vector <vector <string> > dataSeasons;
     vector <vector <double> > averageTempDay;
     vector <vector <int> > firstDayWinter;
+    vector <vector <int> > firstDaySpring;
     
     readData("smhi-opendata_Lund.csv", dataSeasons);
     calcAverageTemp(dataSeasons, averageTempDay);
-    beginingWinter(averageTempDay, firstDayWinter);
+    beginningWinter(averageTempDay, firstDayWinter);
+    beginningSpring(averageTempDay, firstDaySpring);
     
-    print(dataSeasons, 5);
-    cout << endl << endl;
-    printDoubleVector(averageTempDay, 5);
-    cout << endl << endl;
+    //print(dataSeasons, 5);
+    //cout << endl << endl;
+    //printDoubleVector(averageTempDay, 5);
+    //cout << endl << endl;
     printIntVector(firstDayWinter, 10);
+    cout << endl << endl;
+    printIntVector(firstDaySpring, 10);
     
 }
 
