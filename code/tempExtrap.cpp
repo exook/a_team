@@ -18,5 +18,5 @@ void tempTrender::tempEx(){
                 hist->Fill(gRandom->Gaus(65.0, 5.0));
 
         TCanvas * c1= new TCanvas("c1", "random",5,5,800,600);
-        hist->Draw();
+        //hist->Draw();
 }
