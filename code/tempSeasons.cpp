@@ -1,21 +1,4 @@
-#include <iostream>
 #include "tempTrender.h"
-
-////prints vectors of different types
-//template <class T>
-//void printAllTypes(T vec, int lines) {
-//    if (int(vec.size()) >= lines) {
-//        //loop through vector and print
-//        for (int i=0; i < lines; i++)
-//        {
-//            for (int j = 0; j < int(vec.at(i).size()); j++)
-//            {
-//                cout << vec.at(i).at(j) << " ";
-//            }
-//            cout << endl;
-//        }
-//    }
-//}
 
 //calculate average temperature on each day
 void calcAverageTemp(const vector <vector <string> > &data, vector <vector <double> > &averageTemp){
@@ -264,12 +247,12 @@ void tempTrender::startDaySeasons(){
     //cout << endl << endl;
     //printDoubleVector(averageTempDay, 5);
     cout << endl << endl;
-    printIntVector(firstDayWinter, int(firstDayWinter.size()));
+    print<vector <vector <int> >>(firstDayWinter, int(firstDayWinter.size()));
     cout << endl << endl;
     cout << firstDayWinter.size() << endl;
     cout << firstDaySpring.size() << endl;
     cout << endl;
-    printIntVector(firstDaySpring, int(firstDaySpring.size()));
+    print<vector <vector <int> >>(firstDaySpring, int(firstDaySpring.size()));
 }
 
 
