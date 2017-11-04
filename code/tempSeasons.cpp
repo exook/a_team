@@ -219,6 +219,52 @@ void beginningSpring(const vector <vector <double> > &averageTemp,
     }
 }
 
+//finds the first day of each summer and saves the date in a vector
+void beginningSummer(const vector <vector <double> > &averageTemp, vector <vector <int> > &beginDaySummer){
+    
+    int yearPrevius = averageTemp.at(0).at(0)-1; //first year in data -1
+    int yearFirst = averageTemp.at(0).at(0)-1;
+    int monthFirst;
+    int dayFirst;
+    int counterDays = 0;
+    
+    //loop through dates in the vector
+    for (int i=1; i < int(averageTemp.size()); i++){
+        
+        //is it a summertemperature
+        if (averageTemp.at(i).at(3) >= 10){
+            //remember date of first summer day
+            if (counterDays == 0) {
+                yearFirst = averageTemp.at(i).at(0);
+                monthFirst = averageTemp.at(i).at(1);
+                dayFirst = averageTemp.at(i).at(2);
+            }
+            counterDays++;
+            
+            //definition begining of a new summer
+            if (counterDays == 5 && (yearFirst != yearPrevius)) {
+                
+                vector<int> outputLine;
+                
+                //save date first day of summer of a year
+                outputLine.push_back(yearFirst);
+                outputLine.push_back(monthFirst);
+                outputLine.push_back(dayFirst);
+                
+                beginDaySummer.push_back(outputLine);
+                
+                yearPrevius = averageTemp.at(i).at(0);
+                counterDays = 0;
+            }
+        }
+        else {
+            counterDays = 0;
+        }
+        
+    }
+}
+
+
 
 //creates day a season starts to year histograms for all seasons
 void tempTrender::startDaySeasons(){
@@ -237,22 +283,27 @@ void tempTrender::startDaySeasons(){
     vector <vector <double> > averageTempDay;
     vector <vector <int> > firstDayWinter;
     vector <vector <int> > firstDaySpring;
+    vector <vector <int> > firstDaySummer;
     
     readData("smhi-opendata_Lund.csv", dataSeasons);
     calcAverageTemp(dataSeasons, averageTempDay);
     beginningWinter(averageTempDay, firstDayWinter);
     beginningSpring(averageTempDay, firstDayWinter, firstDaySpring);
+    beginningSummer(averageTempDay, firstDaySummer);
     
     //print(dataSeasons, 5);
     //cout << endl << endl;
-    //printDoubleVector(averageTempDay, 5);
+    print<vector <vector <double> >>(averageTempDay, 10);
     cout << endl << endl;
-    print<vector <vector <int> >>(firstDayWinter, int(firstDayWinter.size()));
+    print<vector <vector <int> >>(firstDayWinter, 5);
     cout << endl << endl;
     cout << firstDayWinter.size() << endl;
     cout << firstDaySpring.size() << endl;
+    cout << firstDaySummer.size() << endl;
     cout << endl;
-    print<vector <vector <int> >>(firstDaySpring, int(firstDaySpring.size()));
+    print<vector <vector <int> >>(firstDaySpring, 5);
+    cout << endl << endl;
+    print<vector <vector <int> >>(firstDaySummer, int(firstDaySummer.size()));
 }
 
 
