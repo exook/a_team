@@ -2,6 +2,7 @@
 #include "tempTrender.h"
 
 //prints data in vector for the first given number of lines
+//TODO: merge print vectors
 void printDoubleVector(const vector <vector <double> > vec, int lines){
     
     for (int i=0; i < lines; i++)
@@ -78,13 +79,12 @@ void calcAverageTemp(const vector <vector <string> > &data, vector <vector <doub
 void beginningWinter(const vector <vector <double> > &averageTemp, vector <vector <int> > &beginDayWinter){
     
     int yearPrevius = averageTemp.at(0).at(0)-1; //first year in data -1
-    int monthPrevius = 0;
+    int monthPrevius = 12; //assume the winter has started in the previous year (before data)
     int currentYear;
     int currentMonth;
     int yearFirst;
     int monthFirst;
     int dayFirst;
-    bool winterTemp;
     int counterDays = 0;
     
     //loop through dates in the vector
@@ -98,7 +98,6 @@ void beginningWinter(const vector <vector <double> > &averageTemp, vector <vecto
                 monthFirst = averageTemp.at(i).at(1);
                 dayFirst = averageTemp.at(i).at(2);
             }
-            winterTemp = true;
             counterDays++;
             
             currentYear = averageTemp.at(i).at(0);
@@ -135,47 +134,94 @@ void beginningWinter(const vector <vector <double> > &averageTemp, vector <vecto
             }
         }
         else {
-            winterTemp = false;
             counterDays = 0;
         }
         
     }
 }
 
-//finds the first day of winter for each year and saves the date in a vector
-void beginningSpring(const vector <vector <double> > &averageTemp, vector <vector <int> > &beginDaySpring){
+template <class T>
+int dateToInt (const T vec, int line) {
+    if (int(vec.at(line).size()) >= 3) {
+        string year = to_string(vec.at(line).at(0));
+        string month = to_string(vec.at(line).at(1));
+        string day = to_string(vec.at(line).at(2));
+
+        int date = stoi(year + month + day);
+        return date;
+    }
+    else {
+        return 1;
+    }
+}
+
+//finds the first day of spring for each year and saves the date in a vector
+//TODO: not yet working
+void beginningSpring(const vector <vector <double> > &averageTemp,
+                     const vector <vector <int> > &beginDayWinter,
+                     vector <vector <int> > &beginDaySpring){
     
     int yearPrevius = averageTemp.at(0).at(0)-1; //first year in data -1
-    int year;
-    bool springTemp;
+    int yearFirst;
+    int monthFirst;
+    int dayFirst;
     int counterDays = 0;
     
     //loop through dates in the vector
-    for (int i=1; i < int(averageTemp.size()); i++){
+    for (int i=0; i < int(averageTemp.size()); i++){
         
         //is it a springtemperature
         if (averageTemp.at(i).at(3) > 0 && averageTemp.at(i).at(3) < 10){
-            springTemp = true;
+            //remember date of first spring day
+            if (counterDays == 0) {
+                yearFirst = averageTemp.at(i).at(0);
+                monthFirst = averageTemp.at(i).at(1);
+                dayFirst = averageTemp.at(i).at(2);
+            }
             counterDays++;
             
+            
             //definition begining of spring
-            //TODO: check if after start winter??
-            if (counterDays == 7 && (averageTemp.at(i).at(0) != yearPrevius)) {
+            if (counterDays == 7) {
                 
-                vector<int> outputLine;
+                //check if this spring date is after the start of winter
+                bool afterWinter = true;
+                int currentYear = averageTemp.at(i).at(0);
                 
-                //save date first day winter of a year
-                outputLine.push_back(averageTemp.at(i).at(0));
-                outputLine.push_back(averageTemp.at(i).at(1));
-                outputLine.push_back(averageTemp.at(i).at(2));
+//                //TODO can be more efficient with while year below equal
+//                //TODO not yet functional
+//                for (int j=0; j < int(beginDayWinter.size()); j++){
+//                    if ((currentYear == beginDayWinter.at(j).at(0)) &&
+//                        (beginDayWinter.at(j).at(1) < 6)) {
+//                        
+//                        //get date of winter and spring to compare
+//                        int winterDate = dateToInt<vector <vector <int> >>(beginDayWinter, j);
+//                        int springDate = dateToInt<vector <vector <double> >>(averageTemp, i);
+//                        
+//                        if (springDate < winterDate) {
+//                            afterWinter = false;
+//                        }
+//                    }
+//                }
                 
-                beginDaySpring.push_back(outputLine);
-                
-                yearPrevius = averageTemp.at(i).at(0);
+                if ((currentYear != yearPrevius) && afterWinter) {
+                    vector<int> outputLine;
+                    
+                    //save date first day spring of a year
+                    outputLine.push_back(yearFirst);
+                    outputLine.push_back(monthFirst);
+                    outputLine.push_back(dayFirst);
+                    
+                    beginDaySpring.push_back(outputLine);
+                    
+                    yearPrevius = currentYear;
+                }
+                else {
+                    counterDays = 0;
+                }
             }
         }
         else {
-            springTemp = false;
             counterDays = 0;
         }
         
@@ -204,14 +250,20 @@ void tempTrender::startDaySeasons(){
     readData("smhi-opendata_Lund.csv", dataSeasons);
     calcAverageTemp(dataSeasons, averageTempDay);
     beginningWinter(averageTempDay, firstDayWinter);
-    beginningSpring(averageTempDay, firstDaySpring);
+    beginningSpring(averageTempDay, firstDayWinter, firstDaySpring);
+    
+    int winterDate = dateToInt<vector <vector <int> >>(firstDayWinter, 0);
+    cout << winterDate << endl;
     
     //print(dataSeasons, 5);
     //cout << endl << endl;
     //printDoubleVector(averageTempDay, 5);
-    //cout << endl << endl;
+    cout << endl << endl;
     printIntVector(firstDayWinter, 10);
     cout << endl << endl;
+    cout << firstDayWinter.size() << endl;
+    cout << firstDaySpring.size() << endl;
+    cout << endl;
     printIntVector(firstDaySpring, 10);
     
 }
