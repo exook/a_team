@@ -1,6 +1,7 @@
 #ifndef TEMPTRENDER_H
 #define TEMPTRENDER_H
 
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -22,7 +23,27 @@ class tempTrender {
 	private:
     string path;
     void readData(string fileName, vector <vector <string> > &data);
-    void print(const vector <vector <string> > vec,int lines);
+    
+    template <class T> void print(T vec, int lines);
 };
+
+
+//prints vectors of different types
+//call as: print<type>(vec, lines);
+//e.g. with type = vector <vector <string> >
+template <class T>
+void tempTrender::print(T vec, int lines) {
+    if (int(vec.size()) >= lines) {
+        //loop through vector and print
+        for (int i=0; i < lines; i++)
+        {
+            for (int j = 0; j < int(vec.at(i).size()); j++)
+            {
+                cout << vec.at(i).at(j) << " ";
+            }
+            cout << endl;
+        }
+    }
+}
 
 #endif

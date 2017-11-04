@@ -1,31 +1,21 @@
 #include <iostream>
 #include "tempTrender.h"
 
-//prints data in vector for the first given number of lines
-void printDoubleVector(const vector <vector <double> > vec, int lines){
-    
-    for (int i=0; i < lines; i++)
-    {
-        for (int j = 0; j < int(vec.at(i).size()); j++)
-        {
-            cout << vec.at(i).at(j) << " ";
-        }
-        cout << endl;
-    }
-}
-
-//prints data in vector for the first given number of lines
-void printIntVector(const vector <vector <int> > vec, int lines){
-    
-    for (int i=0; i < lines; i++)
-    {
-        for (int j = 0; j < int(vec.at(i).size()); j++)
-        {
-            cout << vec.at(i).at(j) << " ";
-        }
-        cout << endl;
-    }
-}
+////prints vectors of different types
+//template <class T>
+//void printAllTypes(T vec, int lines) {
+//    if (int(vec.size()) >= lines) {
+//        //loop through vector and print
+//        for (int i=0; i < lines; i++)
+//        {
+//            for (int j = 0; j < int(vec.at(i).size()); j++)
+//            {
+//                cout << vec.at(i).at(j) << " ";
+//            }
+//            cout << endl;
+//        }
+//    }
+//}
 
 //calculate average temperature on each day
 void calcAverageTemp(const vector <vector <string> > &data, vector <vector <double> > &averageTemp){
@@ -163,11 +153,11 @@ void tempTrender::startDaySeasons(){
     calcAverageTemp(dataSeasons, averageTempDay);
     beginingWinter(averageTempDay, firstDayWinter);
     
-    print(dataSeasons, 5);
+    print<vector <vector <string> >>(dataSeasons, 5);
     cout << endl << endl;
-    printDoubleVector(averageTempDay, 5);
+    print<vector <vector <double> >>(averageTempDay, 5);
     cout << endl << endl;
-    printIntVector(firstDayWinter, 10);
+    print<vector <vector <int> >>(firstDayWinter, 10);
     
 }
 
