@@ -1,4 +1,11 @@
 #include "tempTrender.h"
+// ROOT library objects
+#include <TF1.h> // 1d function class
+#include <TH1.h> // 1d histogram classes
+#include <TStyle.h>  // style object
+#include <TMath.h>   // math functions
+#include <TCanvas.h> // canvas object
+#include <TGraph.h>
 
 //calculate average temperature on each day
 void calcAverageTemp(const vector <vector <string> > &data, vector <vector <double> > &averageTemp){
@@ -219,13 +226,39 @@ void beginningSpring(const vector <vector <double> > &averageTemp,
     }
 }
 
+// Calculate day of year
+//TODO: use for all
+//TODO: leapyear included??
+int getDayOfYear2(int year, int month, int day) {
+    bool checkleapYear = false;
+    int dayOfYear = 0;
+    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+        checkleapYear = true;
+    }
+    int daysInMonthsNonLeap[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int daysInMonthsLeap[12] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (checkleapYear == false) {
+        for (int k = 1; k < month; k++) {
+            dayOfYear = dayOfYear + daysInMonthsNonLeap[k-1];
+        }
+        dayOfYear = dayOfYear + day;
+    }
+    else {
+        for (int j = 1; j < month; j++) {
+            dayOfYear = dayOfYear + daysInMonthsLeap[j-1];
+        }
+        dayOfYear = dayOfYear + day;
+    }
+    return dayOfYear;
+}
+
 //finds the first day of each summer and saves the date in a vector
 void beginningSummer(const vector <vector <double> > &averageTemp, vector <vector <int> > &beginDaySummer){
     
     int yearPrevius = averageTemp.at(0).at(0)-1; //first year in data -1
     int yearFirst = averageTemp.at(0).at(0)-1;
-    int monthFirst;
-    int dayFirst;
+    int monthFirst = 0;
+    int dayFirst = 0;
     int counterDays = 0;
     
     cout << "Calculating the first day of summer for each year..." << endl;
@@ -247,11 +280,14 @@ void beginningSummer(const vector <vector <double> > &averageTemp, vector <vecto
             if (counterDays == 5 && (yearFirst != yearPrevius)) {
                 
                 vector<int> outputLine;
+                int dayOfYear = getDayOfYear2(yearFirst, monthFirst, dayFirst);
                 
                 //save date first day of summer of a year
                 outputLine.push_back(yearFirst);
                 outputLine.push_back(monthFirst);
                 outputLine.push_back(dayFirst);
+
+                outputLine.push_back(dayOfYear);
                 
                 beginDaySummer.push_back(outputLine);
                 
@@ -327,7 +363,6 @@ void beginningFall(const vector <vector <double> > &averageTemp,
 }
 
 
-
 //creates day a season starts to year histograms for all seasons
 void tempTrender::startDaySeasons(){
     cout << endl;
@@ -350,10 +385,10 @@ void tempTrender::startDaySeasons(){
     
     readData("smhi-opendata_Lund.csv", dataSeasons);
     calcAverageTemp(dataSeasons, averageTempDay);
-    beginningWinter(averageTempDay, firstDayWinter);
-    beginningSpring(averageTempDay, firstDayWinter, firstDaySpring);
+//    beginningWinter(averageTempDay, firstDayWinter);
+//    beginningSpring(averageTempDay, firstDayWinter, firstDaySpring);
     beginningSummer(averageTempDay, firstDaySummer);
-    beginningFall(averageTempDay, firstDaySummer, firstDayFall);
+//    beginningFall(averageTempDay, firstDaySummer, firstDayFall);
     
     //print(dataSeasons, 5);
     //cout << endl << endl;
@@ -368,12 +403,30 @@ void tempTrender::startDaySeasons(){
 //    cout << endl;
 //    print<vector <vector <int> >>(firstDaySpring, 5);
 //    cout << endl << endl;
-//    print<vector <vector <int> >>(firstDaySummer, 5);
+    print<vector <vector <int> >>(firstDaySummer, 5);
 //    cout << endl << endl;
 //    print<vector <vector <int> >>(firstDayFall, 5);
     
     
+//    // create histogram for the summer data
+//    TH2I* hSummer = new TH1D("hSummer", "   ",
+//                          100, 0, 2*TMath::Pi());
+//    
+//    TH2I
     
+    Int_t xSummerYear[int(firstDaySummer.size())];
+    Int_t ySummerDay[int(firstDaySummer.size())];
+    
+    for (int i=0; i < int(firstDaySummer.size()); i++){
+        xSummerYear[i] = firstDaySummer.at(i).at(0);
+        ySummerDay[i] = firstDaySummer.at(i).at(3);
+    }
+    
+    TCanvas *cSummer = new TCanvas("cSummer","Summer date changes",900, 600);
+    TGraph* gSummer = new TGraph (int(firstDaySummer.size()), xSummerYear, ySummerDay);
+    
+    gSummer->SetFillColor(40);
+    gSummer->Draw("AB");
     
 }
 
