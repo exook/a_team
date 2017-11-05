@@ -8,15 +8,56 @@
 #include <TCanvas.h> // canvas object
 #include <fstream>
 #include <TRandom3.h>
+
+using namespace std;
+
+vector<vector<string>> readDataOld(){	
+	ifstream file("/home/alexander/Desktop/a_team/datasets/uppsala_tm_1722-2013.dat");
+	//check if opened correctly
+    if (!file) {
+        cout << "Error could not read data file" << endl;
+    }
+    else {
+        cout << "Succesfully opened data file" << endl;
+    }
+
+    string value;
+    vector <vector <string>> dataVector;
+    string line;
+
+    while (getline(file,line)){
+        istringstream helpstring(line);
+        vector <string> row;
+        while(getline(helpstring,value,' ')){
+            if (value.find_first_not_of(' ') != std::string::npos){
+                row.push_back(value);
+            }
+        
+        }
+        dataVector.push_back(row);
+    }
+    file.close();
+    return dataVector;
+}
+
+
 void tempTrender::tempEx(){
-	gRandom=new TRandom3();
-        // create a histogram 
-        TH1D* hist = new TH1D("data", ";x;N", 20, 0.0, 100.0);
+	vector <vector <string> > data;
+	data=readDataOld();
+    //gRandom=new TRandom3();
+    TH1D* hist = new TH1D("data", ";x;N", 100, -50, 50);
 
-       // fill in the histogram
-        for (int i = 0; i < 100; ++i)
-                hist->Fill(gRandom->Gaus(65.0, 5.0));
+    for(size_t i = 0; i < data.size(); ++i){
+        //cout<<data.at(i).at(4);
+        //hist->Fill(gRandom->Gaus(65.0, 5.0));
+        float value;
+        //value=string_to_float(data.at(i).at(4));
+        hist->Fill(strtof(data.at(i).at(4).c_str(),NULL));
+    }
 
-        TCanvas * c1= new TCanvas("c1", "random",5,5,800,600);
-        hist->Draw();
+    TCanvas * c1= new TCanvas("c1", "random",5,5,800,600);
+    hist->Draw();
+
+    
+
 }
