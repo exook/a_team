@@ -1,9 +1,5 @@
 #include <iostream>
 #include "tempTrender.h"
-#include <vector>
-#include <fstream>
-#include <sstream>
-#include <string>
 // ROOT library obejcts
 #include <TF1.h> // 1d function class
 #include <TH1.h> // 1d histogram classes
