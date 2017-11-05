@@ -84,11 +84,11 @@ void tempTrender::hotCold(string fileName){
     int dayPrevious = stoi(datahotCold.at(0).at(2));
     double minTemp = stod(datahotCold.at(0).at(6));
     double maxTemp = stod(datahotCold.at(0).at(6));
-    int year, maxTempMonth, maxTempDay, minTempMonth, minTempDay, maxTempDayOfYear, minTempDayOfYear;
+    int year, maxTempMonth = 0, maxTempDay = 0, minTempMonth = 0, minTempDay = 0, maxTempDayOfYear, minTempDayOfYear;
     double temp;
-    
+     
 
-    for (int i = 0; i < datahotCold.size(); i++) {
+    for (signed int i = 0; i < int(datahotCold.size()); i++) {
 		year = stoi(datahotCold.at(i).at(0));
 		temp = stoi(datahotCold.at(i).at(6));
 		if (year == yearPrevious) {
@@ -104,10 +104,10 @@ void tempTrender::hotCold(string fileName){
 			}
 		}
 		else if (year == yearPrevious + 1) {
-			cout << "year === " << year << endl;
+			/*cout << "year === " << year << endl;
 			cout << "yearPrevious === " << yearPrevious << endl;
 			cout << "maxTemp ==== " << maxTemp << endl;
-			cout << "minTemp ==== " << minTemp << endl;
+			cout << "minTemp ==== " << minTemp << endl;*/
 			maxTempDayOfYear = getDayOfYear(yearPrevious, maxTempMonth, maxTempDay);
 			minTempDayOfYear = getDayOfYear(yearPrevious, minTempMonth, minTempDay);
 			warmestHist->Fill(maxTempDayOfYear);

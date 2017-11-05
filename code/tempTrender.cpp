@@ -1,4 +1,3 @@
-#include <iostream>
 #include <fstream>
 #include <sstream>
 #include "tempTrender.h"
@@ -85,20 +84,6 @@ void tempTrender::readData(string fileName, vector <vector <string> > &data) {
     dataFile.close();
 }
 
-//prints data in vector for the first given number of lines
-void tempTrender::print(const vector <vector <string> > vec, int lines){
-    cout << endl;
-    
-    //loop through elements in the vector and print them
-    for (int i=0; i < lines; i++)
-    {
-        for (int j = 0; j < int(vec.at(i).size()); j++)
-        {
-            cout << vec.at(i).at(j) << " ";
-        }
-        cout << endl;
-    }
-}
 
 
 
