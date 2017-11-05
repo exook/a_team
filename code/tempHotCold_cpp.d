@@ -1,6 +1,7 @@
 
 # DO NOT DELETE
 
+<<<<<<< HEAD
 ./tempHotCold_cpp.so: /usr/include/c++/5/iostream tempTrender.h
 ./tempHotCold_cpp.so: /usr/include/c++/5/string /usr/include/c++/5/vector
 ./tempHotCold_cpp.so: /home/shi/Documents/root-6.10.02/include/TF1.h
@@ -84,3 +85,59 @@
 ./tempHotCold_cpp.so: /home/shi/Documents/root-6.10.02/include/TCanvasImp.h
 ./tempHotCold_cpp.so: /home/shi/Documents/root-6.10.02/include/RVersion.h /home/shi/Documents/root-6.10.02/include/RConfig.h /home/shi/Documents/root-6.10.02/include/TClass.h /home/shi/Documents/root-6.10.02/include/TDictAttributeMap.h /home/shi/Documents/root-6.10.02/include/TInterpreter.h /home/shi/Documents/root-6.10.02/include/TROOT.h /home/shi/Documents/root-6.10.02/include/TBuffer.h /home/shi/Documents/root-6.10.02/include/TMemberInspector.h /home/shi/Documents/root-6.10.02/include/TError.h /home/shi/Documents/root-6.10.02/include/RtypesImp.h /home/shi/Documents/root-6.10.02/include/TIsAProxy.h /home/shi/Documents/root-6.10.02/include/TFileMergeInfo.h /home/shi/Documents/root-6.10.02/include/TCollectionProxyInfo.h /home/shi/Documents/root-6.10.02/bin/rootcling
 tempHotCold_cpp__ROOTBUILDVERSION= 6.10/02
+=======
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/iostream
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__config
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/ios
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/iosfwd
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__locale
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/string
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cstring
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cstdio
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cwchar
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cwctype
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cctype
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/algorithm
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/initializer_list
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cstddef
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/type_traits
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/utility
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tuple
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tuple_03
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/memory
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/typeinfo
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/exception
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cstdint
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/new
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/limits
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__undef_min_max
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/iterator
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__functional_base
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__functional_base_03
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__debug
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/tuple
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/stdexcept
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cassert
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/mutex
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__mutex_base
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/chrono
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/ctime
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/ratio
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/climits
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/system_error
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cerrno
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/functional
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__functional_03
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/streambuf
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/istream
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/ostream
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/locale
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cstdlib
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bit_reference
+./tempHotCold_cpp.so: tempTrender.h
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector
+./tempHotCold_cpp.so: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__split_buffer
+./tempHotCold_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/RVersion.h /usr/local/Cellar/root/6.10.08/include/root/RConfig.h /usr/local/Cellar/root/6.10.08/include/root/TClass.h /usr/local/Cellar/root/6.10.08/include/root/TDictAttributeMap.h /usr/local/Cellar/root/6.10.08/include/root/TInterpreter.h /usr/local/Cellar/root/6.10.08/include/root/TROOT.h /usr/local/Cellar/root/6.10.08/include/root/TBuffer.h /usr/local/Cellar/root/6.10.08/include/root/TMemberInspector.h /usr/local/Cellar/root/6.10.08/include/root/TError.h /usr/local/Cellar/root/6.10.08/include/root/RtypesImp.h /usr/local/Cellar/root/6.10.08/include/root/TIsAProxy.h /usr/local/Cellar/root/6.10.08/include/root/TFileMergeInfo.h /usr/local/Cellar/root/6.10.08/include/root/TCollectionProxyInfo.h /usr/local/Cellar/root/6.10.08/bin/rootcling
+tempHotCold_cpp__ROOTBUILDVERSION= 6.10/08
+>>>>>>> 7ae4d2a0dc8e0d0bad72407f82e35110e527a430
