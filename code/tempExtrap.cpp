@@ -57,12 +57,24 @@ void totalAverage(vector<vector<float>>* dataVectorPointer){
     int initialYear=dataVectorPointer->at(0).at(0);
     int endYear=dataVectorPointer->at(dataVectorPointer->size()-1).at(0);
     //cout<<initialYear<<","<<endYear<<endl;
-
-    for(int year = initialYear; year <= endYear;year++){//warning: comparison between signed and unsigned integer expressions [-Wsign-compare
+    int row=0;
+    for(int year = initialYear; year < endYear;++year){//warning: comparison between signed and unsigned integer expressions [-Wsign-compare
+        int yearlySum=0;
         if(isLeapYear(year)){
-            cout<<"leap"<<endl;
-        }else{
-            cout<<"regular"<<endl;
+            for(int day=1;day<=366;++day){
+                yearlySum+=dataVectorPointer->at(row).at(4);
+                row++;
+                //cout<<year<<":"<<day<<endl;
+            }
+        cout<<year<<": "<<yearlySum/366<<endl;
+        }
+        else{
+            for(int day=1;day<=365;day++){
+                yearlySum+=dataVectorPointer->at(row).at(4);
+                row++;
+                //cout<<year<<":"<<day<<endl;
+            }
+        cout<<year<<": "<<yearlySum/365<<endl;
         }
     }
 
