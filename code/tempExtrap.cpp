@@ -49,7 +49,7 @@ int isLeapYear(int year){
     }
 }
 
-void totalAverage(vector<vector<float>>* dataVectorPointer,vector <float>* averagesVectorPointer){
+void totalAverage(vector<vector<float>>* dataVectorPointer,vector <vector<float>>* averagesVectorPointer){
 
 
     //cout<<initialYear<<","<<endYear<<endl;
@@ -71,8 +71,11 @@ void totalAverage(vector<vector<float>>* dataVectorPointer,vector <float>* avera
     int initialYear=dataVectorPointer->at(row).at(0);
     int endYear=dataVectorPointer->at(dataVectorPointer->size()-1).at(0);
 
+    vector <float> thisYear;
+
     for(int year = initialYear; year < endYear;year++){//warning: comparison between signed and unsigned integer expressions [-Wsign-compare
         float yearlySum=0;
+        vector <float> thisYear;
         if(isLeapYear(year)){
             for(int day=1;day<=366;day++){
                 yearlySum+=dataVectorPointer->at(row).at(4);
@@ -80,7 +83,9 @@ void totalAverage(vector<vector<float>>* dataVectorPointer,vector <float>* avera
                 writer<<year<<":"<<day<<endl;
                 writer<<dataVectorPointer->at(row).at(0)<<":"<<dataVectorPointer->at(row).at(1)<<":"<<dataVectorPointer->at(row).at(2)<<endl<<endl;
             }
-        averagesVectorPointer->push_back(yearlySum/366);
+        thisYear.push_back(year);
+        thisYear.push_back(yearlySum/366);
+        averagesVectorPointer->push_back(thisYear);
         }
         else{
             for(int day=1;day<=365;day++){
@@ -89,7 +94,9 @@ void totalAverage(vector<vector<float>>* dataVectorPointer,vector <float>* avera
                 writer<<year<<":"<<day<<endl;
                 writer<<dataVectorPointer->at(row).at(0)<<":"<<dataVectorPointer->at(row).at(1)<<":"<<dataVectorPointer->at(row).at(2)<<endl<<endl;
             }
-        averagesVectorPointer->push_back(yearlySum/365);
+        thisYear.push_back(year);
+        thisYear.push_back(yearlySum/366);
+        averagesVectorPointer->push_back(thisYear);
         }
     }
 
@@ -103,14 +110,23 @@ void tempTrender::tempEx(){
     
     readDataOld(dataVectorPointer);
 
-    vector <float> averagesVector;
-    vector <float> *averagesVectorPointer=&averagesVector; 
+    vector <vector<float>> averagesVector;
+    vector <vector<float>> *averagesVectorPointer=&averagesVector; 
 
     totalAverage(dataVectorPointer,averagesVectorPointer);
 
     TH1D* hist = new TH1D("data", ";x;N", 100, 0, 10);
 
-    //Make data into histogram
+    for(size_t i = 0; i < averagesVector.size(); ++i){
+        hist->Fill(averagesVector.at(i).at(1));
+    }
+    TCanvas * c1= new TCanvas("c1", "random",5,5,800,600);
+    hist->Draw();
+
+
+
+}
+
 /*
     int initialYear=dataVectorPointer->at(0).at(0);
     int endYear=dataVectorPointer->at(dataVectorPointer->size()-1).at(0);
@@ -121,11 +137,3 @@ void tempTrender::tempEx(){
             hist->Fill(row+initialYear);
     }
 */
-    for(size_t i = 0; i < averagesVector.size(); ++i){
-        hist->Fill(averagesVector.at(i));
-    }
-
-    TCanvas * c1= new TCanvas("c1", "random",5,5,800,600);
-    hist->Draw();
-
-}
