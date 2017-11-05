@@ -1,5 +1,6 @@
 #include <iostream>
 #include "tempTrender.h"
+#include <sstream>
 // ROOT library obejcts
 #include <TF1.h> // 1d function class
 #include <TH1.h> // 1d histogram classes
@@ -57,7 +58,5 @@ void tempTrender::tempEx(){
 
     TCanvas * c1= new TCanvas("c1", "random",5,5,800,600);
     hist->Draw();
-
-    
 
 }
