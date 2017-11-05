@@ -49,36 +49,51 @@ int isLeapYear(int year){
     }
 }
 
-void totalAverage(vector<vector<float>>* dataVectorPointer){
-    //for(size_t i = 0; i < dataVectorPointer->size(); ++i){
-    //   cout<<dataVectorPointer->at(i).at(4)<<endl;
-    //}
+void totalAverage(vector<vector<float>>* dataVectorPointer,vector <float>* averagesVectorPointer){
 
-    int initialYear=dataVectorPointer->at(0).at(0);
-    int endYear=dataVectorPointer->at(dataVectorPointer->size()-1).at(0);
+
     //cout<<initialYear<<","<<endYear<<endl;
+
+    ofstream writer;
+    writer.open("bug.txt");
+    
     int row=0;
-    for(int year = initialYear; year < endYear;++year){//warning: comparison between signed and unsigned integer expressions [-Wsign-compare
-        int yearlySum=0;
+    for(size_t i = 0; i < dataVectorPointer->size(); ++i){
+        row=i-1;
+        if(dataVectorPointer->at(i).at(1)==1 && dataVectorPointer->at(i).at(2)==1){
+            break;
+        }
+        else{
+            //cout<<"No first of january found"<<endl;
+        }
+    }
+
+    int initialYear=dataVectorPointer->at(row).at(0);
+    int endYear=dataVectorPointer->at(dataVectorPointer->size()-1).at(0);
+
+    for(int year = initialYear; year < endYear;year++){//warning: comparison between signed and unsigned integer expressions [-Wsign-compare
+        float yearlySum=0;
         if(isLeapYear(year)){
-            for(int day=1;day<=366;++day){
+            for(int day=1;day<=366;day++){
                 yearlySum+=dataVectorPointer->at(row).at(4);
                 row++;
-                //cout<<year<<":"<<day<<endl;
+                writer<<year<<":"<<day<<endl;
+                writer<<dataVectorPointer->at(row).at(0)<<":"<<dataVectorPointer->at(row).at(1)<<":"<<dataVectorPointer->at(row).at(2)<<endl<<endl;
             }
-        cout<<year<<": "<<yearlySum/366<<endl;
+        averagesVectorPointer->push_back(yearlySum/366);
         }
         else{
             for(int day=1;day<=365;day++){
                 yearlySum+=dataVectorPointer->at(row).at(4);
                 row++;
-                //cout<<year<<":"<<day<<endl;
+                writer<<year<<":"<<day<<endl;
+                writer<<dataVectorPointer->at(row).at(0)<<":"<<dataVectorPointer->at(row).at(1)<<":"<<dataVectorPointer->at(row).at(2)<<endl<<endl;
             }
-        cout<<year<<": "<<yearlySum/365<<endl;
+        averagesVectorPointer->push_back(yearlySum/365);
         }
     }
 
-    
+    writer.close();
 }
 
 void tempTrender::tempEx(){
@@ -88,20 +103,29 @@ void tempTrender::tempEx(){
     
     readDataOld(dataVectorPointer);
 
-	//vector <vector <string> > data;
-	//data=readDataOld();
-    TH1D* hist = new TH1D("data", ";x;N", 100, -50, 50);
+    vector <float> averagesVector;
+    vector <float> *averagesVectorPointer=&averagesVector; 
 
-    for(size_t i = 0; i < dataVector.size(); ++i){
-        hist->Fill(dataVector.at(i).at(4));
-        //hist->Fill(strtof(dataVector.at(i).at(4).c_str(),NULL));
-        
+    totalAverage(dataVectorPointer,averagesVectorPointer);
+
+    TH1D* hist = new TH1D("data", ";x;N", 100, 0, 10);
+
+    //Make data into histogram
+/*
+    int initialYear=dataVectorPointer->at(0).at(0);
+    int endYear=dataVectorPointer->at(dataVectorPointer->size()-1).at(0);
+
+    for(int row = 0; row < (endYear-initialYear);row++){
+        for(float i=0;i<averagesVector.at(row);i+=0.01)
+            cout<<row+initialYear<<endl;
+            hist->Fill(row+initialYear);
+    }
+*/
+    for(size_t i = 0; i < averagesVector.size(); ++i){
+        hist->Fill(averagesVector.at(i));
     }
 
     TCanvas * c1= new TCanvas("c1", "random",5,5,800,600);
     hist->Draw();
-
-    totalAverage(dataVectorPointer);
-    //cout<<totalAverage<<endl;
 
 }
