@@ -1,6 +1,5 @@
 #include <iostream>
 #include "tempTrender.h"
-<<<<<<< HEAD
 #include <TF1.h> // 1d function class
 #include <TH1.h> // 1d histogram classes
 #include <TStyle.h>  // style object
@@ -143,7 +142,3 @@ void tempTrender::hotCold(string fileName){
 	*/
     
 }
-=======
-
-//add your functions :)
->>>>>>> 7ae4d2a0dc8e0d0bad72407f82e35110e527a430

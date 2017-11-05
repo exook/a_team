@@ -134,7 +134,6 @@ int dateToInt (const T vec, int line) {
 }
 
 //check if the second season date is after the start of the first season
-//TODO: follow not loop for fall/Summer comparison??
 bool seasonsInOrder(int yearStart, int i, bool compareWinter,
                      const vector <vector <double> > &secondSeason,
                      const vector <vector <int> > &firstSeason){
@@ -359,19 +358,22 @@ void tempTrender::startDaySeasons(){
     //print(dataSeasons, 5);
     //cout << endl << endl;
     //print<vector <vector <double> >>(averageTempDay, int(averageTempDay.size()/2));
-    cout << endl << endl;
-    print<vector <vector <int> >>(firstDayWinter, 5);
-    cout << endl << endl;
-    cout << firstDayWinter.size() << endl;
-    cout << firstDaySpring.size() << endl;
-    cout << firstDaySummer.size() << endl;
-    cout << firstDayFall.size() << endl;
-    cout << endl;
-    print<vector <vector <int> >>(firstDaySpring, 5);
-    cout << endl << endl;
-    print<vector <vector <int> >>(firstDaySummer, 5);
-    cout << endl << endl;
-    print<vector <vector <int> >>(firstDayFall, 5);
+//    cout << endl << endl;
+//    print<vector <vector <int> >>(firstDayWinter, 5);
+//    cout << endl << endl;
+//    cout << firstDayWinter.size() << endl;
+//    cout << firstDaySpring.size() << endl;
+//    cout << firstDaySummer.size() << endl;
+//    cout << firstDayFall.size() << endl;
+//    cout << endl;
+//    print<vector <vector <int> >>(firstDaySpring, 5);
+//    cout << endl << endl;
+//    print<vector <vector <int> >>(firstDaySummer, 5);
+//    cout << endl << endl;
+//    print<vector <vector <int> >>(firstDayFall, 5);
+    
+    
+    
     
 }
 
