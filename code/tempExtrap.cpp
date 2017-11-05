@@ -1,6 +1,9 @@
 #include <iostream>
 #include "tempTrender.h"
 #include <vector>
+#include <fstream>
+#include <sstream>
+#include <string>
 // ROOT library obejcts
 #include <TF1.h> // 1d function class
 #include <TH1.h> // 1d histogram classes
@@ -12,25 +15,58 @@
 
 using namespace std;
 
+vector<vector<string>> readDataOld(){	
+	ifstream file("/home/alexander/Desktop/a_team/datasets/uppsala_tm_1722-2013.dat");
+	//check if opened correctly
+    if (!file) {
+        cout << "Error could not read data file" << endl;
+    }
+    else {
+        cout << "Succesfully opened data file" << endl;
+    }
+
+    string value;
+    vector <vector <string>> dataVector;
+    string line;
+
+    while (getline(file,line)){
+        istringstream helpstring(line);
+        vector <string> row;
+        while(getline(helpstring,value,' ')){
+            if (value.find_first_not_of(' ') != std::string::npos){
+                row.push_back(value);
+            }
+        
+        }
+        dataVector.push_back(row);
+    }
+    file.close();
+    return dataVector;
+}
+
+float string_to_float(string stringValue1){
+    
+    float f1=strtof(stringValue1.c_str(),NULL);
+    return f1;
+}
+
 void tempTrender::tempEx(){
-    vector <vector <string> > data;
-    readData("smhi-opendata_Lund.csv", data);
-	//for(size_t i = 0; i < dataOnDay.size(); ++i) cout<<dataOnDay.at(i)<<endl;
-	cout<<data.at(1).at(6)<<endl;
+	vector <vector <string> > data;
+	data=readDataOld();
+    //gRandom=new TRandom3();
+    TH1D* hist = new TH1D("data", ";x;N", 100, -50, 50);
 
-/*
-	gRandom=new TRandom3();
-        // create a histogram 
-        TH1D* hist = new TH1D("data", ";x;N", 20, 0.0, 100.0);
+    for(size_t i = 0; i < data.size(); ++i){
+        //cout<<data.at(i).at(4);
+        //hist->Fill(gRandom->Gaus(65.0, 5.0));
+        float value;
+        //value=string_to_float(data.at(i).at(4));
+        hist->Fill(strtof(data.at(i).at(4).c_str(),NULL));
+    }
 
-       // fill in the histogram
-        for (int i = 0; i < 100; ++i)
-                hist->Fill(gRandom->Gaus(65.0, 5.0));
+    TCanvas * c1= new TCanvas("c1", "random",5,5,800,600);
+    hist->Draw();
 
-        TCanvas * c1= new TCanvas("c1", "random",5,5,800,600);
-        hist->Draw();
+    
 
-	    vector <vector <string> > dataOnDay;
-    readData("smhi-opendata_Lund.csv", dataOnDay);
-*/
 }
