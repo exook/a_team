@@ -45,23 +45,30 @@ int isLeapYear(int year){
         return 1;
     }
     else{
-        cout<<"regular year"<<endl;
         return 0;
     }
 }
-/*
-void totalAverage(vector<vector<string>>* dataVectorPointer){
-    for(size_t i = 0; i < dataVectorPointer->size(); ++i){
-        //cout<<dataVectorPointer->at(i).at(4)<<endl;
-        yearlySum=0;
-            for(int j;j<365;j++){
-                yearlySum=yearlySum+dataVectorPointer->at(i).at(4);
-            }
-        yearlySum/365;
+
+void totalAverage(vector<vector<float>>* dataVectorPointer){
+    //for(size_t i = 0; i < dataVectorPointer->size(); ++i){
+    //   cout<<dataVectorPointer->at(i).at(4)<<endl;
+    //}
+
+    int initialYear=dataVectorPointer->at(0).at(0);
+    int endYear=dataVectorPointer->at(dataVectorPointer->size()-1).at(0);
+    //cout<<initialYear<<","<<endYear<<endl;
+
+    for(int year = initialYear; year <= endYear;year++){//warning: comparison between signed and unsigned integer expressions [-Wsign-compare
+        if(isLeapYear(year)){
+            cout<<"leap"<<endl;
+        }else{
+            cout<<"regular"<<endl;
+        }
     }
+
     
 }
-*/
+
 void tempTrender::tempEx(){
 
     vector <vector <float>> dataVector;
@@ -82,7 +89,7 @@ void tempTrender::tempEx(){
     TCanvas * c1= new TCanvas("c1", "random",5,5,800,600);
     hist->Draw();
 
-    //totalAverage(dataVectorPointer);
+    totalAverage(dataVectorPointer);
     //cout<<totalAverage<<endl;
 
 }
