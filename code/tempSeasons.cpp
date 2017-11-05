@@ -57,6 +57,8 @@ void beginningWinter(const vector <vector <double> > &averageTemp, vector <vecto
     int dayFirst;
     int counterDays = 0;
     
+    cout << "Calculating the first day of each winter..." << endl;
+    
     //loop through dates in the vector
     for (int i=1; i < int(averageTemp.size()); i++){
         
@@ -77,7 +79,6 @@ void beginningWinter(const vector <vector <double> > &averageTemp, vector <vecto
                 //There are 4 cases of how the begin days of winters can follow
                 
                 //successive winters both early in year (month < 6)
-                //TODO change currentYear to yearFirst?? etc
                 bool case1 = (yearFirst != yearPrevius) &&
                             ((monthPrevius < 6) && (monthFirst < 6));
                 //successive winters both late in year (month > 6)
@@ -132,86 +133,33 @@ int dateToInt (const T vec, int line) {
     return date;
 }
 
-//check if this spring date is after the start of winter
-//TODO: genaralize
-bool springAfterWinter(int yearFirstSpring, int i,
-                       const vector <vector <double> > &averageTemp,
-                       const vector <vector <int> > &beginDayWinter){
-
-    bool dateAfterWinter = true;
-    int currentYear = averageTemp.at(i).at(0);
+//check if the second season date is after the start of the first season
+//TODO: follow not loop for fall/Summer comparison??
+bool seasonsInOrder(int yearStart, int i, bool compareWinter,
+                     const vector <vector <double> > &secondSeason,
+                     const vector <vector <int> > &firstSeason){
     
-    //TODO can be more efficient with while year below equal
-    for (int j=0; j < int(beginDayWinter.size()); j++){
-        if ((yearFirstSpring == beginDayWinter.at(j).at(0)) &&
-            (beginDayWinter.at(j).at(1) < 6)) {
+    bool rightOrder = true;
+
+    //loop trough first season to find corresponding year
+    for (int j=0; j < int(firstSeason.size()); j++){
+        if (yearStart == firstSeason.at(j).at(0)) {
             
-            //get date of winter and spring to compare
-            int winterDate = dateToInt<vector <vector <int> >>(beginDayWinter, j);
-            int springDate = dateToInt<vector <vector <double> >>(averageTemp, i);
-            
-            if (springDate < winterDate) {
-                dateAfterWinter = false;
+            if ((compareWinter && firstSeason.at(j).at(1) < 6) || !compareWinter) {
+                //get date of seasons to compare
+                int firstSeasonDate = dateToInt<vector <vector <int> >>(firstSeason, j);
+                int secondSeasonDate = dateToInt<vector <vector <double> >>(secondSeason, i);
+                
+                if (firstSeasonDate > secondSeasonDate) {
+                    rightOrder = false;
+                }
             }
+            break;
         }
     }
     
-    return dateAfterWinter;
+    return rightOrder;
 }
-
-//check if this spring date is after the start of winter
-//TODO: genaralize
-bool fallAfterSummer(int yearFirstSpring, int i,
-                       const vector <vector <double> > &averageTemp,
-                       const vector <vector <int> > &beginDaySummer){
-    
-    bool dateAfterSummer = true;
-    int currentYear = averageTemp.at(i).at(0);
-    
-    //TODO can be more efficient with while year below equal
-    for (int j=0; j < int(beginDaySummer.size()); j++){
-        if (yearFirstSpring == beginDaySummer.at(j).at(0)) {
-            
-            //get date of summer and fall to compare
-            int summerDate = dateToInt<vector <vector <int> >>(beginDaySummer, j);
-            int fallDate = dateToInt<vector <vector <double> >>(averageTemp, i);
-            
-            if (fallDate < summerDate) {
-                dateAfterSummer = false;
-            }
-        }
-    }
-    
-    return dateAfterSummer;
-}
-
-////check if this spring date is after the start of winter
-////TODO: genaralize
-////TODO: not yet functional
-//bool seasonsInOrder(int yearStart, int i,
-//                     const vector <vector <double> > &secondSeason,
-//                     const vector <vector <int> > &firstSeason){
-//    
-//    bool rightOrder = true;
-//    int currentYear = secondSeason.at(i).at(0);
-//    
-//    //TODO can be more efficient with while year below equal
-//    for (int j=0; j < int(firstSeason.size()); j++){
-//        if ((yearStart == firstSeason.at(j).at(0)) &&
-//            (firstSeason.at(j).at(1) < 6)) {
-//            
-//            //get date of winter and spring to compare
-//            int firstSeasonDate = dateToInt<vector <vector <int> >>(firstSeason, j);
-//            int secondSeasonDate = dateToInt<vector <vector <double> >>(secondSeason, i);
-//            
-//            if (firstSeasonDate < secondSeasonDate) {
-//                rightOrder = false;
-//            }
-//        }
-//    }
-//    
-//    return rightOrder;
-//}
 
 //finds the first day of spring for each year and saves the date in a vector
 void beginningSpring(const vector <vector <double> > &averageTemp,
@@ -223,6 +171,8 @@ void beginningSpring(const vector <vector <double> > &averageTemp,
     int monthFirst;
     int dayFirst;
     int counterDays = 0;
+    
+    cout << "Calculating the first day of spring for each year..." << endl;
     
     //loop through dates in the vector
     for (int i=0; i < int(averageTemp.size()); i++){
@@ -237,18 +187,14 @@ void beginningSpring(const vector <vector <double> > &averageTemp,
             }
             counterDays++;
             
-            
             //definition begining of spring
             if (counterDays == 7) {
                 
-                //check if this spring date is after the start of winter
-                //bool afterWinter = seasonsInOrder(yearFirst, i, averageTemp, beginDayWinter);
-                bool afterWinter = springAfterWinter(yearFirst, i, averageTemp, beginDayWinter);
+                //check if the first spring date is after the start of winter
+                bool afterWinter = seasonsInOrder(yearFirst, i-6, true, averageTemp, beginDayWinter);
                 
                 //a new spring
                 if ((yearFirst != yearPrevius) && afterWinter) {
-                    
-                    //cout << yearPrevius << endl;
 
                     vector<int> outputLine;
                     
@@ -282,6 +228,8 @@ void beginningSummer(const vector <vector <double> > &averageTemp, vector <vecto
     int monthFirst;
     int dayFirst;
     int counterDays = 0;
+    
+    cout << "Calculating the first day of summer for each year..." << endl;
     
     //loop through dates in the vector
     for (int i=1; i < int(averageTemp.size()); i++){
@@ -331,6 +279,8 @@ void beginningFall(const vector <vector <double> > &averageTemp,
     int dayFirst;
     int counterDays = 0;
     
+    cout << "Calculating the first day of fall for each year..." << endl;
+    
     //loop through dates in the vector
     for (int i=0; i < int(averageTemp.size()); i++){
         
@@ -344,18 +294,14 @@ void beginningFall(const vector <vector <double> > &averageTemp,
             }
             counterDays++;
             
-            
             //definition begining of fall
             if (counterDays == 5) {
                 
-                //check if this spring date is after the start of summer
-                //bool afterSummer = seasonsInOrder(yearFirst, i, averageTemp, beginDaySummer);
-                bool afterSummer = fallAfterSummer(yearFirst, i, averageTemp, beginDaySummer);
+                //check if the first fall date is after the start of summer
+                bool afterSummer = seasonsInOrder(yearFirst, i-4, false, averageTemp, beginDaySummer);
                 
                 //a new fall
                 if ((yearFirst != yearPrevius) && afterSummer) {
-                    
-                    //cout << yearPrevius << endl;
                     
                     vector<int> outputLine;
                     
@@ -412,20 +358,20 @@ void tempTrender::startDaySeasons(){
     
     //print(dataSeasons, 5);
     //cout << endl << endl;
-    print<vector <vector <double> >>(averageTempDay, int(averageTempDay.size()/2));
-//    cout << endl << endl;
-//    print<vector <vector <int> >>(firstDayWinter, int(firstDayWinter.size()));
-//    cout << endl << endl;
-//    cout << firstDayWinter.size() << endl;
-//    cout << firstDaySpring.size() << endl;
-//    cout << firstDaySummer.size() << endl;
-//    cout << firstDayFall.size() << endl;
-//    cout << endl;
-//    print<vector <vector <int> >>(firstDaySpring, 5);
-//    cout << endl << endl;
-//    print<vector <vector <int> >>(firstDaySummer, 5);
-//    cout << endl << endl;
-//    print<vector <vector <int> >>(firstDayFall, 5);
+    //print<vector <vector <double> >>(averageTempDay, int(averageTempDay.size()/2));
+    cout << endl << endl;
+    print<vector <vector <int> >>(firstDayWinter, 5);
+    cout << endl << endl;
+    cout << firstDayWinter.size() << endl;
+    cout << firstDaySpring.size() << endl;
+    cout << firstDaySummer.size() << endl;
+    cout << firstDayFall.size() << endl;
+    cout << endl;
+    print<vector <vector <int> >>(firstDaySpring, 5);
+    cout << endl << endl;
+    print<vector <vector <int> >>(firstDaySummer, 5);
+    cout << endl << endl;
+    print<vector <vector <int> >>(firstDayFall, 5);
     
 }
 
