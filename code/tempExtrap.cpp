@@ -165,24 +165,15 @@ void tempTrender::tempEx(){
 */
 
     TCanvas * c2= new TCanvas("c2", "random",5,5,1200,600);
-    c2->DrawFrame(1722,-5.0,2013,5.0);
+    c2->DrawFrame(1722,-3.0,2013,3.0);
+
+    gr_above->SetTitle("graph title;x title;y title");
         
     gr_above->SetFillColor(2);
-    gr_above->GetXaxis()->SetTitle("X-Axis");
-    gr_above->GetYaxis()->SetTitle("Y-Axis");
     gr_above->Draw("B");
     
-
     gr_below->SetFillColor(4);
-    gr_below->GetXaxis()->SetTitle("X-Axis");
-    gr_below->GetYaxis()->SetTitle("Y-Axis");
     gr_below->Draw("B");
-
-    //1873
-    cout<<y_below[149]<<endl;
-    cout<<y_below[150]<<endl;
-    cout<<y_below[151]<<endl;
-    cout<<y_below[152]<<endl;
     
 }
 
