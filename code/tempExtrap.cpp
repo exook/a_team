@@ -9,6 +9,7 @@
 #include <TCanvas.h> // canvas object
 #include <fstream>
 #include <TRandom3.h>
+#include <TGraph.h>
 
 using namespace std;
 
@@ -49,7 +50,7 @@ int isLeapYear(int year){
     }
 }
 
-void totalAverage(vector<vector<float>>* dataVectorPointer,vector <vector<float>>* averagesVectorPointer){
+void averages(vector<vector<float>>* dataVectorPointer,vector <vector<float>>* averagesVectorPointer){
 
 
     //cout<<initialYear<<","<<endYear<<endl;
@@ -80,8 +81,8 @@ void totalAverage(vector<vector<float>>* dataVectorPointer,vector <vector<float>
             for(int day=1;day<=366;day++){
                 yearlySum+=dataVectorPointer->at(row).at(4);
                 row++;
-                writer<<year<<":"<<day<<endl;
-                writer<<dataVectorPointer->at(row).at(0)<<":"<<dataVectorPointer->at(row).at(1)<<":"<<dataVectorPointer->at(row).at(2)<<endl<<endl;
+                //writer<<year<<":"<<day<<endl;
+                //writer<<dataVectorPointer->at(row).at(0)<<":"<<dataVectorPointer->at(row).at(1)<<":"<<dataVectorPointer->at(row).at(2)<<endl<<endl;
             }
         thisYear.push_back(year);
         thisYear.push_back(yearlySum/366);
@@ -91,8 +92,8 @@ void totalAverage(vector<vector<float>>* dataVectorPointer,vector <vector<float>
             for(int day=1;day<=365;day++){
                 yearlySum+=dataVectorPointer->at(row).at(4);
                 row++;
-                writer<<year<<":"<<day<<endl;
-                writer<<dataVectorPointer->at(row).at(0)<<":"<<dataVectorPointer->at(row).at(1)<<":"<<dataVectorPointer->at(row).at(2)<<endl<<endl;
+                //writer<<year<<":"<<day<<endl;
+                //writer<<dataVectorPointer->at(row).at(0)<<":"<<dataVectorPointer->at(row).at(1)<<":"<<dataVectorPointer->at(row).at(2)<<endl<<endl;
             }
         thisYear.push_back(year);
         thisYear.push_back(yearlySum/366);
@@ -101,6 +102,16 @@ void totalAverage(vector<vector<float>>* dataVectorPointer,vector <vector<float>
     }
 
     writer.close();
+}
+
+float totalAverage(vector <vector<float>>* averagesVectorPointer){
+    float totalSum=0;
+    for(size_t i = 0; i < averagesVectorPointer->size(); ++i){
+        totalSum+=averagesVectorPointer->at(i).at(1);
+    }
+    return totalSum/averagesVectorPointer->size();
+    
+
 }
 
 void tempTrender::tempEx(){
@@ -113,18 +124,66 @@ void tempTrender::tempEx(){
     vector <vector<float>> averagesVector;
     vector <vector<float>> *averagesVectorPointer=&averagesVector; 
 
-    totalAverage(dataVectorPointer,averagesVectorPointer);
+    averages(dataVectorPointer,averagesVectorPointer);
 
-    TH1D* hist = new TH1D("data", ";x;N", 100, 0, 10);
+    //TH1D* hist = new TH1D("data", ";x;N", 100, 0, 10);
+    //for(size_t i = 0; i < averagesVector.size(); ++i){
+    //    hist->Fill(averagesVector.at(i).at(1));
+    //}
+    //TCanvas * c1= new TCanvas("c1", "random",5,5,800,600);
+    //hist->Draw();
 
-    for(size_t i = 0; i < averagesVector.size(); ++i){
-        hist->Fill(averagesVector.at(i).at(1));
-    }
-    TCanvas * c1= new TCanvas("c1", "random",5,5,800,600);
-    hist->Draw();
+    float totalMean=totalAverage(averagesVectorPointer);
+    //cout<<totalMean<<endl;
 
+   Int_t n = averagesVector.size();
+   Double_t x[n], y[n],y_above[n],y_below[n];
+   for (Int_t i=0; i<n; i++) {
+        x[i] = averagesVector.at(i).at(0);
+        y[i] = averagesVector.at(i).at(1)-totalMean;
+        if(y[i]<0){
+            y_below[i]=y[i];
+            y_above[i]=0;
+        }
+        if(y[i]>=0){
+            y_above[i]=y[i];
+            y_below[i]=0;
+        }
+   }
+    TGraph *gr1 = new TGraph (n, x, y);
+    TGraph *gr_above = new TGraph (n, x, y_above);
+    TGraph *gr_below = new TGraph (n, x, y_below);
 
+/*
+    TCanvas * c_working= new TCanvas("c1", "random",5,5,1200,600);
+    gr1->SetFillColor(40);
+    gr1->GetXaxis()->SetTitle("X-Axis");
+    gr1->GetXaxis()->SetLimits(1722,2013);
+    gr1->GetYaxis()->SetTitle("Y-Axis");
+    //gr1->GetXaxis()->SetLimits(3.0,-3.0);
+    gr1->Draw("AB");
+*/
 
+    TCanvas * c2= new TCanvas("c2", "random",5,5,1200,600);
+    c2->DrawFrame(1722,-5.0,2013,5.0);
+        
+    gr_above->SetFillColor(2);
+    gr_above->GetXaxis()->SetTitle("X-Axis");
+    gr_above->GetYaxis()->SetTitle("Y-Axis");
+    gr_above->Draw("B");
+    
+
+    gr_below->SetFillColor(4);
+    gr_below->GetXaxis()->SetTitle("X-Axis");
+    gr_below->GetYaxis()->SetTitle("Y-Axis");
+    gr_below->Draw("B");
+
+    //1873
+    cout<<y_below[149]<<endl;
+    cout<<y_below[150]<<endl;
+    cout<<y_below[151]<<endl;
+    cout<<y_below[152]<<endl;
+    
 }
 
 /*
