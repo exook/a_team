@@ -7,8 +7,7 @@
 #include <TStyle.h>  // style object
 #include <TMath.h>   // math functions
 #include <TCanvas.h> // canvas object
-
-// Adding the possibility to choose time of day?
+#include <TGraph.h>
 
 // Left to do: probability to observe a certain temperature
 
@@ -22,7 +21,7 @@ void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
     
     vector <float> tempCalculatedDay; // Vector to store temperatures for the chosen day
     // Create histogram
-    TH1F* hist = new TH1F("hist", "Temperature;Temperature [#circC];Entries", 300, -20, 40);
+    TH1F* histogram = new TH1F("histogram", "Temperature;Temperature [#circC];Entries", 200, -20, 40);
     
     
     // Find the right day, month and time in the data
@@ -33,18 +32,23 @@ void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
         }
     }
     for(Int_t i = 0; i < (int)tempCalculatedDay.size(); i++) {
-        hist->Fill(tempCalculatedDay[i]);
+        histogram->Fill(tempCalculatedDay[i]);
     }
     
-    hist->SetFillColor(kRed + 1);
-    double mean = hist->GetMean(); //The mean of the distribution
-    double stdev = hist->GetRMS(); //The standard deviation
+    
+    
+    histogram->SetFillColor(kBlue - 6);
+    double mean = histogram->GetMean(); //The mean of the distribution
+    double stdev = histogram->GetRMS(); //The standard deviation
     TCanvas* canv = new TCanvas();
-    hist->Draw();
+    histogram->Draw();
+
+    histogram->Fit("gaus");
+    
     // Save the canvas as a picture
     canv->SaveAs("tempOnDay.png");
     
-
+    
 }
 
 
