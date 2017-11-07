@@ -78,19 +78,3 @@ void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
 
 
 
-
-
-/*
- Int_t n = 200;
- Double_t x[n], y[n];
- for (Int_t i=0; i<n; i++) {
- x[i] = i*60/200;
- y[i] = 1/(mean*TMath::Sqrt(2*stdev))*TMath::Exp(-TMath::Power((x[i]-mean),2)/(2*TMath::Power(stdev,2)));
- }
- */
-/*
- TF1 *gr1 = new TF1 ("gr1","1/(mean*TMath::Sqrt(2*stdev))*TMath::Exp(-TMath::Power(((x)-mean),2)/(2*TMath::Power(stdev,2)))",-20, 40);
- gr1->SetLineColor(kGreen);
- gr1->Draw();
- */
-
