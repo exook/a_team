@@ -176,13 +176,13 @@ void tempTrender::tempEx(){
 
     TCanvas * c2= new TCanvas("c2", "random",1200,600);
     c2->DrawFrame(1722,-3.0,2013,3.0);
-/*
+
     gr_above->SetFillColor(kRed-3);
     gr_above->Draw("B");
     
     gr_below->SetFillColor(kBlue-3);
     gr_below->Draw("B");
-*/
+
     gr_average->Draw("p");
     gr_average->SetLineWidth(3);
     gr_average->SetMarkerStyle(2);
@@ -194,7 +194,6 @@ void tempTrender::tempEx(){
     //2*cos((1/291)((110+104)/2)*x+a)*cos((1/291)((7)/2)*x+a); x from 1722 to 2013
     //TF1* fitFunc = new TF1("fitFunc", "[0]*cos((1/291)((110+104)/2)*x+1.05)*cos((1/291)((7)/2)*x+1.05)", 1722, 2013);
 
-/*
 //working
 
     TF1* fitFunc = new TF1("fitFunc", "([0]*(x-1840)*cos([1]*x))", 1722, 2013);
@@ -202,14 +201,9 @@ void tempTrender::tempEx(){
     fitFunc->SetParameter(0, 0.6);
     fitFunc->SetParameter(1, 0.025);
 //
-*/
 
-    TF1* fitFunc = new TF1("fitFunc", "([0]*(x-1840)*cos([1]*x))", 1722, 2013);
-
-    fitFunc->SetParameter(0, 0.6);
-    fitFunc->SetParameter(1, 0.05);
-
-    fitFunc->SetLineColor(kGreen);
+    fitFunc->SetLineColor(kGreen-3);
+    fitFunc->SetLineWidth(3);
     gr_average->Fit(fitFunc);
 
 }
