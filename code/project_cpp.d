@@ -3,5 +3,5 @@
 
 ./project_cpp.so: tempTrender.h /usr/include/c++/5/iostream
 ./project_cpp.so: /usr/include/c++/5/string /usr/include/c++/5/vector
-./project_cpp.so: /home/alexander/root/include/RVersion.h /home/alexander/root/include/RConfig.h /home/alexander/root/include/TClass.h /home/alexander/root/include/TDictAttributeMap.h /home/alexander/root/include/TInterpreter.h /home/alexander/root/include/TROOT.h /home/alexander/root/include/TBuffer.h /home/alexander/root/include/TMemberInspector.h /home/alexander/root/include/TError.h /home/alexander/root/include/RtypesImp.h /home/alexander/root/include/TIsAProxy.h /home/alexander/root/include/TFileMergeInfo.h /home/alexander/root/include/TCollectionProxyInfo.h
-project_cpp__ROOTBUILDVERSION= 6.06/08
+./project_cpp.so: /home/shi/Documents/root-6.10.02/include/RVersion.h /home/shi/Documents/root-6.10.02/include/RConfig.h /home/shi/Documents/root-6.10.02/include/TClass.h /home/shi/Documents/root-6.10.02/include/TDictAttributeMap.h /home/shi/Documents/root-6.10.02/include/TInterpreter.h /home/shi/Documents/root-6.10.02/include/TROOT.h /home/shi/Documents/root-6.10.02/include/TBuffer.h /home/shi/Documents/root-6.10.02/include/TMemberInspector.h /home/shi/Documents/root-6.10.02/include/TError.h /home/shi/Documents/root-6.10.02/include/RtypesImp.h /home/shi/Documents/root-6.10.02/include/TIsAProxy.h /home/shi/Documents/root-6.10.02/include/TFileMergeInfo.h /home/shi/Documents/root-6.10.02/include/TCollectionProxyInfo.h /home/shi/Documents/root-6.10.02/bin/rootcling
+project_cpp__ROOTBUILDVERSION= 6.10/02

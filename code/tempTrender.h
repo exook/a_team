@@ -25,6 +25,7 @@ class tempTrender {
     string path;
     void readData(string fileName, vector <vector <string> > &data);
     int getDayOfYear(int year, int month, int day);
+    bool testLeapYear(int year);
     template <class T> void print(T vec, int lines);
 };
 
@@ -47,16 +48,22 @@ void tempTrender::print(T vec, int lines) {
     }
 }
 
+// Test leap year
+bool tempTrender::testLeapYear(int year) {
+	bool check = false;
+	if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+		check = true;
+	}
+	return check;
+}
 // Calculate day of year
 int tempTrender::getDayOfYear(int year, int month, int day) {
-	bool checkleapYear = false;
+	bool checkLeapYear = false;
 	int dayOfYear = 0;
-	if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
-		checkleapYear = true;
-	}
+	checkLeapYear = testLeapYear(year);
 	int daysInMonthsNonLeap[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	int daysInMonthsLeap[12] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	if (checkleapYear == false) {
+	if (checkLeapYear == false) {
 		for (int k = 1; k < month; k++) {
 			dayOfYear = dayOfYear + daysInMonthsNonLeap[k-1];
 		}
