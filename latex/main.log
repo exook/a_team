@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.11)  7 NOV 2017 12:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.11)  7 NOV 2017 17:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -288,13 +288,71 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen104
 \Gin@req@width=\dimen105
 )
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks17
+\ex@=\dimen106
+))
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen107
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count89
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count90
+\leftroot@=\count91
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count92
+\DOTSCASE@=\count93
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen108
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count94
+\c@MaxMatrixCols=\count95
+\dotsspace@=\muskip10
+\c@parentequation=\count96
+\dspbrk@lvl=\count97
+\tag@help=\toks18
+\row@=\count98
+\column@=\count99
+\maxfields@=\count100
+\andhelp@=\toks19
+\eqnshift@=\dimen109
+\alignsep@=\dimen110
+\tagshift@=\dimen111
+\tagwidth@=\dimen112
+\totwidth@=\dimen113
+\lineht@=\dimen114
+\@envbody=\toks20
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/subfiles/subfiles.sty
 Package: subfiles 2012/05/23 Federico Garcia
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks17
-\verbatim@line=\toks18
+\every@verbatim=\toks22
+\verbatim@line=\toks23
 \verbatim@in@stream=\read1
 ))
 (/usr/local/texlive/2015/texmf-dist/tex/latex/blindtext/blindtext.sty
@@ -303,53 +361,53 @@ Package: blindtext 2012/01/06 V2.0 blindtext-Package
 (/usr/local/texlive/2015/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 )
-\c@blindtext=\count89
-\c@Blindtext=\count90
-\c@blind@countparstart=\count91
-\blind@countxx=\count92
-\blindtext@numBlindtext=\count93
-\blind@countyy=\count94
-\c@blindlist=\count95
-\c@blindlistlevel=\count96
-\c@blindlist@level=\count97
-\blind@listitem=\count98
-\c@blind@listcount=\count99
-\c@blind@levelcount=\count100
-\blind@mathformula=\count101
-\blind@Mathformula=\count102
-\c@blind@randomcount=\count103
-\c@blind@randommax=\count104
-\c@blind@pangramcount=\count105
-\c@blind@pangrammax=\count106
+\c@blindtext=\count101
+\c@Blindtext=\count102
+\c@blind@countparstart=\count103
+\blind@countxx=\count104
+\blindtext@numBlindtext=\count105
+\blind@countyy=\count106
+\c@blindlist=\count107
+\c@blindlistlevel=\count108
+\c@blindlist@level=\count109
+\blind@listitem=\count110
+\c@blind@listcount=\count111
+\c@blind@levelcount=\count112
+\blind@mathformula=\count113
+\blind@Mathformula=\count114
+\c@blind@randomcount=\count115
+\c@blind@randommax=\count116
+\c@blind@pangramcount=\count117
+\c@blind@pangrammax=\count118
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count107
-\scratchdimen=\dimen106
-\scratchbox=\box26
-\nofMPsegments=\count108
-\nofMParguments=\count109
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count110
-\MPscratchDim=\dimen107
-\MPnumerator=\count111
-\makeMPintoPDFobject=\count112
-\everyMPtoPDFconversion=\toks20
+\scratchcounter=\count119
+\scratchdimen=\dimen115
+\scratchbox=\box28
+\nofMPsegments=\count120
+\nofMParguments=\count121
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count122
+\MPscratchDim=\dimen116
+\MPnumerator=\count123
+\makeMPintoPDFobject=\count124
+\everyMPtoPDFconversion=\toks25
 ) (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -398,16 +456,47 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 24.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 24.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 24.
-
 (./sections/introduction.tex) (./sections/hotandcold.tex)
-(./sections/tempSeasons.tex) (./sections/tempDay.tex
-<images/tempOnDay.png, id=1, 700.6175pt x 476.78125pt>
+(./sections/tempSeasons.tex
+<images/springStart.png, id=1, 901.3675pt x 577.15625pt>
+File: images/springStart.png Graphic file (type png)
+
+<use images/springStart.png>
+Package pdftex.def Info: images/springStart.png used on input line 13.
+(pdftex.def)             Requested size: 293.2521pt x 187.77611pt.
+
+<images/summerStart.png, id=2, 901.3675pt x 577.15625pt>
+File: images/summerStart.png Graphic file (type png)
+
+<use images/summerStart.png>
+Package pdftex.def Info: images/summerStart.png used on input line 21.
+(pdftex.def)             Requested size: 293.2521pt x 187.77611pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<images/fallStart.png, id=3, 901.3675pt x 577.15625pt>
+File: images/fallStart.png Graphic file (type png)
+
+<use images/fallStart.png>
+Package pdftex.def Info: images/fallStart.png used on input line 29.
+(pdftex.def)             Requested size: 293.2521pt x 187.77611pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<images/winterStart.png, id=4, 901.3675pt x 577.15625pt>
+File: images/winterStart.png Graphic file (type png)
+
+<use images/winterStart.png>
+Package pdftex.def Info: images/winterStart.png used on input line 37.
+(pdftex.def)             Requested size: 293.2521pt x 187.77611pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) (./sections/tempDay.tex
+<images/tempOnDay.png, id=5, 700.6175pt x 476.78125pt>
 File: images/tempOnDay.png Graphic file (type png)
 
 <use images/tempOnDay.png>
@@ -420,25 +509,27 @@ Overfull \hbox (5.30789pt too wide) in paragraph at lines 5--6
 
 ) (./sections/tempExtrap.tex) [1
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2 <./i
-mages/tempOnDay.png>] (./main.aux) ) 
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./image
+s/springStart.png>] [2 <./images/summerStart.png> <./images/fallStart.png>] [3 
+<./images/winterStart.png> <./images/tempOnDay.png>] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 2336 strings out of 493089
- 32611 string characters out of 6134842
- 104283 words of memory out of 5000000
- 5772 multiletter control sequences out of 15000+600000
- 7587 words of font info for 27 fonts, out of 8000000 for 9000
+ 2962 strings out of 493089
+ 39995 string characters out of 6134842
+ 116723 words of memory out of 5000000
+ 6376 multiletter control sequences out of 15000+600000
+ 8715 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,6n,23p,252b,255s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr17.pfb>
-Output written on main.pdf (2 pages, 62894 bytes).
+ 38i,6n,23p,364b,283s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/
+texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/tex
+live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texli
+ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb>
+Output written on main.pdf (3 pages, 213666 bytes).
 PDF statistics:
- 28 PDF objects out of 1000 (max. 8388607)
- 18 compressed objects within 1 object stream
+ 39 PDF objects out of 1000 (max. 8388607)
+ 23 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
