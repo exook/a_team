@@ -190,16 +190,13 @@ void tempTrender::tempEx(){
     gr_average->GetXaxis()->SetTitle("year");
     gr_average->Draw("p");
 
-    //TF1* fitFunc = new TF1("fitFunc", "(cos([0]*x))", 1722, 2013);
-    //sin(0.4*x)*2*cos(4*x)
-    //cos((1/291)110*x)+cos((1/291)104*x)
-    //TF1* fitFunc = new TF1("fitFunc", "[0]*cos((1/291)*110*x)+[0]*cos((1/291)*104*x)", 1722, 2013);
+
     //2*cos((1/291)((110+104)/2)*x+a)*cos((1/291)((7)/2)*x+a); x from 1722 to 2013
-    TF1* fitFunc = new TF1("fitFunc", "[0]*cos((1/291)((110+104)/2)*x+1.05)*cos((1/291)((7)/2)*x+1.05)", 1722, 2013);
-    fitFunc->SetParameter(0, 2);
-    //fitFunc->SetParameter(0, 0.4);
-    //fitFunc->SetParameter(0, 2);
-    //fitFunc->SetParameter(0, 4);
+    //TF1* fitFunc = new TF1("fitFunc", "[0]*cos((1/291)((110+104)/2)*x+1.05)*cos((1/291)((7)/2)*x+1.05)", 1722, 2013);
+
+    TF1* fitFunc = new TF1("fitFunc", "([0]*cos(0.02*x))", 1722, 2013);
+
+    fitFunc->SetParameter(0, 4);
     fitFunc->SetLineColor(kGreen);
     gr_average->Fit(fitFunc);
 
