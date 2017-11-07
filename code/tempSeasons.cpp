@@ -348,8 +348,8 @@ void tempTrender::beginningFall(const vector <vector <double> > &averageTemp,
     }
 }
 
-//stores data to plot in arrays
-void arrayPlotData(const vector <vector <int> > &beginDaySeason, string season,
+//stores data to plot (or show in a histogram) in arrays
+void arrayData(const vector <vector <int> > &beginDaySeason, string season,
                    int n, Int_t x[n], Int_t y[n]){
     for (int i=0; i < n; i++){
         x[i] = beginDaySeason.at(i).at(0);
@@ -374,7 +374,7 @@ void plotSeason(const vector <vector <int> > &beginDaySeason, string season){
     Int_t xYear[n];
     Int_t yDay[n];
     
-    arrayPlotData(beginDaySeason, season, n, xYear, yDay);
+    arrayData(beginDaySeason, season, n, xYear, yDay);
     
     TCanvas* cSeason = new TCanvas("cSeason", Form("The first day of %s", season.c_str()),900, 600);
     TGraph* gSeason = new TGraph (n, xYear, yDay);
@@ -409,10 +409,49 @@ void plotSeason(const vector <vector <int> > &beginDaySeason, string season){
 //    line->SetLineColor(kBlack);
 //    line->Draw();
 //    cSeason->Update();
-    cout << "Plotting data " << season << endl;
+//    cout << "Plotting data " << season << ": ";
     
     cSeason->SaveAs(Form("tempSeasonPlots/%sStart.png", season.c_str()));
     cSeason->Close();
+}
+
+//create a histogram of the start days of a season
+void histogram(const vector <vector <int> > &beginDaySeason, string season){
+    int n = int(beginDaySeason.size());
+    Int_t x[n];
+    Int_t y[n];
+    
+    arrayData(beginDaySeason, season, n, x, y);
+    
+    TH1I* hist = new TH1I("hist", Form("Spread in the first day of %s; Day of year; Entries", season.c_str()), 366, 1, 366);
+    TCanvas* c_hist = new TCanvas("c1", "v2 canvas", 900, 600);
+    
+    //fill the histogram
+    for (int i=0; i < n; i++){
+        hist->Fill(y[i]);
+    }
+    
+    hist->SetFillColor(kBlue + 3);
+    hist->Draw();
+    
+    //legend
+    if (season == "fall") {
+        //at different position for fall histogram
+        TLegend* leg = new TLegend(0.2, 0.89, 0.449, 0.93);
+        leg->SetBorderSize(0);
+        leg->AddEntry(hist, Form("First day of %s", season.c_str()), "l");
+        leg->Draw();
+    }
+    else {
+        TLegend* leg = new TLegend(0.7, 0.89, 0.949, 0.93);
+        leg->SetBorderSize(0);
+        leg->AddEntry(hist, Form("First day of %s", season.c_str()), "l");
+        leg->Draw();
+    }
+    
+    c_hist->SaveAs(Form("tempSeasonPlots/%sHistogram.png", season.c_str()));
+    c_hist->Close();
+    delete hist;
 }
 
 //creates day a season starts to year histograms for all seasons
@@ -437,6 +476,8 @@ void tempTrender::startDaySeasons(){
     
     readData("smhi-opendata_Lund.csv", dataSeasons);
     calcAverageTemp(dataSeasons, averageTempDay);
+    
+    //calculate start of seasons
     beginningWinter(averageTempDay, firstDayWinter);
     beginningSpring(averageTempDay, firstDayWinter, firstDaySpring);
     beginningSummer(averageTempDay, firstDaySummer);
@@ -455,15 +496,23 @@ void tempTrender::startDaySeasons(){
 //    cout << endl;
 //    print<vector <vector <int> >>(firstDaySpring, 5);
 //    cout << endl << endl;
-    print<vector <vector <int> >>(firstDaySummer, 5);
+//    print<vector <vector <int> >>(firstDaySummer, 5);
 //    cout << endl << endl;
 //    print<vector <vector <int> >>(firstDayFall, int(firstDayFall.size()));
     
-    cout << endl;
+    cout << endl << "Plotting the results"<< endl;
     plotSeason(firstDaySpring, "spring");
     plotSeason(firstDaySummer, "summer");
     plotSeason(firstDayFall, "fall");
     plotSeason(firstDayWinter, "winter");
+    
+    //making histograms of the result
+    cout << endl << "Making histograms" << endl;
+    histogram(firstDaySpring, "spring");
+    histogram(firstDaySummer, "summer");
+    histogram(firstDayFall, "fall");
+    histogram(firstDayWinter, "winter");
+    
     
 }
 
