@@ -7,7 +7,7 @@
 #include <TStyle.h>  // style object
 #include <TMath.h>   // math functions
 #include <TCanvas.h> // canvas object
-
+#include <TLegend.h>
 // Adding the possibility to choose time of day?
 // Leap years?
 
@@ -29,7 +29,7 @@ void tempTrender::tempOnDayNumber(int dateToCalculate){
     int dayToCalculate;
     int monthToCalculate = 0;
     
-    //int months[13] = {0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366}; // For leapyears
+    //int months[13] = {0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366}; // For leapyears if day 60
     int months[13] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365};
     
     
@@ -41,7 +41,7 @@ void tempTrender::tempOnDayNumber(int dateToCalculate){
   
     // Find the right day, month and time in the data
     for (int i = 1 ; i < (int)dataOnDay.size(); i++ ) {
-        if ( (stoi(dataOnDay.at(i).at(1)) == monthToCalculate) && (stoi(dataOnDay.at(i).at(2)) == dayToCalculate) && (dataOnDay.at(i).at(3) == "12") ) {
+        if ( (stoi(dataOnDay.at(i).at(1)) == monthToCalculate) && (stoi(dataOnDay.at(i).at(2)) == dayToCalculate) ){ //&&(dataOnDay.at(i).at(3) == "12") ) {
             tempCalculatedDay.push_back(strtof((dataOnDay.at(i).at(6)).c_str(),0)); // Vector (float) with temperatures for chosen day
         }
     }
@@ -51,14 +51,26 @@ void tempTrender::tempOnDayNumber(int dateToCalculate){
         hist->Fill(tempCalculatedDay[i]);
     }
     
+    
     hist->SetFillColor(kRed + 1);
     double mean = hist->GetMean(); //The mean of the distribution
     double stdev = hist->GetRMS(); //The standard deviation
-    TCanvas* canv = new TCanvas();
+    TCanvas* c2 = new TCanvas("c2", "Number of day");
     hist->Draw();
-    // Save the canvas as a picture
-    canv->SaveAs("tempOnDayNumber.png");
+    hist->Fit("gaus");
+    gStyle->SetOptStat(0);
+    
+    TLegend* leg = new TLegend(0.7,0.8,0.9,0.9);
+    leg->SetFillStyle(0); //Hollow fill (transparent)
+    leg->SetBorderSize(0); //Get rid of the border
+    //leg->SetHeader("The Legend Title");
+    leg->AddEntry(hist,"Temperature on..","f");
+    leg->Draw();
    
+    // Save the canvas as a picture
+    c2->SaveAs("tempOnDayNumber.png");
+    
+
 
 }
 
