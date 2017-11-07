@@ -65,6 +65,7 @@ void tempTrender::hotCold(string fileName){
     double maxTemp = stod(datahotCold.at(0).at(6));
     int year, maxTempMonth = 0, maxTempDay = 0, minTempMonth = 0, minTempDay = 0, maxTempDayOfYear, minTempDayOfYear;
     double temp;
+     
 
     for (int i = 0; i < int(datahotCold.size()); i++) {
 		year = stoi(datahotCold.at(i).at(0));
@@ -122,7 +123,3 @@ void tempTrender::hotCold(string fileName){
 	
     
 }
-
-
-//add your functions :)
-
