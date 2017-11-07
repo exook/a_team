@@ -74,7 +74,7 @@ void averages(vector<vector<float>>* dataVectorPointer,vector <vector<float>>* a
 
     vector <float> thisYear;
 
-    for(int year = initialYear; year < endYear;year++){//warning: comparison between signed and unsigned integer expressions [-Wsign-compare
+    for(int year = initialYear+1; year <= endYear;year++){//warning: comparison between signed and unsigned integer expressions [-Wsign-compare
         float yearlySum=0;
         vector <float> thisYear;
         if(isLeapYear(year)){
@@ -126,15 +126,7 @@ void tempTrender::tempEx(){
 
     averages(dataVectorPointer,averagesVectorPointer);
 
-    //TH1D* hist = new TH1D("data", ";x;N", 100, 0, 10);
-    //for(size_t i = 0; i < averagesVector.size(); ++i){
-    //    hist->Fill(averagesVector.at(i).at(1));
-    //}
-    //TCanvas * c1= new TCanvas("c1", "random",5,5,800,600);
-    //hist->Draw();
-
     float totalMean=totalAverage(averagesVectorPointer);
-    //cout<<totalMean<<endl;
 
    Int_t n = averagesVector.size();
    Double_t x[n], y[n],y_above[n],y_below[n];
@@ -150,40 +142,108 @@ void tempTrender::tempEx(){
             y_below[i]=0;
         }
    }
-    TGraph *gr1 = new TGraph (n, x, y);
+
+    //int groupSize=20;
+    int groupSize=5;
+    Double_t y_movingAverage[n/groupSize],x_movingAverage[n/groupSize];
+
+    //cout<<n<<endl;
+
+    //290
+
+    int counter=0;
+    int counter2=1;
+    double sum=0;
+    int initialYear=1723;//Hardcoded!
+    for(Int_t i=0;i<n;i++){
+        counter+=1;
+        //cout<<y[i]<<endl;
+        sum+=y[i];
+        //cout<<"sum: "<<sum<<endl;
+        if(counter==groupSize){
+            y_movingAverage[i/groupSize]=sum/groupSize;
+            x_movingAverage[counter2]=initialYear+(counter2*groupSize);
+            counter=0;
+            counter2+=1;
+            //cout<<"Average: "<<y[i/groupSize]<<endl;
+            sum=0;
+        }
+    }
+
+    TGraph *gr_average = new TGraph (n/groupSize, x_movingAverage, y_movingAverage);
     TGraph *gr_above = new TGraph (n, x, y_above);
     TGraph *gr_below = new TGraph (n, x, y_below);
 
-/*
-    TCanvas * c_working= new TCanvas("c1", "random",5,5,1200,600);
-    gr1->SetFillColor(40);
-    gr1->GetXaxis()->SetTitle("X-Axis");
-    gr1->GetXaxis()->SetLimits(1722,2013);
-    gr1->GetYaxis()->SetTitle("Y-Axis");
-    //gr1->GetXaxis()->SetLimits(3.0,-3.0);
-    gr1->Draw("AB");
-*/
-
-    TCanvas * c2= new TCanvas("c2", "random",5,5,1200,600);
+    TCanvas * c2= new TCanvas("c2", "random",1200,600);
     c2->DrawFrame(1722,-3.0,2013,3.0);
 
-    gr_above->SetTitle("graph title;x title;y title");
-        
-    gr_above->SetFillColor(2);
+    gr_above->SetFillColor(kRed-3);
     gr_above->Draw("B");
     
-    gr_below->SetFillColor(4);
+    gr_below->SetFillColor(kBlue-3);
     gr_below->Draw("B");
-    
-}
+
+    gr_average->Draw();
+    gr_average->SetMarkerStyle(8);
+    gr_average->SetMarkerSize(1);
+    gr_average->GetXaxis()->SetTitle("year");
+    gr_average->Draw("p");
+
+
+
 
 /*
-    int initialYear=dataVectorPointer->at(0).at(0);
-    int endYear=dataVectorPointer->at(dataVectorPointer->size()-1).at(0);
-
-    for(int row = 0; row < (endYear-initialYear);row++){
-        for(float i=0;i<averagesVector.at(row);i+=0.01)
-            cout<<row+initialYear<<endl;
-            hist->Fill(row+initialYear);
+    for(Int_t i=0; i<(n/groupSize); i++){
+        int sum=0;
+        for(Int_t j=0; j<(groupSize); j++){
+            sum+=y[(i*j)+j];
+            //cout<<sum<<endl;
+        }
+        cout<<sum/groupSize<<endl;
+        y_movingAverage[i]=sum/groupSize;
+        x_movingAverage[i]=x[i*(groupSize/2)];
     }
+
+
+    TGraph *gr = new TGraph (n, x, y);
+    TGraph *gr_average = new TGraph (n/groupSize, x_movingAverage, y_movingAverage);
+    TGraph *gr_above = new TGraph (n, x, y_above);
+    TGraph *gr_below = new TGraph (n, x, y_below);
+
+    TCanvas * c2= new TCanvas("c2", "random",1200,600);
+    c2->DrawFrame(1722,-3.0,2013,3.0);
+
+    gr_average->Draw();
+    gr_average->SetMarkerStyle(8);
+    gr_average->SetMarkerSize(1);
+    gr_average->GetXaxis()->SetTitle("year");
+    gr_average->Draw("p");
+    
+    
+    gr->Draw();
+    gr->SetMarkerStyle(8);
+    gr->SetMarkerSize(1);
+    gr->GetXaxis()->SetTitle("year");
+    gr->Draw("p");
+
+    
+    gr->SetTitle("graph title;x title;y title");
+        
+    gr_above->SetFillColor(kRed-3);
+    gr_above->Draw("B");
+    
+    gr_below->SetFillColor(kBlue-3);
+    gr_below->Draw("B");
+
+    // create 1d function that we will use to fit our generated data to ensure
+    // that the generation works
+    //TF1* fitFunc = new TF1("fitFunc", "[1]*(1+2*[0]*cos(2*x))", 0, TMath::Pi());
+
+    
+
+  TF1* fitFunc = new TF1("fitFunc", "([0]*sin(1*x))", 0, TMath::Pi());
+  fitFunc->SetParameter(0, 100);
+  fitFunc->SetLineColor(kRed);
+  gr->Fit(fitFunc);
 */
+}
