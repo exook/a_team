@@ -128,5 +128,9 @@
 ./tempSeasons_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/TAttCanvas.h
 ./tempSeasons_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/TCanvasImp.h
 ./tempSeasons_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/TGraph.h
+./tempSeasons_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/TLegend.h
+./tempSeasons_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/TPave.h
+./tempSeasons_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/TBox.h
+./tempSeasons_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/TLine.h
 ./tempSeasons_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/RVersion.h /usr/local/Cellar/root/6.10.08/include/root/RConfig.h /usr/local/Cellar/root/6.10.08/include/root/TClass.h /usr/local/Cellar/root/6.10.08/include/root/TDictAttributeMap.h /usr/local/Cellar/root/6.10.08/include/root/TInterpreter.h /usr/local/Cellar/root/6.10.08/include/root/TROOT.h /usr/local/Cellar/root/6.10.08/include/root/TBuffer.h /usr/local/Cellar/root/6.10.08/include/root/TMemberInspector.h /usr/local/Cellar/root/6.10.08/include/root/TError.h /usr/local/Cellar/root/6.10.08/include/root/RtypesImp.h /usr/local/Cellar/root/6.10.08/include/root/TIsAProxy.h /usr/local/Cellar/root/6.10.08/include/root/TFileMergeInfo.h /usr/local/Cellar/root/6.10.08/include/root/TCollectionProxyInfo.h /usr/local/Cellar/root/6.10.08/bin/rootcling
 tempSeasons_cpp__ROOTBUILDVERSION= 6.10/08
