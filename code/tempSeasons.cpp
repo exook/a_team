@@ -56,34 +56,9 @@ void calcAverageTemp(const vector <vector <string> > &data, vector <vector <doub
     }
 }
 
-// Calculate day of year
-//TODO: use for all
-//TODO: leapyear included??
-int getDayOfYear2(int year, int month, int day) {
-    bool checkleapYear = false;
-    int dayOfYear = 0;
-    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
-        checkleapYear = true;
-    }
-    int daysInMonthsNonLeap[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    int daysInMonthsLeap[12] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    if (checkleapYear == false) {
-        for (int k = 1; k < month; k++) {
-            dayOfYear = dayOfYear + daysInMonthsNonLeap[k-1];
-        }
-        dayOfYear = dayOfYear + day;
-    }
-    else {
-        for (int j = 1; j < month; j++) {
-            dayOfYear = dayOfYear + daysInMonthsLeap[j-1];
-        }
-        dayOfYear = dayOfYear + day;
-    }
-    return dayOfYear;
-}
-
 //finds the first day of each winter and saves the date in a vector
-void beginningWinter(const vector <vector <double> > &averageTemp, vector <vector <int> > &beginDayWinter){
+void tempTrender::beginningWinter(const vector <vector <double> > &averageTemp,
+                                  vector <vector <int> > &beginDayWinter){
     
     int yearPrevius = averageTemp.at(0).at(0)-1; //first year in data -1
     int monthPrevius = 12; //assume the winter has started in the previous year (before data)
@@ -128,7 +103,7 @@ void beginningWinter(const vector <vector <double> > &averageTemp, vector <vecto
                 if (case1 || case2 || case3 || case4) {
                     
                     vector<int> outputLine;
-                    int dayOfYear = getDayOfYear2(yearFirst, monthFirst, dayFirst);
+                    int dayOfYear = getDayOfYear(yearFirst, monthFirst, dayFirst);
                     
                     //save date first day winter of a year
                     outputLine.push_back(yearFirst);
@@ -199,9 +174,9 @@ bool seasonsInOrder(int yearStart, int i, bool compareWinter,
 }
 
 //finds the first day of spring for each year and saves the date in a vector
-void beginningSpring(const vector <vector <double> > &averageTemp,
-                     const vector <vector <int> > &beginDayWinter,
-                     vector <vector <int> > &beginDaySpring){
+void tempTrender::beginningSpring(const vector <vector <double> > &averageTemp,
+                                  const vector <vector <int> > &beginDayWinter,
+                                  vector <vector <int> > &beginDaySpring){
     
     int yearPrevius = averageTemp.at(0).at(0) -1; //first year in data -1
     int yearFirst = averageTemp.at(0).at(0)-1;
@@ -234,7 +209,7 @@ void beginningSpring(const vector <vector <double> > &averageTemp,
                 if ((yearFirst != yearPrevius) && afterWinter) {
 
                     vector<int> outputLine;
-                    int dayOfYear = getDayOfYear2(yearFirst, monthFirst, dayFirst);
+                    int dayOfYear = getDayOfYear(yearFirst, monthFirst, dayFirst);
                     
                     //save date of the first day spring of a year
                     outputLine.push_back(yearFirst);
@@ -261,7 +236,8 @@ void beginningSpring(const vector <vector <double> > &averageTemp,
 }
 
 //finds the first day of each summer and saves the date in a vector
-void beginningSummer(const vector <vector <double> > &averageTemp, vector <vector <int> > &beginDaySummer){
+void tempTrender::beginningSummer(const vector <vector <double> > &averageTemp,
+                                  vector <vector <int> > &beginDaySummer){
     
     int yearPrevius = averageTemp.at(0).at(0)-1; //first year in data -1
     int yearFirst = averageTemp.at(0).at(0)-1;
@@ -288,7 +264,7 @@ void beginningSummer(const vector <vector <double> > &averageTemp, vector <vecto
             if (counterDays == 5 && (yearFirst != yearPrevius)) {
                 
                 vector<int> outputLine;
-                int dayOfYear = getDayOfYear2(yearFirst, monthFirst, dayFirst);
+                int dayOfYear = getDayOfYear(yearFirst, monthFirst, dayFirst);
                 
                 //save date first day of summer of a year
                 outputLine.push_back(yearFirst);
@@ -312,9 +288,9 @@ void beginningSummer(const vector <vector <double> > &averageTemp, vector <vecto
 
 //finds the first day of fall for each year and saves the date in a vector
 //TODO generalize with beginningSpring
-void beginningFall(const vector <vector <double> > &averageTemp,
-                     const vector <vector <int> > &beginDaySummer,
-                     vector <vector <int> > &beginDayFall){
+void tempTrender::beginningFall(const vector <vector <double> > &averageTemp,
+                                const vector <vector <int> > &beginDaySummer,
+                                vector <vector <int> > &beginDayFall){
     
     int yearPrevius = averageTemp.at(0).at(0) -1; //first year in data -1
     int yearFirst = averageTemp.at(0).at(0)-1;
@@ -347,7 +323,7 @@ void beginningFall(const vector <vector <double> > &averageTemp,
                 if ((yearFirst != yearPrevius) && afterSummer) {
                     
                     vector<int> outputLine;
-                    int dayOfYear = getDayOfYear2(yearFirst, monthFirst, dayFirst);
+                    int dayOfYear = getDayOfYear(yearFirst, monthFirst, dayFirst);
                     
                     //save date of the first day fall of a year
                     outputLine.push_back(yearFirst);
@@ -373,7 +349,8 @@ void beginningFall(const vector <vector <double> > &averageTemp,
 }
 
 //stores data to plot in arrays
-void arrayPlotData(const vector <vector <int> > &beginDaySeason, string season, int n, Int_t x[n], Int_t y[n]){
+void arrayPlotData(const vector <vector <int> > &beginDaySeason, string season,
+                   int n, Int_t x[n], Int_t y[n]){
     for (int i=0; i < n; i++){
         x[i] = beginDaySeason.at(i).at(0);
         if (season == "winter" && beginDaySeason.at(i).at(1) > 6) {
