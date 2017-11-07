@@ -144,7 +144,7 @@ void tempTrender::tempEx(){
    }
 
     //int groupSize=20;
-    int groupSize=10;
+    int groupSize=5;
     Double_t y_movingAverage[n/groupSize],x_movingAverage[n/groupSize];
 
     //cout<<n<<endl;
@@ -176,6 +176,12 @@ void tempTrender::tempEx(){
 
     TCanvas * c2= new TCanvas("c2", "random",1200,600);
     c2->DrawFrame(1722,-3.0,2013,3.0);
+
+    gr_above->SetFillColor(kRed-3);
+    gr_above->Draw("B");
+    
+    gr_below->SetFillColor(kBlue-3);
+    gr_below->Draw("B");
 
     gr_average->Draw();
     gr_average->SetMarkerStyle(8);
