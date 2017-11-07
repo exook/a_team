@@ -7,14 +7,16 @@
 #include <TStyle.h>  // style object
 #include <TMath.h>   // math functions
 #include <TCanvas.h> // canvas object
-
-// Adding the possibility to choose time of day?
-
+#include <TGraph.h>
+#include <TLegend.h>
 // Left to do: probability to observe a certain temperature
+double Gaussian2(double* x, double* par) { //A custom function
+    return par[0]*exp(-0.5*(x[0]*x[0] - 2*x[0]*par[1] + par[1]*par[1])/(par[2]*par[2]));
+}
 
 void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
     cout << endl;
-    cout << "Calculating the temperature for a certain day in Lund" << endl;
+    cout << "Calculating the temperature for a certain date in Lund" << endl;
     
     vector <vector <string> > dataOnDay;
     readData("smhi-opendata_Lund.csv", dataOnDay);
@@ -22,7 +24,7 @@ void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
     
     vector <float> tempCalculatedDay; // Vector to store temperatures for the chosen day
     // Create histogram
-    TH1F* hist = new TH1F("hist", "Temperature;Temperature [#circC];Entries", 300, -20, 40);
+    TH1F* histogram = new TH1F("histogram", "Temperature;Temperature [#circC];Entries", 300, -20, 40);
     
     
     // Find the right day, month and time in the data
@@ -32,22 +34,54 @@ void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
             
         }
     }
+    // Fill the histogram
     for(Int_t i = 0; i < (int)tempCalculatedDay.size(); i++) {
-        hist->Fill(tempCalculatedDay[i]);
+        histogram->Fill(tempCalculatedDay[i]);
     }
     
-    hist->SetFillColor(kRed + 1);
-    double mean = hist->GetMean(); //The mean of the distribution
-    double stdev = hist->GetRMS(); //The standard deviation
-    TCanvas* canv = new TCanvas();
-    hist->Draw();
-    // Save the canvas as a picture
-    canv->SaveAs("tempOnDay.png");
+    //gStyle->SetOptStat(1111);
     
-
+    histogram->SetFillColor(kRed + 1);
+    double mean = histogram->GetMean(); //The mean of the distribution
+    double stdev = histogram->GetRMS(); //The standard deviation
+    TCanvas* c1 = new TCanvas("c1", "Date");
+    histogram->Draw();
+    
+    
+    TF1* func = new TF1("Gaussian", Gaussian2, -20, 40, 3);
+    func->SetParameters(1, 5, 3); //Starting values for fitting
+    func->SetLineColor(kBlack);
+    histogram->Fit(func, "Q1R");
+    
+    
+    TLegend* legen = new TLegend(0.7,0.8,0.9,0.9);
+    legen->SetFillStyle(0); //Hollow fill (transparent)
+    legen->SetBorderSize(0); //Get rid of the border
+    //leg->SetHeader("The Legend Title");
+    legen->AddEntry(histogram,"Temperature on..","f");
+    legen->AddEntry(func, "Gaussian fit", "l");
+    legen->Draw();
+    
+    // Save the canvas as a picture
+    c1->SaveAs("tempOnDay.png");
+    
 }
 
 
 
 
+
+/*
+ Int_t n = 200;
+ Double_t x[n], y[n];
+ for (Int_t i=0; i<n; i++) {
+ x[i] = i*60/200;
+ y[i] = 1/(mean*TMath::Sqrt(2*stdev))*TMath::Exp(-TMath::Power((x[i]-mean),2)/(2*TMath::Power(stdev,2)));
+ }
+ */
+/*
+ TF1 *gr1 = new TF1 ("gr1","1/(mean*TMath::Sqrt(2*stdev))*TMath::Exp(-TMath::Power(((x)-mean),2)/(2*TMath::Power(stdev,2)))",-20, 40);
+ gr1->SetLineColor(kGreen);
+ gr1->Draw();
+ */
 

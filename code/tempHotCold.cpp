@@ -66,6 +66,7 @@ void tempTrender::hotCold(string fileName){
     double maxTemp = stod(datahotCold.at(0).at(6));
     int year, maxTempMonth = 0, maxTempDay = 0, minTempMonth = 0, minTempDay = 0, maxTempDayOfYear, minTempDayOfYear;
     double temp;
+     
 
     for (int i = 0; i < int(datahotCold.size()); i++) {
 		year = stoi(datahotCold.at(i).at(0));
@@ -131,13 +132,14 @@ void tempTrender::hotCold(string fileName){
 	cout << "Its uncertainty (warmest day) is " << funcHot->GetParError(1) << endl;
 	cout << "The mean is for coldest days is " << funcCold->GetParameter(1) << endl;
 	cout << "Its uncertainty (coldest day) is " << funcCold->GetParError(1) << endl;
-    TLegend* leg = new TLegend(0.65, 0.75, 0.92, 0.92, "", "NDC");
+    TLegend* leg = new TLegend(0.6, 0.75, 0.92, 0.92, "", "NDC");
 	leg->SetFillStyle(0); //Hollow fill (transparent)
 	leg->SetBorderSize(0); //Get rid of the border
+	leg->SetTextSize(0.035);
 	leg->AddEntry(warmestHist, "", "F"); //Use object title, draw fill
 	leg->AddEntry(coldestHistLeft, "", "F"); //Use custom title
-	leg->AddEntry(funcHot, "Gaussian fit for hot", "L");
-	leg->AddEntry(funcCold, "Gaussian fit for Cold", "L");
+	leg->AddEntry(funcHot, "Fit for warmest day", "L");
+	leg->AddEntry(funcCold, "Fit for coldest day", "L");
 	// Plot histograms and fit
 	warmestHist->SetFillColor(kRed);
 	warmestHist->SetFillStyle(3003);
@@ -153,7 +155,3 @@ void tempTrender::hotCold(string fileName){
 	
     
 }
-
-
-//add your functions :)
-
