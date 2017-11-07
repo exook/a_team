@@ -194,9 +194,21 @@ void tempTrender::tempEx(){
     //2*cos((1/291)((110+104)/2)*x+a)*cos((1/291)((7)/2)*x+a); x from 1722 to 2013
     //TF1* fitFunc = new TF1("fitFunc", "[0]*cos((1/291)((110+104)/2)*x+1.05)*cos((1/291)((7)/2)*x+1.05)", 1722, 2013);
 
-    TF1* fitFunc = new TF1("fitFunc", "([0]*cos(0.02*x))", 1722, 2013);
+/*
+//working
 
-    fitFunc->SetParameter(0, 4);
+    TF1* fitFunc = new TF1("fitFunc", "([0]*(x-1840)*cos([1]*x))", 1722, 2013);
+
+    fitFunc->SetParameter(0, 0.6);
+    fitFunc->SetParameter(1, 0.025);
+//
+*/
+
+    TF1* fitFunc = new TF1("fitFunc", "([0]*(x-1840)*cos([1]*x))", 1722, 2013);
+
+    fitFunc->SetParameter(0, 0.6);
+    fitFunc->SetParameter(1, 0.05);
+
     fitFunc->SetLineColor(kGreen);
     gr_average->Fit(fitFunc);
 
