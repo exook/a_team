@@ -6,4 +6,5 @@ Branch off and start working on average temperature function (Jessamy)
 2017-11-02 : Created the function for temperature on a certain day, that takes day and month as input
 2017-11-03 : Wrote the function finding the first day of winter (Jessamy) 
 2017-11-04 : Wrote the function finding the first day of spring and a function finding the first day of summer, and a general print function (different types of vectors) (Jessamy)
+2017-11-05 : Wrote the function to find the first day of fall and began to work on plotting the data from the summer (Jessamy)
 
