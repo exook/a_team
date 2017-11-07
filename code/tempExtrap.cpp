@@ -74,7 +74,7 @@ void averages(vector<vector<float>>* dataVectorPointer,vector <vector<float>>* a
 
     vector <float> thisYear;
 
-    for(int year = initialYear; year < endYear;year++){//warning: comparison between signed and unsigned integer expressions [-Wsign-compare
+    for(int year = initialYear+1; year <= endYear;year++){//warning: comparison between signed and unsigned integer expressions [-Wsign-compare
         float yearlySum=0;
         vector <float> thisYear;
         if(isLeapYear(year)){
@@ -143,16 +143,61 @@ void tempTrender::tempEx(){
         }
    }
 
-    int groupSize=20;
+    //int groupSize=20;
+    int groupSize=10;
     Double_t y_movingAverage[n/groupSize],x_movingAverage[n/groupSize];
+
+    //cout<<n<<endl;
+
+    //290
+
+    int counter=0;
+    int counter2=1;
+    double sum=0;
+    int initialYear=1723;//Hardcoded!
+    for(Int_t i=0;i<n;i++){
+        counter+=1;
+        //cout<<y[i]<<endl;
+        sum+=y[i];
+        //cout<<"sum: "<<sum<<endl;
+        if(counter==groupSize){
+            y_movingAverage[i/groupSize]=sum/groupSize;
+            x_movingAverage[counter2]=initialYear+(counter2*groupSize);
+            counter=0;
+            counter2+=1;
+            //cout<<"Average: "<<y[i/groupSize]<<endl;
+            sum=0;
+        }
+    }
+
+    TGraph *gr_average = new TGraph (n/groupSize, x_movingAverage, y_movingAverage);
+    TGraph *gr_above = new TGraph (n, x, y_above);
+    TGraph *gr_below = new TGraph (n, x, y_below);
+
+    TCanvas * c2= new TCanvas("c2", "random",1200,600);
+    c2->DrawFrame(1722,-3.0,2013,3.0);
+
+    gr_average->Draw();
+    gr_average->SetMarkerStyle(8);
+    gr_average->SetMarkerSize(1);
+    gr_average->GetXaxis()->SetTitle("year");
+    gr_average->Draw("p");
+
+
+
+
+/*
     for(Int_t i=0; i<(n/groupSize); i++){
         int sum=0;
         for(Int_t j=0; j<(groupSize); j++){
-            sum=y[(i*j)+j];
+            sum+=y[(i*j)+j];
+            //cout<<sum<<endl;
         }
+        cout<<sum/groupSize<<endl;
         y_movingAverage[i]=sum/groupSize;
-        x_movingAverage[i]=x[i]+(groupSize/2);
+        x_movingAverage[i]=x[i*(groupSize/2)];
     }
+
 
     TGraph *gr = new TGraph (n, x, y);
     TGraph *gr_average = new TGraph (n/groupSize, x_movingAverage, y_movingAverage);
@@ -160,7 +205,7 @@ void tempTrender::tempEx(){
     TGraph *gr_below = new TGraph (n, x, y_below);
 
     TCanvas * c2= new TCanvas("c2", "random",1200,600);
-    //c2->DrawFrame(1722,-3.0,2013,3.0);
+    c2->DrawFrame(1722,-3.0,2013,3.0);
 
     gr_average->Draw();
     gr_average->SetMarkerStyle(8);
@@ -169,7 +214,6 @@ void tempTrender::tempEx(){
     gr_average->Draw("p");
     
     
-    /*
     gr->Draw();
     gr->SetMarkerStyle(8);
     gr->SetMarkerSize(1);
@@ -195,6 +239,5 @@ void tempTrender::tempEx(){
   fitFunc->SetParameter(0, 100);
   fitFunc->SetLineColor(kRed);
   gr->Fit(fitFunc);
-    */
-
+*/
 }
