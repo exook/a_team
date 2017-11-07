@@ -106,7 +106,7 @@ void tempTrender::hotCold(string fileName){
     
 	TF1* func = new TF1("Gaussian", Gaussian, 1, 366, 3);
 	func->SetParameters(5, 200, 50); //Starting values for fitting
-	//warmestHist->Fit(func, "Q1R");
+	warmestHist->Fit(func, "Q1R");
 	func->SetParameters(5, 10, 50); //Starting values for fitting
 	coldestHist->Fit(func, "Q1R");
 	cout << "The mean is " << func->GetParameter(1) << endl;
