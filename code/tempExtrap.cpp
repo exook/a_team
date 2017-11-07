@@ -144,7 +144,7 @@ void tempTrender::tempEx(){
    }
 
     //int groupSize=20;
-    int groupSize=5;
+    int groupSize=5;//they used 5
     Double_t y_movingAverage[n/groupSize],x_movingAverage[n/groupSize];
 
     //cout<<n<<endl;
@@ -176,74 +176,31 @@ void tempTrender::tempEx(){
 
     TCanvas * c2= new TCanvas("c2", "random",1200,600);
     c2->DrawFrame(1722,-3.0,2013,3.0);
-
-    gr_above->SetFillColor(kRed-3);
-    gr_above->Draw("B");
-    
-    gr_below->SetFillColor(kBlue-3);
-    gr_below->Draw("B");
-
-    gr_average->Draw();
-    gr_average->SetMarkerStyle(8);
-    gr_average->SetMarkerSize(1);
-    gr_average->GetXaxis()->SetTitle("year");
-    gr_average->Draw("p");
-
-
-
-
 /*
-    for(Int_t i=0; i<(n/groupSize); i++){
-        int sum=0;
-        for(Int_t j=0; j<(groupSize); j++){
-            sum+=y[(i*j)+j];
-            //cout<<sum<<endl;
-        }
-        cout<<sum/groupSize<<endl;
-        y_movingAverage[i]=sum/groupSize;
-        x_movingAverage[i]=x[i*(groupSize/2)];
-    }
-
-
-    TGraph *gr = new TGraph (n, x, y);
-    TGraph *gr_average = new TGraph (n/groupSize, x_movingAverage, y_movingAverage);
-    TGraph *gr_above = new TGraph (n, x, y_above);
-    TGraph *gr_below = new TGraph (n, x, y_below);
-
-    TCanvas * c2= new TCanvas("c2", "random",1200,600);
-    c2->DrawFrame(1722,-3.0,2013,3.0);
-
-    gr_average->Draw();
-    gr_average->SetMarkerStyle(8);
-    gr_average->SetMarkerSize(1);
-    gr_average->GetXaxis()->SetTitle("year");
-    gr_average->Draw("p");
-    
-    
-    gr->Draw();
-    gr->SetMarkerStyle(8);
-    gr->SetMarkerSize(1);
-    gr->GetXaxis()->SetTitle("year");
-    gr->Draw("p");
-
-    
-    gr->SetTitle("graph title;x title;y title");
-        
     gr_above->SetFillColor(kRed-3);
     gr_above->Draw("B");
     
     gr_below->SetFillColor(kBlue-3);
     gr_below->Draw("B");
-
-    // create 1d function that we will use to fit our generated data to ensure
-    // that the generation works
-    //TF1* fitFunc = new TF1("fitFunc", "[1]*(1+2*[0]*cos(2*x))", 0, TMath::Pi());
-
-    
-
-  TF1* fitFunc = new TF1("fitFunc", "([0]*sin(1*x))", 0, TMath::Pi());
-  fitFunc->SetParameter(0, 100);
-  fitFunc->SetLineColor(kRed);
-  gr->Fit(fitFunc);
 */
+    gr_average->Draw("p");
+    gr_average->SetLineWidth(3);
+    gr_average->SetMarkerStyle(2);
+    gr_average->SetMarkerSize(2);
+    gr_average->GetXaxis()->SetTitle("year");
+    gr_average->Draw("p");
+
+    //TF1* fitFunc = new TF1("fitFunc", "(cos([0]*x))", 1722, 2013);
+    //sin(0.4*x)*2*cos(4*x)
+    //cos((1/291)110*x)+cos((1/291)104*x)
+    //TF1* fitFunc = new TF1("fitFunc", "[0]*cos((1/291)*110*x)+[0]*cos((1/291)*104*x)", 1722, 2013);
+    //2*cos((1/291)((110+104)/2)*x+a)*cos((1/291)((7)/2)*x+a); x from 1722 to 2013
+    TF1* fitFunc = new TF1("fitFunc", "[0]*cos((1/291)((110+104)/2)*x+1.05)*cos((1/291)((7)/2)*x+1.05)", 1722, 2013);
+    fitFunc->SetParameter(0, 2);
+    //fitFunc->SetParameter(0, 0.4);
+    //fitFunc->SetParameter(0, 2);
+    //fitFunc->SetParameter(0, 4);
+    fitFunc->SetLineColor(kGreen);
+    gr_average->Fit(fitFunc);
+
 }
