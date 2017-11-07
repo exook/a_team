@@ -17,13 +17,11 @@ double Gaussian3(double* x, double* par) { //A custom function
 
 void tempTrender::tempOnDayNumber(int dateToCalculate){
     cout << endl;
-    cout << "Calculating the temperature for a certain day in Lund" << endl;
+    cout << "Calculating the temperature for a certain day in Uppsala" << endl;
     
     vector <vector <string> > dataOnDay;
     //readData("smhi-openda_Karlstad.csv", dataOnDay);
     readData("uppsala_tm_1722-2013.dat", dataOnDay);
-    
-    print <vector <vector <string> > > (dataOnDay,10);
     
     
     vector <float> tempCalculatedDay; // Vector to store temperatures for the chosen day
@@ -66,20 +64,28 @@ void tempTrender::tempOnDayNumber(int dateToCalculate){
     TF1* fitfunc = new TF1("Gaussian", Gaussian3, -20, 40, 3);
     fitfunc->SetParameters(1, 5, 3); //Starting values for fitting
     fitfunc->SetLineColor(kBlack);
+
     hist->Fit(fitfunc, "Q1R");
 
-    TLegend* leg = new TLegend(0.7,0.8,0.9,0.9);
+    fitfunc->GetParameter(0); //The constant
+    double fitmean = fitfunc->GetParameter(1);//The mean
+    double fitstdev = fitfunc->GetParameter(2);//The standard deviation
+    double errormean = fitfunc->GetParError(1); //Error of parameter
+    double errorstdev = fitfunc->GetParError(2);
+    
+    TLegend* leg = new TLegend(0.2,0.7,0.5,0.9);
     leg->SetFillStyle(0); //Hollow fill (transparent)
     leg->SetBorderSize(0); //Get rid of the border
     //leg->SetHeader("The Legend Title");
-    leg->AddEntry(hist,"Temperature on..","f");
+    leg->AddEntry(hist,"Temperature on 19/7","f");
     leg->AddEntry(fitfunc, "Gaussian fit", "l");
     leg->Draw();
    
     // Save the canvas as a picture
     c2->SaveAs("tempOnDayNumber.png");
     
-
+    cout << "Data mean: "<<mean << ", fitted function mean: " << fitmean<< " with error: " << errormean<< endl;
+    cout << "Data standard deviation: "<<stdev << ", fitted function standard deviation: " << fitstdev<< " with error: " << errorstdev<< endl;
 
 }
 

@@ -51,19 +51,28 @@ void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
     TF1* func = new TF1("Gaussian", Gaussian2, -20, 40, 3);
     func->SetParameters(1, 5, 3); //Starting values for fitting
     func->SetLineColor(kBlack);
+    
     histogram->Fit(func, "Q1R");
     
+    func->GetParameter(0); //The constant
+    double fitmean = func->GetParameter(1);//The mean
+    double fitstdev = func->GetParameter(2);//The standard deviation
+    double errormean = func->GetParError(1); //Error of parameter
+    double errorstdev = func->GetParError(2);
     
-    TLegend* legen = new TLegend(0.7,0.8,0.9,0.9);
+    TLegend* legen = new TLegend(0.2,0.7,0.5,0.9);
     legen->SetFillStyle(0); //Hollow fill (transparent)
     legen->SetBorderSize(0); //Get rid of the border
     //leg->SetHeader("The Legend Title");
-    legen->AddEntry(histogram,"Temperature on..","f");
+    legen->AddEntry(histogram,"Temperature on 19/7","f");
     legen->AddEntry(func, "Gaussian fit", "l");
     legen->Draw();
     
     // Save the canvas as a picture
     c1->SaveAs("tempOnDay.png");
+    
+    cout << "Data mean: "<<mean << ", fitted function mean: " << fitmean<< " with error: " << errormean<< endl;
+    cout << "Data standard deviation: "<<stdev << ", fitted function standard deviation: " << fitstdev<< " with error: " << errorstdev<< endl;
     
 }
 
