@@ -10,6 +10,9 @@
 #include <TGraph.h>
 #include <TLegend.h>
 // Left to do: probability to observe a certain temperature
+double Gaussian2(double* x, double* par) { //A custom function
+    return par[0]*exp(-0.5*(x[0]*x[0] - 2*x[0]*par[1] + par[1]*par[1])/(par[2]*par[2]));
+}
 
 void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
     cout << endl;
@@ -21,7 +24,7 @@ void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
     
     vector <float> tempCalculatedDay; // Vector to store temperatures for the chosen day
     // Create histogram
-    TH1F* histogram = new TH1F("histogram", "Temperature;Temperature [#circC];Entries", 200, -20, 40);
+    TH1F* histogram = new TH1F("histogram", "Temperature;Temperature [#circC];Entries", 300, -20, 40);
     
     
     // Find the right day, month and time in the data
@@ -43,15 +46,20 @@ void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
     double stdev = histogram->GetRMS(); //The standard deviation
     TCanvas* c1 = new TCanvas("c1", "Date");
     histogram->Draw();
-
-    histogram->Fit("gaus");
-    gStyle->SetOptStat(0);
+    
+    
+    TF1* func = new TF1("Gaussian", Gaussian2, -20, 40, 3);
+    func->SetParameters(1, 5, 3); //Starting values for fitting
+    func->SetLineColor(kBlack);
+    histogram->Fit(func, "Q1R");
+    
     
     TLegend* legen = new TLegend(0.7,0.8,0.9,0.9);
     legen->SetFillStyle(0); //Hollow fill (transparent)
     legen->SetBorderSize(0); //Get rid of the border
     //leg->SetHeader("The Legend Title");
     legen->AddEntry(histogram,"Temperature on..","f");
+    legen->AddEntry(func, "Gaussian fit", "l");
     legen->Draw();
     
     // Save the canvas as a picture

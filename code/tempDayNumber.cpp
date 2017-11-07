@@ -11,14 +11,19 @@
 // Adding the possibility to choose time of day?
 // Leap years?
 
-// Left to do: probability to observe a certain temperature
+double Gaussian3(double* x, double* par) { //A custom function
+    return par[0]*exp(-0.5*(x[0]*x[0] - 2*x[0]*par[1] + par[1]*par[1])/(par[2]*par[2]));
+}
 
 void tempTrender::tempOnDayNumber(int dateToCalculate){
     cout << endl;
     cout << "Calculating the temperature for a certain day in Lund" << endl;
     
     vector <vector <string> > dataOnDay;
-    readData("smhi-opendata_Lund.csv", dataOnDay);
+    //readData("smhi-openda_Karlstad.csv", dataOnDay);
+    readData("uppsala_tm_1722-2013.dat", dataOnDay);
+    
+    print <vector <vector <string> > > (dataOnDay,10);
     
     
     vector <float> tempCalculatedDay; // Vector to store temperatures for the chosen day
@@ -57,14 +62,18 @@ void tempTrender::tempOnDayNumber(int dateToCalculate){
     double stdev = hist->GetRMS(); //The standard deviation
     TCanvas* c2 = new TCanvas("c2", "Number of day");
     hist->Draw();
-    hist->Fit("gaus");
-    gStyle->SetOptStat(0);
     
+    TF1* fitfunc = new TF1("Gaussian", Gaussian3, -20, 40, 3);
+    fitfunc->SetParameters(1, 5, 3); //Starting values for fitting
+    fitfunc->SetLineColor(kBlack);
+    hist->Fit(fitfunc, "Q1R");
+
     TLegend* leg = new TLegend(0.7,0.8,0.9,0.9);
     leg->SetFillStyle(0); //Hollow fill (transparent)
     leg->SetBorderSize(0); //Get rid of the border
     //leg->SetHeader("The Legend Title");
     leg->AddEntry(hist,"Temperature on..","f");
+    leg->AddEntry(fitfunc, "Gaussian fit", "l");
     leg->Draw();
    
     // Save the canvas as a picture
