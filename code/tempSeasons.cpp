@@ -397,9 +397,10 @@ void plotSeason(const vector <vector <int> > &beginDaySeason, string season){
     gSeason->Draw("AB");
     
     //legend
-    TLegend* leg = new TLegend(0.7, 0.89, 0.949, 0.93);
+    TLegend* leg = new TLegend(0.58, 0.87, 0.949, 0.93);
     leg->SetBorderSize(0);
     leg->AddEntry(gSeason, Form("First day of %s", season.c_str()), "f");
+    leg->SetTextSize(.05);
     leg->Draw();
     
     cSeason->SaveAs(Form("tempSeasonPlots/%sStart.png", season.c_str()));
@@ -424,19 +425,23 @@ void histogram(const vector <vector <int> > &beginDaySeason, string season){
     
     hist->SetFillColor(kBlue + 3);
     hist->Draw();
+    hist->GetXaxis()->CenterTitle();
+    hist->GetYaxis()->CenterTitle();
     
     //legend
     if (season == "fall") {
         //at different position for fall histogram
-        TLegend* leg = new TLegend(0.2, 0.89, 0.449, 0.93);
+        TLegend* leg = new TLegend(0.2, 0.87, 0.549, 0.93);
         leg->SetBorderSize(0);
         leg->AddEntry(hist, Form("First day of %s", season.c_str()), "l");
+        leg->SetTextSize(.05);
         leg->Draw();
     }
     else {
-        TLegend* leg = new TLegend(0.7, 0.89, 0.949, 0.93);
+        TLegend* leg = new TLegend(0.58, 0.87, 0.949, 0.93);
         leg->SetBorderSize(0);
         leg->AddEntry(hist, Form("First day of %s", season.c_str()), "l");
+        leg->SetTextSize(.05);
         leg->Draw();
     }
     
