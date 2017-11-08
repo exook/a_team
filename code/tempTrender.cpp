@@ -113,30 +113,6 @@ void tempTrender::readData(string fileName, vector <vector <string> > &data) {
 }
 
 
-// Calculate day of year
-int tempTrender::getDayOfYear(int year, int month, int day) {
-    bool checkleapYear = false;
-    int dayOfYear = 0;
-    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
-        checkleapYear = true;
-    }
-    int daysInMonthsNonLeap[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    int daysInMonthsLeap[12] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    if (checkleapYear == false) {
-        for (int k = 1; k < month; k++) {
-            dayOfYear = dayOfYear + daysInMonthsNonLeap[k-1];
-        }
-        dayOfYear = dayOfYear + day;
-    }
-    else {
-        for (int j = 1; j < month; j++) {
-            dayOfYear = dayOfYear + daysInMonthsLeap[j-1];
-        }
-        dayOfYear = dayOfYear + day;
-    }
-    return dayOfYear;			
-}
-
 
 
 
