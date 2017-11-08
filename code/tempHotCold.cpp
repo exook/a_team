@@ -50,9 +50,10 @@ void tempTrender::hotCold(string fileName){
     
     // create canvas and histograms for warmest and coldest
     TCanvas* c1 = new TCanvas("c1", "hot cold", 900, 600);
-    TH1D* warmestHist = new TH1D("warmestHist", Form("The warmest day of %s; Day of year; Entries", location.c_str()), 70, 0, 366);
-    TH1D* coldestHist = new TH1D("coldestHist", Form("The coldest day of %s; Day of year; Entries", location.c_str()), 70, 0, 366);
-    
+    TH1D* warmestHist = new TH1D("warmestHist", Form("The warmest day of %s; Day of year; Entries", location.c_str()), 100, 0, 366);
+    //TH1D* warmestHist = new TH1D("warmestHist", Form("The warmest day of %s; Day of year; Entries", location.c_str()), 732, -216, 516);
+    TH1D* coldestHistLeft = new TH1D("coldestHistLeft", Form("The coldest day of %s; Day of year; Entries", location.c_str()), 100, -166, 200);
+    TH1D* coldestHistRight = new TH1D("coldestHistRight", Form("The coldest day of %s; Day of year; Entries", location.c_str()), 100, 200, 566);
     // loading data
     vector <vector <string> > datahotCold;
     readData(fileName, datahotCold);
@@ -87,10 +88,19 @@ void tempTrender::hotCold(string fileName){
 			cout << "yearPrevious === " << yearPrevious << endl;
 			cout << "maxTemp ==== " << maxTemp << endl;
 			cout << "minTemp ==== " << minTemp << endl;*/
+			bool checkLeapYear = testLeapYear(yearPrevious);
 			maxTempDayOfYear = getDayOfYear(yearPrevious, maxTempMonth, maxTempDay);
 			minTempDayOfYear = getDayOfYear(yearPrevious, minTempMonth, minTempDay);
+			// Fill hot and cold histogram
 			warmestHist->Fill(maxTempDayOfYear);
-			coldestHist->Fill(minTempDayOfYear);
+			if (minTempDayOfYear > 200) {
+				coldestHistLeft -> Fill(minTempDayOfYear-366);
+				coldestHistRight -> Fill(minTempDayOfYear);
+				}
+			else {
+				coldestHistLeft -> Fill(minTempDayOfYear);
+				coldestHistRight -> Fill(minTempDayOfYear+366);
+			}
 			// set max and min temp to the first day of next year
 			maxTemp = stod(datahotCold.at(i).at(6));
 			minTemp = stod(datahotCold.at(i).at(6));
@@ -105,20 +115,42 @@ void tempTrender::hotCold(string fileName){
 	}
 	
     
-	TF1* func = new TF1("Gaussian", Gaussian, 1, 366, 3);
-	func->SetParameters(5, 200, 50); //Starting values for fitting
-	warmestHist->Fit(func, "Q1R");
-	func->SetParameters(5, 10, 50); //Starting values for fitting
-	coldestHist->Fit(func, "Q1R");
-	cout << "The mean is " << func->GetParameter(1) << endl;
-	cout << "Its uncertainty is " << func->GetParError(1) << endl;
-    TLegend* leg = new TLegend(0.65, 0.75, 0.92, 0.92, "empty", "NDC");
+	TF1* funcHot = new TF1("Gaussian", Gaussian, 1, 366, 3);
+	TF1* funcCold = new TF1("Gaussian", Gaussian, -216, 516, 3);
+	funcHot->SetParameters(5, 200, 50); //Starting values for fitting
+	funcHot->SetLineColor(kRed);
+	warmestHist->Fit(funcHot, "Q1R");
+	funcCold->SetParameters(5, 376, 50); //Starting values for fitting
+	funcCold->SetLineColor(kBlue);
+	coldestHistRight->Fit(funcCold, "Q1R");
+	funcCold->SetParameters(5, 10, 50); //Starting values for fitting
+	funcCold->SetLineColor(kBlue);
+	coldestHistLeft->Fit(funcCold, "Q1R");
+	
+	
+	cout << "The mean is for warmest days is " << funcHot->GetParameter(1) << endl;
+	cout << "Its uncertainty (warmest day) is " << funcHot->GetParError(1) << endl;
+	cout << "The mean is for coldest days is " << funcCold->GetParameter(1) << endl;
+	cout << "Its uncertainty (coldest day) is " << funcCold->GetParError(1) << endl;
+    TLegend* leg = new TLegend(0.6, 0.75, 0.92, 0.92, "", "NDC");
 	leg->SetFillStyle(0); //Hollow fill (transparent)
 	leg->SetBorderSize(0); //Get rid of the border
+	leg->SetTextSize(0.035);
 	leg->AddEntry(warmestHist, "", "F"); //Use object title, draw fill
-	leg->AddEntry(coldestHist, "", "F"); //Use custom title
+	leg->AddEntry(coldestHistLeft, "", "F"); //Use custom title
+	leg->AddEntry(funcHot, "Fit for warmest day", "L");
+	leg->AddEntry(funcCold, "Fit for coldest day", "L");
+	// Plot histograms and fit
+	warmestHist->SetFillColor(kRed);
+	warmestHist->SetFillStyle(3003);
 	warmestHist->Draw();
-	coldestHist->Draw("SAME");; //Draw on top of the existing plot
+	
+	coldestHistLeft->SetFillColor(kBlue);
+	coldestHistLeft->SetFillStyle(3003);
+	coldestHistLeft->Draw("SAME"); //Draw on top of the existing plot
+	coldestHistRight->SetFillColor(kBlue);
+	coldestHistRight->SetFillStyle(3003);
+	coldestHistRight->Draw("SAME");
 	leg->Draw(); //Legends are automatically drawn with "SAME"
 	
     

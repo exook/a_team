@@ -10,7 +10,7 @@
 #include <fstream>
 #include <TRandom3.h>
 #include <TGraph.h>
-
+#include <TLegend.h>
 using namespace std;
 
 void readDataOld(vector<vector<float>>* dataVectorPointer){	
@@ -74,7 +74,7 @@ void averages(vector<vector<float>>* dataVectorPointer,vector <vector<float>>* a
 
     vector <float> thisYear;
 
-    for(int year = initialYear; year < endYear;year++){//warning: comparison between signed and unsigned integer expressions [-Wsign-compare
+    for(int year = initialYear+1; year <= endYear;year++){//warning: comparison between signed and unsigned integer expressions [-Wsign-compare
         float yearlySum=0;
         vector <float> thisYear;
         if(isLeapYear(year)){
@@ -126,15 +126,7 @@ void tempTrender::tempEx(){
 
     averages(dataVectorPointer,averagesVectorPointer);
 
-    //TH1D* hist = new TH1D("data", ";x;N", 100, 0, 10);
-    //for(size_t i = 0; i < averagesVector.size(); ++i){
-    //    hist->Fill(averagesVector.at(i).at(1));
-    //}
-    //TCanvas * c1= new TCanvas("c1", "random",5,5,800,600);
-    //hist->Draw();
-
     float totalMean=totalAverage(averagesVectorPointer);
-    //cout<<totalMean<<endl;
 
    Int_t n = averagesVector.size();
    Double_t x[n], y[n],y_above[n],y_below[n];
@@ -150,40 +142,78 @@ void tempTrender::tempEx(){
             y_below[i]=0;
         }
    }
-    TGraph *gr1 = new TGraph (n, x, y);
+
+    //int groupSize=20;
+    int groupSize=5;//they used 5
+    Double_t y_movingAverage[n/groupSize],x_movingAverage[n/groupSize];
+
+    //cout<<n<<endl;
+
+    //290
+
+    int counter=0;
+    int counter2=1;
+    double sum=0;
+    int initialYear=1723;//Hardcoded!
+    for(Int_t i=0;i<n;i++){
+        counter+=1;
+        //cout<<y[i]<<endl;
+        sum+=y[i];
+        //cout<<"sum: "<<sum<<endl;
+        if(counter==groupSize){
+            y_movingAverage[i/groupSize]=sum/groupSize;
+            x_movingAverage[counter2]=initialYear+(counter2*groupSize);
+            counter=0;
+            counter2+=1;
+            //cout<<"Average: "<<y[i/groupSize]<<endl;
+            sum=0;
+        }
+    }
+
+    TGraph *gr_average = new TGraph (n/groupSize, x_movingAverage, y_movingAverage);
     TGraph *gr_above = new TGraph (n, x, y_above);
     TGraph *gr_below = new TGraph (n, x, y_below);
 
-/*
-    TCanvas * c_working= new TCanvas("c1", "random",5,5,1200,600);
-    gr1->SetFillColor(40);
-    gr1->GetXaxis()->SetTitle("X-Axis");
-    gr1->GetXaxis()->SetLimits(1722,2013);
-    gr1->GetYaxis()->SetTitle("Y-Axis");
-    //gr1->GetXaxis()->SetLimits(3.0,-3.0);
-    gr1->Draw("AB");
-*/
-
-    TCanvas * c2= new TCanvas("c2", "random",5,5,1200,600);
+    TCanvas * c2= new TCanvas("c2", "random",1200,600);
     c2->DrawFrame(1722,-3.0,2013,3.0);
 
-    gr_above->SetTitle("graph title;x title;y title");
-        
-    gr_above->SetFillColor(2);
+    gr_above->SetFillColor(kRed-3);
     gr_above->Draw("B");
     
-    gr_below->SetFillColor(4);
+    gr_below->SetFillColor(kBlue-3);
     gr_below->Draw("B");
+
+    gr_average->Draw("p");
+    gr_average->SetLineWidth(3);
+    gr_average->SetMarkerStyle(2);
+    gr_average->SetMarkerSize(2);
+    gr_average->GetXaxis()->SetTitle("year");
+    gr_average->Draw("p");
+
+
+    //2*cos((1/291)((110+104)/2)*x+a)*cos((1/291)((7)/2)*x+a); x from 1722 to 2013
+    //TF1* fitFunc = new TF1("fitFunc", "[0]*cos((1/291)((110+104)/2)*x+1.05)*cos((1/291)((7)/2)*x+1.05)", 1722, 2013);
+
+//working
+
+    TF1* fitFunc = new TF1("fitFunc", "([0]*(x-1840)*cos([1]*x))", 1722, 2013);
+
+    fitFunc->SetParameter(0, 0.6);
+    fitFunc->SetParameter(1, 0.025);
+//
+
+    fitFunc->SetLineColor(kGreen-3);
+    fitFunc->SetLineWidth(3);
+    gr_average->Fit(fitFunc);
     
+    TLegend* leg = new TLegend(0.2,0.7,0.5,0.9);
+    leg->SetFillStyle(0); //Hollow fill (transparent)
+    leg->SetBorderSize(0); //Get rid of the border
+    //leg->SetHeader("The Legend Title");
+    leg->AddEntry(gr_average,"Average","f");
+    leg->AddEntry(gr_above,"Above","f");
+    leg->AddEntry(gr_below,"Below","f");
+    leg->AddEntry(fitFunc, "fit", "l");
+    leg->Draw();
+
 }
-
-/*
-    int initialYear=dataVectorPointer->at(0).at(0);
-    int endYear=dataVectorPointer->at(dataVectorPointer->size()-1).at(0);
-
-    for(int row = 0; row < (endYear-initialYear);row++){
-        for(float i=0;i<averagesVector.at(row);i+=0.01)
-            cout<<row+initialYear<<endl;
-            hist->Fill(row+initialYear);
-    }
-*/
