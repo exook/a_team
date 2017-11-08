@@ -5,7 +5,7 @@ void project() {
 	string pathToFile = "../datasets/";
     tempTrender t(pathToFile); //Instantiate your analysis object
     
-    //t.startDaySeasons();
+    t.startDaySeasons();
 	//t.tempEx();
 
 	//t.tempOnDay(7, 19); //Call some functions that you've implemented
