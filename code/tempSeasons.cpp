@@ -231,7 +231,6 @@ void tempTrender::beginningSpring(const vector <vector <double> > &averageTemp,
         else {
             counterDays = 0;
         }
-        
     }
 }
 
@@ -282,7 +281,6 @@ void tempTrender::beginningSummer(const vector <vector <double> > &averageTemp,
         else {
             counterDays = 0;
         }
-        
     }
 }
 
@@ -350,7 +348,7 @@ void tempTrender::beginningFall(const vector <vector <double> > &averageTemp,
 
 //stores data to plot (or show in a histogram) in arrays
 void arrayData(const vector <vector <int> > &beginDaySeason, string season,
-                   int n, Int_t x[n], Int_t y[n]){
+                   int n, Int_t x[], Int_t y[]){
     for (int i=0; i < n; i++){
         x[i] = beginDaySeason.at(i).at(0);
         if (season == "winter" && beginDaySeason.at(i).at(1) > 6) {
@@ -404,13 +402,6 @@ void plotSeason(const vector <vector <int> > &beginDaySeason, string season){
     leg->AddEntry(gSeason, Form("First day of %s", season.c_str()), "f");
     leg->Draw();
     
-//    //horizontal line
-//    TLine* line = new TLine(cSeason->GetUxmin()/4.0,cSeason->GetUxmin()/2.0,cSeason->GetUymin()/4.0,cSeason->GetUymin()/2.0);
-//    line->SetLineColor(kBlack);
-//    line->Draw();
-//    cSeason->Update();
-//    cout << "Plotting data " << season << ": ";
-    
     cSeason->SaveAs(Form("tempSeasonPlots/%sStart.png", season.c_str()));
     cSeason->Close();
 }
@@ -454,12 +445,14 @@ void histogram(const vector <vector <int> > &beginDaySeason, string season){
     delete hist;
 }
 
-//creates day a season starts to year histograms for all seasons
+//calculates the first day of seasons for every year in the dataset Lund
+//plots data in bar graphs and histograms
 void tempTrender::startDaySeasons(){
     cout << endl;
-    cout << "Calculating on which day the seasons start each year" << endl;
+    cout << "Analysing the first day of the seasons" << endl;
     cout << endl;
     
+    //definitions start seasons
     //https://www.smhi.se/kunskapsbanken/meteorologi/arstider-1.1082
     //winter t_average =< 0 for 5 days -> first of those days season begins
     //spring 0< t_average <10 for 7 days
@@ -500,6 +493,7 @@ void tempTrender::startDaySeasons(){
 //    cout << endl << endl;
 //    print<vector <vector <int> >>(firstDayFall, int(firstDayFall.size()));
     
+    //make bar graphs of the results
     cout << endl << "Plotting the results"<< endl;
     plotSeason(firstDaySpring, "spring");
     plotSeason(firstDaySummer, "summer");
@@ -512,8 +506,6 @@ void tempTrender::startDaySeasons(){
     histogram(firstDaySummer, "summer");
     histogram(firstDayFall, "fall");
     histogram(firstDayWinter, "winter");
-    
-    
 }
 
 
