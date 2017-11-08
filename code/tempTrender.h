@@ -30,12 +30,6 @@ class tempTrender {
     
     void beginningWinter(const vector <vector <double> > &averageTemp,
                          vector <vector <int> > &beginDayWinter);
-//    void beginningFall(const vector <vector <double> > &averageTemp,
-//                       const vector <vector <int> > &beginDaySummer,
-//                       vector <vector <int> > &beginDayFall);
-//    void beginningSpring(const vector <vector <double> > &averageTemp,
-//                         const vector <vector <int> > &beginDayWinter,
-//                         vector <vector <int> > &beginDaySpring);
     void beginningSummer(const vector <vector <double> > &averageTemp,
                          vector <vector <int> > &beginDaySummer);
     void beginningSpringFall(const vector <vector <double> > &averageTemp,

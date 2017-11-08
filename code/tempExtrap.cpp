@@ -14,7 +14,7 @@
 using namespace std;
 
 void readDataOld(vector<vector<float>>* dataVectorPointer){	
-	ifstream file("/home/alexander/Desktop/a_team/datasets/uppsala_tm_1722-2013.dat");
+	ifstream file("../datasets/uppsala_tm_1722-2013.dat");
 	//check if opened correctly
     if (!file) {
         cout << "Error could not read data file" << endl;

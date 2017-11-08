@@ -6,7 +6,7 @@ void project() {
     tempTrender t(pathToFile); //Instantiate your analysis object
     
     t.startDaySeasons();
-	//t.tempEx();
+//	t.tempEx();
 
 //	t.tempOnDay(7, 19);
 //	t.tempOnDayNumber(200);
