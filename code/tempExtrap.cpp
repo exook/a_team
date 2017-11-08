@@ -10,7 +10,7 @@
 #include <fstream>
 #include <TRandom3.h>
 #include <TGraph.h>
-
+#include <TLegend.h>
 using namespace std;
 
 void readDataOld(vector<vector<float>>* dataVectorPointer){	
@@ -205,5 +205,15 @@ void tempTrender::tempEx(){
     fitFunc->SetLineColor(kGreen-3);
     fitFunc->SetLineWidth(3);
     gr_average->Fit(fitFunc);
+    
+    TLegend* leg = new TLegend(0.2,0.7,0.5,0.9);
+    leg->SetFillStyle(0); //Hollow fill (transparent)
+    leg->SetBorderSize(0); //Get rid of the border
+    //leg->SetHeader("The Legend Title");
+    leg->AddEntry(gr_average,"Average","f");
+    leg->AddEntry(gr_above,"Above","f");
+    leg->AddEntry(gr_below,"Below","f");
+    leg->AddEntry(fitFunc, "fit", "l");
+    leg->Draw();
 
 }
