@@ -19,7 +19,7 @@ class tempTrender {
 	void hotCold(string fileName); //Make a histogram of the hottest and coldest day of the year
 	//void tempPerYear(int yearToExtrapolate); //Make a histogram of average temperature per year, then fit and extrapolate to the given year
 
-	void tempEx();
+	float tempEx(int year);
 
 	private:
     string path;
