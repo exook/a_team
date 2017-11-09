@@ -35,7 +35,6 @@ void readDataOld(vector<vector<float>> &dataVector){
                 float number=strtof(value.c_str(),NULL);
                 row.push_back(number);
             }
-        
         }
         dataVector.push_back(row);
     }
