@@ -15,7 +15,7 @@
 using namespace std;
 
 void readDataOld(vector<vector<float>>* dataVectorPointer){	
-	ifstream file("/home/alexander/Desktop/a_team/datasets/uppsala_tm_1722-2013.dat");
+	ifstream file("../datasets/uppsala_tm_1722-2013.dat");
 	//check if opened correctly
     if (!file) {
         cout << "Error could not read data file" << endl;
@@ -105,7 +105,9 @@ float totalAverage(vector <vector<float>>* averagesVectorPointer){
     return totalSum/averagesVectorPointer->size();
     
 
-}
+} 
+
+
 
 void tempTrender::tempEx(){
 
@@ -121,18 +123,20 @@ void tempTrender::tempEx(){
 
     float totalMean=totalAverage(averagesVectorPointer);
 
+
+
    Int_t n = averagesVector.size();
-   Double_t x[n], y[n],y_above[n],y_below[n];
+   vector <Double_t> x_aroundMean,y_aroundMean,y_above,y_below;
    for (Int_t i=0; i<n; i++) {
-        x[i] = averagesVector.at(i).at(0);
-        y[i] = averagesVector.at(i).at(1)-totalMean;
-        if(y[i]<0){
-            y_below[i]=y[i];
-            y_above[i]=0;
+        x_aroundMean.push_back(averagesVector.at(i).at(0));
+        y_aroundMean.push_back(averagesVector.at(i).at(1)-totalMean);
+        if(y_aroundMean[i]<0){
+            y_below.push_back(y_aroundMean[i]);
+            y_above.push_back(0);
         }
-        if(y[i]>=0){
-            y_above[i]=y[i];
-            y_below[i]=0;
+        if(y_aroundMean[i]>=0){
+            y_above.push_back(y_aroundMean[i]);
+            y_below.push_back(0);
         }
    }
 
@@ -146,7 +150,7 @@ void tempTrender::tempEx(){
     int initialYear=1723;//Hardcoded!
     for(Int_t i=0;i<n;i++){
         counter+=1;
-        sum+=y[i];
+        sum+=y_aroundMean[i];
         counter3++;
         if(counter==groupSize){
             y_movingAverage.push_back(sum/groupSize);
@@ -160,29 +164,9 @@ void tempTrender::tempEx(){
 y_movingAverage.push_back(sum/groupSize);
 x_movingAverage.push_back(initialYear+(counter2*groupSize)-(groupSize/2)+groupSize);
 
-
-cout<<endl<<"Actual array: "<<endl<<endl;
-
-    for(int i=0;i<=n/groupSize;i++){
-        cout<<x_movingAverage[i]<<","<<y_movingAverage[i]<<endl;
-
-    }
-cout<<sum/groupSize<<endl;
-
-int N = x_movingAverage.size();
-float x_movingAverageArray[N];
-float y_movingAverageArray[N];
-for (int i=0 ; i<N ; i++)
-{
-  x_movingAverageArray[i]=x_movingAverage[i];
-  y_movingAverageArray[i]=y_movingAverage[i];
-}
-TGraph *g = new TGraph(N,x,y);
-
-
-    TGraph *gr_average = new TGraph (N, x_movingAverageArray, y_movingAverageArray);
-    TGraph *gr_above = new TGraph (n, x, y_above);
-    TGraph *gr_below = new TGraph (n, x, y_below);
+    TGraph *gr_average = new TGraph (x_movingAverage.size(), &x_movingAverage[0], &y_movingAverage[0]);
+    TGraph *gr_above = new TGraph (x_aroundMean.size(), &x_aroundMean[0], &y_above[0]);
+    TGraph *gr_below = new TGraph (x_aroundMean.size(), &x_aroundMean[0], &y_below[0]);
 
     TCanvas * c2= new TCanvas("c2", "random",1200,600);
     c2->DrawFrame(1722,-3.0,2013,3.0);
