@@ -1,6 +1,6 @@
 #include <iostream>
 #include "tempTrender.h"
-#include <sstream> // maybe include in tempTrender.h instead
+#include <sstream> 
 // ROOT library objects
 #include <TF1.h> // 1d function class
 #include <TH1.h> // 1d histogram classes
