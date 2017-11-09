@@ -14,7 +14,7 @@
 #include <TMultiGraph.h>
 using namespace std;
 
-void readDataOld(vector<vector<float>> &dataVector){	
+void readAllData(vector<vector<float>> &dataVector){	
 	ifstream file("../datasets/uppsala_tm_1722-2013.dat");
 	//check if opened correctly
     if (!file) {
@@ -148,7 +148,7 @@ float tempTrender::tempEx(int year){
 
     vector <vector <float>> dataVector;
     
-    readDataOld(dataVector);
+    readAllData("../datasets/uppsala_tm_1722-2013.dat",dataVector);
 
     vector <vector<float>> averagesVector;
 
@@ -177,8 +177,11 @@ TGraph *gr_average2 = new TGraph (x_movingAverage2.size(), &x_movingAverage2[0],
     c2->DrawFrame(1722,-3,2013,3);
     TMultiGraph *mg = new TMultiGraph();
 
+    //stringstream stream;
+    //stream<<"Temperature (C), around "<<totalMean;
+    //string s=stream.str();
     mg->GetXaxis()->SetTitle("Year");
-    mg->GetYaxis()->SetTitle("Temperature (C)");  
+    mg->GetYaxis()->SetTitle("Temperature (C),\n around given average");
 
     gr_above->SetFillColor(kRed+1);
     gr_below->SetFillColor(kBlue-4);
