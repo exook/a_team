@@ -122,6 +122,29 @@ void separateData(const float totalMean,const vector<vector <float>> &averagesVe
 
 }
 
+void makingMovingAverage(vector <Double_t> &y_movingAverage, vector <Double_t> &x_movingAverage, const vector<vector <float>> &averagesVector, vector <Double_t> &y_aroundMean){
+    int groupSize=30;//they used 5
+    int counter1=0;
+    int counter2=0;
+    double sum=0;
+    int initialYear=1723;//Hardcoded!
+    for(int i=0;i<(int)averagesVector.size();i++){
+        counter1+=1;
+        sum+=y_aroundMean[i];
+        if(counter1==groupSize){
+            y_movingAverage.push_back(sum/groupSize);
+            x_movingAverage.push_back(initialYear+(counter2*groupSize)+(groupSize/2));
+            counter1=0;
+            counter2+=1;
+            cout<<"Average: "<<y_movingAverage[i/groupSize]<<endl;
+            sum=0;
+            }
+        }
+        y_movingAverage.push_back(sum/counter1);
+        x_movingAverage.push_back(initialYear+(counter2*groupSize)+(counter1/2));
+        
+}
+
 float tempTrender::tempEx(int year){
 
     vector <vector <float>> dataVector;
@@ -137,28 +160,9 @@ float tempTrender::tempEx(int year){
     vector <Double_t> x_aroundMean,y_aroundMean,y_above,y_below;
     separateData(totalMean,averagesVector,x_aroundMean,y_aroundMean,y_above,y_below);
 
-    int groupSize=30;//they used 5
     vector <Double_t> y_movingAverage,x_movingAverage;
-
-    int counter1=0;
-    int counter2=0;
-    double sum=0;
-    int initialYear=1723;//Hardcoded!
-    for(int i=0;i<averagesVector.size();i++){
-        counter1+=1;
-        sum+=y_aroundMean[i];
-        if(counter1==groupSize){
-            y_movingAverage.push_back(sum/groupSize);
-            x_movingAverage.push_back(initialYear+(counter2*groupSize)+(groupSize/2));
-            counter1=0;
-            counter2+=1;
-            cout<<"Average: "<<y_movingAverage[i/groupSize]<<endl;
-            sum=0;
-        }
-    }
-    y_movingAverage.push_back(sum/counter1);
-    x_movingAverage.push_back(initialYear+(counter2*groupSize)+(counter1/2));
-
+    makingMovingAverage(y_movingAverage, x_movingAverage, averagesVector, y_aroundMean);
+    
     TGraph *gr_average = new TGraph (x_movingAverage.size(), &x_movingAverage[0], &y_movingAverage[0]);
     TGraph *gr_above = new TGraph (x_aroundMean.size(), &x_aroundMean[0], &y_above[0]);
     TGraph *gr_below = new TGraph (x_aroundMean.size(), &x_aroundMean[0], &y_below[0]);

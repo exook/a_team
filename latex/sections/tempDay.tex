@@ -1,7 +1,8 @@
 \begin{document}
 
-\begin{wrapfigure}{R}{0.3\textwidth}
-\includegraphics[scale=0.7]{flowcharttempday.png}
+\begin{wrapfigure}{r}{0.5\textwidth}
+\centering
+\includegraphics[scale=0.6]{flowcharttempday.png}
 \caption{\label{fig:flowcharttempday} Flow chart for the function that gives the temperature of a given day.}
 \end{wrapfigure}
 
@@ -18,7 +19,7 @@ The algorithm itself is straightforward. First, the dates in the data that match
 \end{center}
 \end{figure}
 
-A histogram for the 19$^{\text{th}}$ of July in Uppsala, for the years from 1722 to 2013, is shown in Fig. \ref{fig:tempOnDayNumber}. From the histogram it is possible to get both the mean and the standard deviation. For Fig. \ref{fig:tempOnDayNumber}, the mean is 16.88 and the standard deviation is 2.96. If we want to know the probability for a certain temperature on the given day, we can use the mean and the standard deviation and assume a Gaussian distribution. The black line in Fig. \ref{fig:tempOnDayNumber} is a Gaussian fitted to the histogram, to see if it is a reasonable assumption. For Uppsala, the data contains enough years to give 274 counts, so the Gaussian fit is sensible. Some of the other data sets would give a lot less data points, as in Fig. \ref{fig:tempOnDay}. The histogram contains only 35 entries for the 19$^{\text{th}}$ of July in Lund, and the Gaussian fit is not a good approximation. 
+A histogram for the 19$^{\text{th}}$ of July in Uppsala, for the years from 1722 to 2013, is shown in Fig. \ref{fig:tempOnDayNumber}. From the histogram it is possible to get both the mean and the standard deviation. For Fig. \ref{fig:tempOnDayNumber}, the mean is 16.88 and the standard deviation is 2.96. If we want to know the probability for a certain temperature on the given day, we can use the mean and the standard deviation and assume a Gaussian distribution. The black line in Fig. \ref{fig:tempOnDayNumber} is a Gaussian fitted to the histogram, to see if it is a reasonable assumption. For Uppsala, the data contains enough years to give 274 counts, so the Gaussian fit should be sensible. This is not true, given that the fit has a $\chi ^2$ of 2, which is not good at all. Some of the other data sets would give a lot less data points, as in Fig. \ref{fig:tempOnDay}. The histogram contains only 35 entries for the 19$^{\text{th}}$ of July in Lund, and the Gaussian fit is definitely not a good approximation. Therefore, the conclusion is that it is not possible to calculate the probability of a certain temperature by approximating with a Gaussian.
 
 \begin{figure}[ht]
 \begin{center}
@@ -27,17 +28,17 @@ A histogram for the 19$^{\text{th}}$ of July in Uppsala, for the years from 1722
 \end{center}
 \end{figure}
 
-\begin{comment}
-Midsummer is celebrated in Sweden on a day between June 19 and June 26. Historically, beginning in the 4th century, Midsummer was celebrated on the 24th of June. Therefore, June 23 is chosen for the comparison since we celebrate on midsummers eve. In Sweden we now celebrate on the Friday between June 19 and June 26. The weather on midsummers eve is compared to the weather on christmas eve, both using the dataset from Uppsala, seen in Fig. \ref{fig:midsummerchristmas}.
+
+Midsummer is celebrated in Sweden on a day between June 19$^{\text{th}}$ and June 26$^{\text{th}}$. Historically, beginning in the 4th century, Midsummer was celebrated on the 24$^{\text{th}}$ of June. Therefore, June 23$^{\text{rd}}$ is chosen for the comparison since we celebrate on midsummers eve (we now celebrate on the Friday between June 19$^{\text{th}}$ and June 26$^{\text{th}}$). The weather on midsummers eve is compared to the weather on christmas eve, both using the dataset from Uppsala, seen in Fig. \ref{fig:midsummerchristmas}. Clearly there is a large difference in the temperatures on midsummer and christmas eve. The mean for midsummers eve (Fig. \ref{fig:midsummerchristmas}(a)) is 15.4 $^{\circ}$C and the mean for christmas eve (Fig. \ref{fig:midsummerchristmas}(b)) is -3.1 $^{\circ}$C.
 
 \begin{figure}[ht]
 \centering
-\subfloat[Midsummers eve]{\label{fig:midsummer}\includegraphics[width=0.5\textwidth]{tempOnDayNumber.png}} 
-\subfloat[Christmas eve]{\label{fig:christmas}\includegraphics[width=0.5\textwidth]{tempOnDay.png}}\\
-\caption{The temperatures on July 19$^{th}$ in Uppsala for the years between 1722 and 2013 in (a). The black line is a Gaussian fitted to the histogram.}
+\subfloat[Midsummers eve]{\label{fig:midsummer}\includegraphics[width=0.5\textwidth]{tempmidsummer.png}} 
+\subfloat[Christmas eve]{\label{fig:christmas}\includegraphics[width=0.5\textwidth]{tempchristmas.png}}\\
+\caption{The temperatures on midsummers eve (a) and christmas eve (b), in Uppsala, for the years between 1722 and 2013.}
 \label{fig:midsummerchristmas}
 \end{figure}
-\end{comment}
+
 
 
 \end{document}
