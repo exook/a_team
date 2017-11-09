@@ -53,12 +53,9 @@ int isLeapYear(int year){
 }
 
 void averages(vector<vector<float>> &dataVector,vector <vector<float>> &averagesVector){
-
-    ofstream writer;
-    writer.open("bug.txt");
     
     int row=0;
-    for(size_t i = 0; i < dataVector.size(); ++i){
+    for(size_t i = 0; i < int(dataVector.size()); ++i){
         row=i-1;
         if(dataVector.at(i).at(1)==1 && dataVector.at(i).at(2)==1){
             break;
@@ -94,8 +91,6 @@ void averages(vector<vector<float>> &dataVector,vector <vector<float>> &averages
         averagesVector.push_back(thisYear);
         }
     }
-
-    writer.close();
 }
 
 float totalAverage(vector <vector<float>> &averagesVector){
@@ -125,9 +120,41 @@ void separateData(const float totalMean,const vector<vector <float>> &averagesVe
 
 void tempTrender::tempEx(){
 
-    vector <vector <float>> dataVector;
+    vector <vector <string>> dataVector_str;
     
-    readDataOld(dataVector);
+    //readDataOld(dataVector);
+
+    readData("uppsala_tm_1722-2013.dat", dataVector_str);
+
+    vector <vector <float>> dataVector;
+
+    for(int i=0;i<int(dataVector_str.size());i++){
+        vector <float> row;
+        for(int j=0;j<2;j++){
+            float temp=strtof(dataVector_str.at(i).at(1).c_str(),NULL);
+            row.push_back(temp);
+            float year=strtof(dataVector_str.at(i).at(0).c_str(),NULL);
+            row.push_back(year);
+        }
+        dataVector.push_back(row);
+     }
+
+    //for(int i=0;i<int(dataVector.size());i++){
+        //cout<<dataVector.at(i).at(0)<<endl;
+        //cout<<dataVector.at(i).at(1)<<endl;
+    //}
+
+    //cout<<dataVector.at(1).at(0)<<endl<<dataVector.at(1).at(1)<<endl;
+
+
+
+    for(int i=0;i<int(dataVector.size());i++){
+        dataVector.at(i).at(0)=strtof(dataVector_str.at(i).at(0).c_str(),0);
+        dataVector.at(i).at(1)=strtof(dataVector_str.at(i).at(1).c_str(),0);
+    }
+
+    cout<<dataVector.at(1).at(0)+dataVector.at(1).at(1)<<endl;
+
 
     vector <vector<float>> averagesVector;
 
@@ -145,7 +172,7 @@ void tempTrender::tempEx(){
     int counter2=0;
     double sum=0;
     int initialYear=1723;//Hardcoded!
-    for(int i=0;i<averagesVector.size();i++){
+    for(int i=0;i<int(averagesVector.size());i++){
         counter1+=1;
         sum+=y_aroundMean[i];
         if(counter1==groupSize){
