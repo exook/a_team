@@ -366,7 +366,7 @@ void histogram(const vector <vector <int> > &beginDaySeason, string season){
     Int_t x[n];
     Int_t y[n];
     
-    arrayData(beginDaySeason, season, n, x, y);
+    arrayData(beginDaySeason, "none", n, x, y);
     
     TH1I* hist = new TH1I("hist", Form("Spread in the first day of %s; Day of year; Entries", season.c_str()), 366, 1, 366);
     TCanvas* c_hist = new TCanvas("c1", "v2 canvas", 900, 600);
@@ -434,7 +434,7 @@ void tempTrender::startDaySeasons(){
     beginningSpringFall(averageTempDay, firstDaySummer, firstDayFall, "fall");
     
     //cout << endl << endl;
-    //print<vector <vector <int> >>(firstDayFall, 5);
+    print<vector <vector <int> >>(firstDayWinter, int(firstDayWinter.size()));
     
     //make bar graphs of the results
     cout << endl << "Plotting the results"<< endl;
