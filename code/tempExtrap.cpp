@@ -142,26 +142,24 @@ void tempTrender::tempEx(){
     int groupSize=30;//they used 5
     vector <Double_t> y_movingAverage,x_movingAverage;
 
-    int counter=0;
+    int counter1=0;
     int counter2=0;
-    int counter3=0;
     double sum=0;
     int initialYear=1723;//Hardcoded!
     for(int i=0;i<averagesVector.size();i++){
-        counter+=1;
+        counter1+=1;
         sum+=y_aroundMean[i];
-        counter3++;
-        if(counter==groupSize){
+        if(counter1==groupSize){
             y_movingAverage.push_back(sum/groupSize);
             x_movingAverage.push_back(initialYear+(counter2*groupSize)-(groupSize/2)+groupSize);
-            counter=0;
+            counter1=0;
             counter2+=1;
             cout<<"Average: "<<y_movingAverage[i/groupSize]<<endl;
             sum=0;
         }
     }
-    y_movingAverage.push_back(sum/groupSize);
-    x_movingAverage.push_back(initialYear+(counter2*groupSize)-(groupSize/2)+groupSize);
+    y_movingAverage.push_back(sum/counter1);
+    x_movingAverage.push_back(initialYear+(counter2*groupSize)+(counter1/2));
 
     TGraph *gr_average = new TGraph (x_movingAverage.size(), &x_movingAverage[0], &y_movingAverage[0]);
     TGraph *gr_above = new TGraph (x_aroundMean.size(), &x_aroundMean[0], &y_above[0]);
