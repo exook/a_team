@@ -56,76 +56,6 @@ void calcAverageTemp(const vector <vector <string> > &data, vector <vector <doub
     }
 }
 
-//finds the first day of each winter and saves the date in a vector
-void tempTrender::beginningWinter(const vector <vector <double> > &averageTemp,
-                                  vector <vector <int> > &beginDayWinter){
-    
-    int yearPrevius = averageTemp.at(0).at(0)-1; //first year in data -1
-    int monthPrevius = 12; //assume the winter has started in the previous year (before data)
-    int yearFirst = averageTemp.at(0).at(0)-1;
-    int monthFirst = 0;
-    int dayFirst = 0;
-    int counterDays = 0;
-    
-    cout << "Calculating the first day of each winter..." << endl;
-    
-    //loop through dates in the vector
-    for (int i=1; i < int(averageTemp.size()); i++){
-        
-        //is it a wintertemperature
-        if (averageTemp.at(i).at(3) <= 0){
-            //remember date of first winter day
-            if (counterDays == 0) {
-                yearFirst = averageTemp.at(i).at(0);
-                monthFirst = averageTemp.at(i).at(1);
-                dayFirst = averageTemp.at(i).at(2);
-            }
-            counterDays++;
-            
-            //begining of winter
-            if (counterDays == 5) {
-                
-                //The winter does not always start once per year (month 1 to 12)
-                //There are 4 cases of how the begin days of winters can follow
-                
-                //successive winters both early in year (month < 6)
-                bool case1 = (yearFirst != yearPrevius) &&
-                            ((monthPrevius < 6) && (monthFirst < 6));
-                //successive winters both late in year (month > 6)
-                bool case2 = (yearFirst != yearPrevius) &&
-                            ((monthPrevius > 6) && (monthFirst > 6));
-                //succesive winters are in the same year (one early the other late)
-                bool case3 = (monthPrevius < 6) && (monthFirst > 6);
-                //succesive winters skip a year (one winter late, the next early)
-                bool case4 = (monthPrevius > 6) && (yearFirst - yearPrevius == 2);
-                
-                //a new winter
-                if (case1 || case2 || case3 || case4) {
-                    
-                    vector<int> outputLine;
-                    int dayOfYear = getDayOfYear(yearFirst, monthFirst, dayFirst);
-                    
-                    //save date first day winter of a year
-                    outputLine.push_back(yearFirst);
-                    outputLine.push_back(monthFirst);
-                    outputLine.push_back(dayFirst);
-                    
-                    outputLine.push_back(dayOfYear);
-                    
-                    beginDayWinter.push_back(outputLine);
-                    
-                    yearPrevius = averageTemp.at(i).at(0);
-                    monthPrevius = averageTemp.at(i).at(1);
-                    counterDays = 0;
-                }
-            }
-        }
-        else {
-            counterDays = 0;
-        }
-    }
-}
-
 //concatenates the date in the vector and returns it as int
 template <class T>
 int dateToInt (const T vec, int line) {
@@ -178,24 +108,65 @@ bool seasonsInOrder(int yearStart, int i, string season,
     return rightOrder;
 }
 
-//finds the first day of each summer and saves the date in a vector
-void tempTrender::beginningSummer(const vector <vector <double> > &averageTemp,
-                                  vector <vector <int> > &beginDaySummer){
+//check if it is a winter/summer temperature
+bool rightTemperature(string season, double temp) {
+    if (season == "winter") {
+        return (temp <= 0);
+    }
+    else if (season == "summer") {
+        return (temp >= 10);
+    }
+    else {return false;}
+}
+
+//check is if it is a new winter/summer
+bool newWinterSummer(string season, int yearFirst, int monthFirst,
+                     int yearPrevius, int monthPrevius){
+    if (season == "winter") {
+        //The winter does not always start once per year (month 1 to 12)
+        //There are 4 cases of how the begin days of winters can follow
+        
+        //successive winters both early in year (month < 6)
+        bool case1 = (yearFirst != yearPrevius) &&
+                     ((monthPrevius < 6) && (monthFirst < 6));
+        //successive winters both late in year (month > 6)
+        bool case2 = (yearFirst != yearPrevius) &&
+                     ((monthPrevius > 6) && (monthFirst > 6));
+        //succesive winters are in the same year (one early the other late)
+        bool case3 = (monthPrevius < 6) && (monthFirst > 6);
+        //succesive winters skip a year (one winter late, the next early)
+        bool case4 = (monthPrevius > 6) && (yearFirst - yearPrevius == 2);
+        
+        //new winter if true
+        return (case1 || case2 || case3 || case4);
+    }
+    else if (season == "summer"){
+        return (yearFirst != yearPrevius);
+    }
+    else {return false;}
+}
+
+//finds the first day of each winter and saves the date in a vector
+void tempTrender::beginningWinterSummer(const vector <vector <double> > &averageTemp,
+                                        vector <vector <int> > &beginDay,
+                                        string season){
     
     int yearPrevius = averageTemp.at(0).at(0)-1; //first year in data -1
-    int yearFirst = averageTemp.at(0).at(0)-1;
-    int monthFirst = 0;
-    int dayFirst = 0;
+    int monthPrevius = 12; //assume the winter has started in the previous year (before data)
+    int yearFirst = averageTemp.at(0).at(0)-1, monthFirst = 0, dayFirst = 0;
     int counterDays = 0;
+    bool rightTemp = false, newSeason = false;
     
-    cout << "Calculating the first day of summer for each year..." << endl;
+    cout << "Calculating the first day of each " << season << "..." << endl;
     
     //loop through dates in the vector
-    for (int i=1; i < int(averageTemp.size()); i++){
+    for (int i=0; i < int(averageTemp.size()); i++){
         
-        //is it a summertemperature
-        if (averageTemp.at(i).at(3) >= 10){
-            //remember date of first summer day
+        rightTemp = rightTemperature(season, averageTemp.at(i).at(3));
+        
+        //is it a winter/summer temperature
+        if (rightTemp){
+            //remember date of first winter/summer day
             if (counterDays == 0) {
                 yearFirst = averageTemp.at(i).at(0);
                 monthFirst = averageTemp.at(i).at(1);
@@ -203,23 +174,30 @@ void tempTrender::beginningSummer(const vector <vector <double> > &averageTemp,
             }
             counterDays++;
             
-            //definition begining of a new summer
-            if (counterDays == 5 && (yearFirst != yearPrevius)) {
+            //begining of winter/summer
+            if (counterDays == 5) {
                 
-                vector<int> outputLine;
-                int dayOfYear = getDayOfYear(yearFirst, monthFirst, dayFirst);
+                newSeason = newWinterSummer(season, yearFirst, monthFirst, yearPrevius, monthPrevius);
                 
-                //save date first day of summer of a year
-                outputLine.push_back(yearFirst);
-                outputLine.push_back(monthFirst);
-                outputLine.push_back(dayFirst);
-
-                outputLine.push_back(dayOfYear);
+                //a new winter/summer
+                if (newSeason) {
                 
-                beginDaySummer.push_back(outputLine);
-                
-                yearPrevius = averageTemp.at(i).at(0);
-                counterDays = 0;
+                    vector<int> outputLine;
+                    int dayOfYear = getDayOfYear(yearFirst, monthFirst, dayFirst);
+                    
+                    //save date first day winter/summer of a year
+                    outputLine.push_back(yearFirst);
+                    outputLine.push_back(monthFirst);
+                    outputLine.push_back(dayFirst);
+                    
+                    outputLine.push_back(dayOfYear);
+                    
+                    beginDay.push_back(outputLine);
+                    
+                    yearPrevius = averageTemp.at(i).at(0);
+                    monthPrevius = averageTemp.at(i).at(1);
+                    counterDays = 0;
+                }
             }
         }
         else {
@@ -236,12 +214,10 @@ void tempTrender::beginningSpringFall(const vector <vector <double> > &averageTe
     
     int yearPrevius = averageTemp.at(0).at(0) -1; //first year in data -1
     int yearFirst = averageTemp.at(0).at(0)-1;
-    int monthFirst = 0;
-    int dayFirst = 0;
-    int counterDays = 0;
-    int nDays = 0;
+    int monthFirst = 0, dayFirst = 0;
+    int counterDays = 0, nDays = 0;
     
-    cout << Form("Calculating the first day of %s for each year...", season.c_str()) << endl;
+    cout << "Calculating the first day of each " << season << "..." << endl;
     
     //how many days in a row between 0 and 10 degrees before the seasons starts
     if (season == "spring") {
@@ -363,8 +339,7 @@ void plotSeason(const vector <vector <int> > &beginDaySeason, string season){
 //create a histogram of the start days of a season
 void histogram(const vector <vector <int> > &beginDaySeason, string season){
     int n = int(beginDaySeason.size());
-    Int_t x[n];
-    Int_t y[n];
+    Int_t x[n], y[n];
     
     arrayData(beginDaySeason, "none", n, x, y);
     
@@ -419,22 +394,18 @@ void tempTrender::startDaySeasons(){
     
     vector <vector <string> > dataSeasons;
     vector <vector <double> > averageTempDay;
-    vector <vector <int> > firstDayWinter;
-    vector <vector <int> > firstDaySpring;
-    vector <vector <int> > firstDaySummer;
-    vector <vector <int> > firstDayFall;
+    vector <vector <int> > firstDayWinter, firstDaySpring, firstDaySummer, firstDayFall;
     
     readData("smhi-opendata_Lund.csv", dataSeasons);
     calcAverageTemp(dataSeasons, averageTempDay);
     
     //calculate start of seasons
-    beginningWinter(averageTempDay, firstDayWinter);
+    beginningWinterSummer(averageTempDay, firstDayWinter, "winter");
     beginningSpringFall(averageTempDay, firstDayWinter, firstDaySpring, "spring");
-    beginningSummer(averageTempDay, firstDaySummer);
+    beginningWinterSummer(averageTempDay, firstDaySummer, "summer");
     beginningSpringFall(averageTempDay, firstDaySummer, firstDayFall, "fall");
     
-    //cout << endl << endl;
-    print<vector <vector <int> >>(firstDayWinter, int(firstDayWinter.size()));
+    //print<vector <vector <int> >>(firstDayWinter, int(firstDayWinter.size()));
     
     //make bar graphs of the results
     cout << endl << "Plotting the results"<< endl;

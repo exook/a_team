@@ -15,7 +15,7 @@ void rootlogon() {
     gROOT->ProcessLine(".L tempDay.cpp+");
     gROOT->ProcessLine(".L tempDayNumber.cpp+");
     gROOT->ProcessLine(".L tempHotCold.cpp+");
-    gROOT->ProcessLine(".L tempExtrap.cpp+");
+//    gROOT->ProcessLine(".L tempExtrap.cpp+");
     gROOT->ProcessLine(".L project.cpp+"); //The + means to recompile only if it changed sine last time
     gROOT->ProcessLine("project()");
     //Now you can type project() to invoke the function defined in project

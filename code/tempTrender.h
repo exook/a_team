@@ -28,10 +28,9 @@ class tempTrender {
     bool testLeapYear(int year);
     template <class T> void print(T vec, int lines);
     
-    void beginningWinter(const vector <vector <double> > &averageTemp,
-                         vector <vector <int> > &beginDayWinter);
-    void beginningSummer(const vector <vector <double> > &averageTemp,
-                         vector <vector <int> > &beginDaySummer);
+    void beginningWinterSummer(const vector <vector <double> > &averageTemp,
+                               vector <vector <int> > &beginDayWinter,
+                               string season);
     void beginningSpringFall(const vector <vector <double> > &averageTemp,
                              const vector <vector <int> > &beginDayFirst,
                              vector <vector <int> > &beginDaySecond,
