@@ -53,6 +53,73 @@ int isLeapYear(int year){
 }
 
 void averages(vector<vector<float>> &dataVector,vector <vector<float>> &averagesVector){
+/*
+    int yearPrev=1722;
+    float tempSum=0;
+    int daySum=0;
+    vector <float> thisYear;
+    for(int i=0;i<int(dataVector.size());i++){
+        int currentYear=dataVector.at(i).at(0);
+        float temp=dataVector.at(i).at(1);
+        if(!(currentYear>yearPrev)){
+            tempSum+=temp;
+            daySum++;
+            }
+        else{
+            thisYear.push_back(yearPrev);
+            thisYear.push_back(tempSum/daySum);
+            averagesVector.push_back(thisYear);
+
+            vector <float> thisYear;
+            tempSum=temp;
+            daySum=0;
+            }
+    }
+}
+*/
+    //for(int i=0;i<int(averagesVector.size());i++){
+     //   cout<<averagesVector.at(i).at(0)<<":"<<averagesVector.at(i).at(1)<<endl;
+    //}
+
+
+    float tempSum=0;
+    int daySum=0;
+    int yearPrev=1722;
+    vector <float> thisYear;
+    for(int i=0;i<int(dataVector.size());i++){
+        int currentYear=dataVector.at(i).at(0);
+        //cout<<dataVector.at(i).at(1)<<endl;
+        if(!(currentYear>yearPrev)){
+            tempSum+=dataVector.at(i).at(1);
+            //cout<<"TEMPSUM: "<<tempSum<<endl;
+            daySum++;
+        }
+        else{
+        //cout<<dataVector.at(i).at(0)<<":"<<dataVector.at(i).at(1)<<endl;
+        //cout<<"HAPPY NEW YEAR"<<endl;
+        //cout<<"DAYSUM"<<daySum<<endl;
+        vector <float> thisYear;
+        thisYear.push_back(yearPrev);
+        thisYear.push_back(tempSum/daySum);
+        cout<<yearPrev<<":"<<tempSum/daySum<<endl;
+        averagesVector.push_back(thisYear);
+
+        
+        tempSum=0;
+        daySum=1;
+        yearPrev=currentYear;
+        }
+
+    }
+    
+    //for(int i=0;i<int(averagesVector.size());i++){
+    //    cout<<averagesVector.at(i).at(0)<<":"<<averagesVector.at(i).at(1)<<endl;
+    //}
+
+}
+
+/*
+void averages(vector<vector<float>> &dataVector,vector <vector<float>> &averagesVector){
     
     int row=0;
     for(size_t i = 0; i < int(dataVector.size()); ++i){
@@ -92,6 +159,8 @@ void averages(vector<vector<float>> &dataVector,vector <vector<float>> &averages
         }
     }
 }
+*/
+
 
 float totalAverage(vector <vector<float>> &averagesVector){
     float totalSum=0;
@@ -131,29 +200,20 @@ void tempTrender::tempEx(){
     for(int i=0;i<int(dataVector_str.size());i++){
         vector <float> row;
         for(int j=0;j<2;j++){
-            float temp=strtof(dataVector_str.at(i).at(1).c_str(),NULL);
-            row.push_back(temp);
             float year=strtof(dataVector_str.at(i).at(0).c_str(),NULL);
             row.push_back(year);
+            float temp=strtof(dataVector_str.at(i).at(8).c_str(),NULL);
+            row.push_back(temp);
         }
         dataVector.push_back(row);
      }
 
     //for(int i=0;i<int(dataVector.size());i++){
-        //cout<<dataVector.at(i).at(0)<<endl;
-        //cout<<dataVector.at(i).at(1)<<endl;
+    //    cout<<dataVector.at(i).at(0)<<":"<<dataVector.at(i).at(1)<<endl;
     //}
 
-    //cout<<dataVector.at(1).at(0)<<endl<<dataVector.at(1).at(1)<<endl;
 
 
-
-    for(int i=0;i<int(dataVector.size());i++){
-        dataVector.at(i).at(0)=strtof(dataVector_str.at(i).at(0).c_str(),0);
-        dataVector.at(i).at(1)=strtof(dataVector_str.at(i).at(1).c_str(),0);
-    }
-
-    cout<<dataVector.at(1).at(0)+dataVector.at(1).at(1)<<endl;
 
 
     vector <vector<float>> averagesVector;
