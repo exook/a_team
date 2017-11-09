@@ -151,7 +151,7 @@ void tempTrender::tempEx(){
         sum+=y_aroundMean[i];
         if(counter1==groupSize){
             y_movingAverage.push_back(sum/groupSize);
-            x_movingAverage.push_back(initialYear+(counter2*groupSize)-(groupSize/2)+groupSize);
+            x_movingAverage.push_back(initialYear+(counter2*groupSize)+(groupSize/2));
             counter1=0;
             counter2+=1;
             cout<<"Average: "<<y_movingAverage[i/groupSize]<<endl;
@@ -189,7 +189,7 @@ void tempTrender::tempEx(){
     TF1* fitFunc = new TF1("fitFunc", "([0]*(x-1840)*cos([1]*x))", 1722, 2013);
 
     fitFunc->SetParameter(0, 0.6);
-    fitFunc->SetParameter(1, 0.5);
+    fitFunc->SetParameter(1, 0.125);
 
     fitFunc->SetLineColor(kGreen-3);
     fitFunc->SetLineWidth(3);
