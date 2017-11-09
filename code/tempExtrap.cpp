@@ -208,14 +208,14 @@ TMultiGraph *mg = new TMultiGraph();
     //gr_average->Draw("P");
     gr_average->SetLineWidth(3);
     gr_average->SetMarkerStyle(8);
-    gr_average->SetMarkerSize(2);
+    gr_average->SetMarkerSize(1.5);
     
     //gr_average->GetXaxis()->SetTitle("year");
     //gr_average->Draw("L");
 
     mg->Add(gr_above,"B");
     mg->Add(gr_below,"B");
-    mg->Add(gr_average,"PL");
+    mg->Add(gr_average,"PC");
 
     mg->GetXaxis()->SetTitle("Year");
     mg->GetYaxis()->SetTitle("Temperature (C)");  
@@ -249,5 +249,12 @@ TMultiGraph *mg = new TMultiGraph();
     leg->AddEntry(gr_below,"Below","f");
     leg->AddEntry(fitFunc, "fit", "l");
     leg->Draw();
+
+    double_t param0=fitFunc->GetParameter(0);
+    double_t param1=fitFunc->GetParameter(1);
+    int year=2250;
+    cout<<param0*(year-1840)*cos(param1*year);
+    
+    
 
 }
