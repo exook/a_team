@@ -9,8 +9,9 @@
 #include <TCanvas.h> // canvas object
 #include <TGraph.h>
 #include <TLegend.h>
-// Left to do: probability to observe a certain temperature
-double Gaussian2(double* x, double* par) { //A custom function
+
+// The fit function
+double Gaussian2(double* x, double* par) {
     return par[0]*exp(-0.5*(x[0]*x[0] - 2*x[0]*par[1] + par[1]*par[1])/(par[2]*par[2]));
 }
 
@@ -18,6 +19,7 @@ void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
     cout << endl;
     cout << "Calculating the temperature for a certain date in Lund" << endl;
     
+    // Read the data
     vector <vector <string> > dataOnDay;
     readData("smhi-opendata_Lund.csv", dataOnDay);
     
@@ -39,31 +41,30 @@ void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
         histogram->Fill(tempCalculatedDay[i]);
     }
     
-    //gStyle->SetOptStat(1111);
-    
-    histogram->SetFillColor(kRed + 1);
-    double mean = histogram->GetMean(); //The mean of the distribution
-    double stdev = histogram->GetRMS(); //The standard deviation
+    // Draw the histogram
+    histogram->SetFillColor(kBlue);
+    double mean = histogram->GetMean(); // The mean of the distribution
+    double stdev = histogram->GetRMS(); // The standard deviation
     TCanvas* c1 = new TCanvas("c1", "Date");
     histogram->Draw();
     
-    
+    // Create a fit function
     TF1* func = new TF1("Gaussian", Gaussian2, -20, 40, 3);
     func->SetParameters(1, 5, 3); //Starting values for fitting
     func->SetLineColor(kBlack);
-    
     histogram->Fit(func, "Q1R");
     
-    func->GetParameter(0); //The constant
-    double fitmean = func->GetParameter(1);//The mean
-    double fitstdev = func->GetParameter(2);//The standard deviation
-    double errormean = func->GetParError(1); //Error of parameter
+    // Parameters of the fit function
+    func->GetParameter(0); // The constant
+    double fitmean = func->GetParameter(1);// The mean of the fit function
+    double fitstdev = func->GetParameter(2);// The standard deviation of the fit function
+    double errormean = func->GetParError(1); // Error of parameters
     double errorstdev = func->GetParError(2);
     
+    // Create a legend
     TLegend* legen = new TLegend(0.2,0.7,0.5,0.9);
-    legen->SetFillStyle(0); //Hollow fill (transparent)
-    legen->SetBorderSize(0); //Get rid of the border
-    //leg->SetHeader("The Legend Title");
+    legen->SetFillStyle(0); // Transparent
+    legen->SetBorderSize(0); // No border
     legen->AddEntry(histogram,"Temperature on 19/7","f");
     legen->AddEntry(func, "Gaussian fit", "l");
     legen->Draw();
@@ -71,9 +72,10 @@ void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
     // Save the canvas as a picture
     c1->SaveAs("tempOnDay.png");
     
-    cout << "Data mean: "<<mean << ", fitted function mean: " << fitmean<< " with error: " << errormean<< endl;
-    cout << "Data standard deviation: "<<stdev << ", fitted function standard deviation: " << fitstdev<< " with error: " << errorstdev<< endl;
-    
+    cout << "Data mean: "<<mean << endl;
+    cout << "Data standard deviation: "<<stdev<< endl;
+    cout << "Number of data points: "<<tempCalculatedDay.size()<<endl; // To know how many data points
+
 }
 
 
