@@ -146,7 +146,7 @@ void tempTrender::tempEx(){
 
     //int groupSize=20;
     int groupSize=30;//they used 5
-    Double_t y_movingAverage[(n/groupSize)+1],x_movingAverage[(n/groupSize)+1];
+    vector <Double_t> y_movingAverage,x_movingAverage;
 
     int counter=0;
     int counter2=0;
@@ -160,15 +160,16 @@ void tempTrender::tempEx(){
         //cout<<"sum: "<<sum<<endl;
         counter3++;
         if(counter==groupSize){
-            y_movingAverage[i/groupSize]=sum/groupSize;
-            x_movingAverage[counter2]=initialYear+(counter2*groupSize)-(groupSize/2)+groupSize;
+            y_movingAverage.push_back(sum/groupSize);
+            x_movingAverage.push_back(initialYear+(counter2*groupSize)-(groupSize/2)+groupSize);
             counter=0;
             counter2+=1;
             cout<<"Average: "<<y_movingAverage[i/groupSize]<<endl;
             sum=0;
         }
     }
-y_movingAverage[counter3/groupSize]=sum/groupSize;
+y_movingAverage.push_back(sum/groupSize);
+x_movingAverage.push_back(initialYear+(counter2*groupSize)-(groupSize/2)+groupSize);
 
 
 cout<<endl<<"Actual array: "<<endl<<endl;
@@ -179,8 +180,18 @@ cout<<endl<<"Actual array: "<<endl<<endl;
     }
 cout<<sum/groupSize<<endl;
 
+int N = x_movingAverage.size();
+float x_movingAverageArray[N];
+float y_movingAverageArray[N];
+for (int i=0 ; i<N ; i++)
+{
+  x_movingAverageArray[i]=x_movingAverage[i];
+  y_movingAverageArray[i]=y_movingAverage[i];
+}
+TGraph *g = new TGraph(N,x,y);
 
-    TGraph *gr_average = new TGraph (n/groupSize, x_movingAverage, y_movingAverage);
+
+    TGraph *gr_average = new TGraph (N, x_movingAverageArray, y_movingAverageArray);
     TGraph *gr_above = new TGraph (n, x, y_above);
     TGraph *gr_below = new TGraph (n, x, y_below);
 
