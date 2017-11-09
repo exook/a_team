@@ -5,7 +5,7 @@
 //constructor
 tempTrender::tempTrender(string filePath) {
     cout << endl;
-    cout << "This program calculates trends in the temparture datasets." << endl;
+    cout << "This program calculates trends in the temprature datasets." << endl;
     cout << "The path to the data files: " << endl;
     cout << filePath << endl;
     path = filePath;
