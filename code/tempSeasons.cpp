@@ -420,6 +420,7 @@ void tempTrender::startDaySeasons(){
     histogram(firstDaySummer, "summer");
     histogram(firstDayFall, "fall");
     histogram(firstDayWinter, "winter");
+    cout << endl;
 }
 
 
