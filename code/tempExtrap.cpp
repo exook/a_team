@@ -122,8 +122,8 @@ void separateData(const float totalMean,const vector<vector <float>> &averagesVe
 
 }
 
-void makingMovingAverage(vector <Double_t> &y_movingAverage, vector <Double_t> &x_movingAverage, const vector<vector <float>> &averagesVector, vector <Double_t> &y_aroundMean){
-    int groupSize=30;//they used 5
+void makingMovingAverage(vector <Double_t> &y_movingAverage, vector <Double_t> &x_movingAverage, const vector<vector <float>> &averagesVector, vector <Double_t> &y_aroundMean,int groupSize){
+    //int groupSize=30;//they used 5
     int counter1=0;
     int counter2=0;
     double sum=0;
@@ -136,7 +136,6 @@ void makingMovingAverage(vector <Double_t> &y_movingAverage, vector <Double_t> &
             x_movingAverage.push_back(initialYear+(counter2*groupSize)+(groupSize/2));
             counter1=0;
             counter2+=1;
-            cout<<"Average: "<<y_movingAverage[i/groupSize]<<endl;
             sum=0;
             }
         }
@@ -156,37 +155,46 @@ float tempTrender::tempEx(int year){
     averages(dataVector,averagesVector);
 
     float totalMean=totalAverage(averagesVector);
+    cout<<"The total average is: "<<totalMean<<endl;
 
     vector <Double_t> x_aroundMean,y_aroundMean,y_above,y_below;
     separateData(totalMean,averagesVector,x_aroundMean,y_aroundMean,y_above,y_below);
 
-    vector <Double_t> y_movingAverage,x_movingAverage;
-    makingMovingAverage(y_movingAverage, x_movingAverage, averagesVector, y_aroundMean);
+    vector <Double_t> y_movingAverage1,x_movingAverage1;
+    makingMovingAverage(y_movingAverage1, x_movingAverage1, averagesVector, y_aroundMean,30);
     
-    TGraph *gr_average = new TGraph (x_movingAverage.size(), &x_movingAverage[0], &y_movingAverage[0]);
+    TGraph *gr_average1 = new TGraph (x_movingAverage1.size(), &x_movingAverage1[0], &y_movingAverage1[0]);
+
+    vector <Double_t> y_movingAverage2,x_movingAverage2;
+    makingMovingAverage(y_movingAverage2, x_movingAverage2, averagesVector, y_aroundMean,11);
+TGraph *gr_average2 = new TGraph (x_movingAverage2.size(), &x_movingAverage2[0], &y_movingAverage2[0]);
+
     TGraph *gr_above = new TGraph (x_aroundMean.size(), &x_aroundMean[0], &y_above[0]);
     TGraph *gr_below = new TGraph (x_aroundMean.size(), &x_aroundMean[0], &y_below[0]);
 
     TCanvas * c2= new TCanvas("c2", "random",1200,600);
-    c2->DrawFrame(1722,-3.0,2013,3.0);
+    //c2->DrawFrame(1722,-3.0,2013,3.0);
+    c2->DrawFrame(1722,-3,2013,3);
     TMultiGraph *mg = new TMultiGraph();
-
-    gr_above->SetFillColor(kRed-3);
-    
-    gr_below->SetFillColor(kBlue-3);
-
-    gr_average->SetLineWidth(3);
-    gr_average->SetMarkerStyle(8);
-    gr_average->SetMarkerSize(1.5);
-
-    mg->Add(gr_above,"B");
-    mg->Add(gr_below,"B");
-    mg->Add(gr_average,"PC");
 
     mg->GetXaxis()->SetTitle("Year");
     mg->GetYaxis()->SetTitle("Temperature (C)");  
 
+    gr_above->SetFillColor(kRed+1);
+    gr_below->SetFillColor(kBlue-4);
+
+    mg->Add(gr_above,"B");
+    mg->Add(gr_below,"B");
+
+    gr_average1->SetLineWidth(4);
+
+    mg->Add(gr_average1,"C");
+
+    gr_average2->SetLineWidth(2);
+    mg->Add(gr_average2,"C");
     mg->Draw();
+    
+    c2->SaveAs("extrapolatedDataNoFit.jpg");
 
     TF1* fitFunc = new TF1("fitFunc", "([0]*(x-1840)*cos([1]*x))", 1722, 2013);
 
@@ -195,25 +203,28 @@ float tempTrender::tempEx(int year){
 
     fitFunc->SetLineColor(kGreen-3);
     fitFunc->SetLineWidth(3);
-    gr_average->Fit(fitFunc);
+    gr_average1->Fit(fitFunc);
     
     TLegend* leg = new TLegend(0.25,0.8,0.45,0.9);
     leg->SetFillStyle(0); //Hollow fill (transparent)
     leg->SetBorderSize(0); //Get rid of the border
     leg->SetNColumns(2);
     //leg->SetHeader("The Legend Title");
-    leg->AddEntry(gr_average,"Average","f");
+    leg->AddEntry(gr_average1,"Average 1","f");
+    leg->AddEntry(gr_average2,"Average 2","f");
     leg->AddEntry(gr_above,"Above","f");
     leg->AddEntry(gr_below,"Below","f");
     leg->AddEntry(fitFunc, "fit", "l");
     leg->Draw();
+
+    mg->Draw();
 
     float param0=fitFunc->GetParameter(0);
     float param1=fitFunc->GetParameter(1);
     //return param0*(year-1840)*cos(param1*year);
     //int year=2050;
     //cout<<param0*(year-1840)*cos(param1*year)<<endl;
-    c2->SaveAs("extrapolatedData.jpg");
+    c2->SaveAs("extrapolatedDataFit.jpg");
 
     return param0*(year-1840)*cos(param1*year)+totalMean;
 

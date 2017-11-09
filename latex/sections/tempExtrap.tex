@@ -11,7 +11,17 @@ For the complete set of data, the first year, 1722, was skipped because its meas
 
 With the data of yearly averages at hand, it was processed for plotting. To do this, the total average temeperature from all the yearly average temperatures was calculated. With a for loop iterating through the data elements and simple if statements, the average temperatures and corresponding year were pushed into one vector containing all temperatures above the total average, and one vector containing those below. These two new vectors are not used for further analysis, but purely used for plotting.
 
-The average temperature vector was then used to calculate a moving average. The goal of this moving average is to take the yearly averages in groups and take the average yearly temperature for that group. 
+The average temperature vector was then used to calculate a moving average. The goal of this moving average is to take the yearly averages in groups and take the average yearly temperature for that group. This will make it easier to fit. Similarly ot the other average functions, this iterated through the average vector and for each element added the temperature. If the iteration counter was the size of the desired group size, then the average of the average temperatures was pushed into a vector for the y-values. For the x-values, the current year, the middle of the group, corresponded to the initial year, plus the number of groups so far times the group size. Plus half a group size. If the number of years is not divisible by the group size then the last years will not be represented. This is accomodated by outside the for loop push the current value of the sum.
+
+These moving average y- and x-values were then put into a \texttt{TGraph} object, and a fit function was added to this graf. The function was of the form $A*(x-1840)*cos(B*x))$, where A and B are parameters. The graph, the fit were then plotted together with the above and belov vectors, as bar graphs, mentioned earlier.
+
+The main function \texttt{tempEx} then returned the value of the fit function evaluated at the desired year.
+
+\subsection{Results and Conclusion}
+
+The results show a somewhat periodically oscillating average yearly temperature around 5.9 Celcius. The fit achieves a $\chi ^2=1.2$, which is surprisingly good for such a simplistic model. Extrapolating with this function, $0.005(x-1840)cos(0.125x)$ gives an average temperature of 5.88 Celcius year 2050. In conclusion, the yearly temperatures do in fact oscillate over time. However, it is clearly seen in the data that at in the more recent years have been concistently warmer and a more proper model, using global data could most likely show proof of global warming. It is interesting to see that such a simple model as ours does make a good fit with the data. It is also interesting that such a temperature increase can be seen in data just obtained in the Stockholm region. 
+
+
 
 
 
