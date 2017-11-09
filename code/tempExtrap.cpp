@@ -14,7 +14,7 @@
 #include <TMultiGraph.h>
 using namespace std;
 
-void readDataOld(vector<vector<float>>* dataVectorPointer){	
+void readDataOld(vector<vector<float>> &dataVector){	
 	ifstream file("../datasets/uppsala_tm_1722-2013.dat");
 	//check if opened correctly
     if (!file) {
@@ -37,10 +37,11 @@ void readDataOld(vector<vector<float>>* dataVectorPointer){
             }
         
         }
-        dataVectorPointer->push_back(row);
+        dataVector.push_back(row);
     }
     file.close();
 }
+
 
 int isLeapYear(int year){
     if((year % 4 == 0 && year % 100 != 0) || ( year % 400 == 0)){
@@ -51,23 +52,23 @@ int isLeapYear(int year){
     }
 }
 
-void averages(vector<vector<float>>* dataVectorPointer,vector <vector<float>>* averagesVectorPointer){
+void averages(vector<vector<float>> &dataVector,vector <vector<float>> &averagesVector){
 
     ofstream writer;
     writer.open("bug.txt");
     
     int row=0;
-    for(size_t i = 0; i < dataVectorPointer->size(); ++i){
+    for(size_t i = 0; i < dataVector.size(); ++i){
         row=i-1;
-        if(dataVectorPointer->at(i).at(1)==1 && dataVectorPointer->at(i).at(2)==1){
+        if(dataVector.at(i).at(1)==1 && dataVector.at(i).at(2)==1){
             break;
         }
         else{
         }
     }
 
-    int initialYear=dataVectorPointer->at(row).at(0);
-    int endYear=dataVectorPointer->at(dataVectorPointer->size()-1).at(0);
+    int initialYear=dataVector.at(row).at(0);
+    int endYear=dataVector.at(dataVector.size()-1).at(0);
 
     vector <float> thisYear;
 
@@ -76,33 +77,33 @@ void averages(vector<vector<float>>* dataVectorPointer,vector <vector<float>>* a
         vector <float> thisYear;
         if(isLeapYear(year)){
             for(int day=1;day<=366;day++){
-                yearlySum+=dataVectorPointer->at(row).at(4);
+                yearlySum+=dataVector.at(row).at(4);
                 row++;
             }
         thisYear.push_back(year);
         thisYear.push_back(yearlySum/366);
-        averagesVectorPointer->push_back(thisYear);
+        averagesVector.push_back(thisYear);
         }
         else{
             for(int day=1;day<=365;day++){
-                yearlySum+=dataVectorPointer->at(row).at(4);
+                yearlySum+=dataVector.at(row).at(4);
                 row++;
             }
         thisYear.push_back(year);
         thisYear.push_back(yearlySum/366);
-        averagesVectorPointer->push_back(thisYear);
+        averagesVector.push_back(thisYear);
         }
     }
 
     writer.close();
 }
 
-float totalAverage(vector <vector<float>>* averagesVectorPointer){
+float totalAverage(vector <vector<float>> &averagesVector){
     float totalSum=0;
-    for(size_t i = 0; i < averagesVectorPointer->size(); ++i){
-        totalSum+=averagesVectorPointer->at(i).at(1);
+    for(size_t i = 0; i < averagesVector.size(); ++i){
+        totalSum+=averagesVector.at(i).at(1);
     }
-    return totalSum/averagesVectorPointer->size();
+    return totalSum/averagesVector.size();
 } 
 
 void separateData(const float totalMean,const vector<vector <float>> &averagesVector,vector <Double_t> &x_aroundMean,vector <Double_t> &y_aroundMean,vector <Double_t> &y_above,vector <Double_t> &y_below){
@@ -122,45 +123,47 @@ void separateData(const float totalMean,const vector<vector <float>> &averagesVe
 
 }
 
-void tempTrender::tempEx(){
-
-    vector <vector <float>> dataVector;
-    vector <vector <float>> *dataVectorPointer=&dataVector;
-    
-    readDataOld(dataVectorPointer);
-
-    vector <vector<float>> averagesVector;
-    vector <vector<float>> *averagesVectorPointer=&averagesVector; 
-
-    averages(dataVectorPointer,averagesVectorPointer);
-
-    float totalMean=totalAverage(averagesVectorPointer);
-
-    vector <Double_t> x_aroundMean,y_aroundMean,y_above,y_below;
-    separateData(totalMean,averagesVector,x_aroundMean,y_aroundMean,y_above,y_below);
-
+void makingMovingAverage(vector <Double_t> &y_movingAverage, vector <Double_t> &x_movingAverage, const vector<vector <float>> &averagesVector, vector <Double_t> &y_aroundMean){
     int groupSize=30;//they used 5
-    vector <Double_t> y_movingAverage,x_movingAverage;
-
     int counter1=0;
     int counter2=0;
     double sum=0;
     int initialYear=1723;//Hardcoded!
-    for(int i=0;i<averagesVector.size();i++){
+    for(int i=0;i<(int)averagesVector.size();i++){
         counter1+=1;
         sum+=y_aroundMean[i];
         if(counter1==groupSize){
             y_movingAverage.push_back(sum/groupSize);
-            x_movingAverage.push_back(initialYear+(counter2*groupSize)-(groupSize/2)+groupSize);
+            x_movingAverage.push_back(initialYear+(counter2*groupSize)+(groupSize/2));
             counter1=0;
             counter2+=1;
             cout<<"Average: "<<y_movingAverage[i/groupSize]<<endl;
             sum=0;
+            }
         }
-    }
-    y_movingAverage.push_back(sum/counter1);
-    x_movingAverage.push_back(initialYear+(counter2*groupSize)+(counter1/2));
+        y_movingAverage.push_back(sum/counter1);
+        x_movingAverage.push_back(initialYear+(counter2*groupSize)+(counter1/2));
+        
+}
 
+float tempTrender::tempEx(int year){
+
+    vector <vector <float>> dataVector;
+    
+    readDataOld(dataVector);
+
+    vector <vector<float>> averagesVector;
+
+    averages(dataVector,averagesVector);
+
+    float totalMean=totalAverage(averagesVector);
+
+    vector <Double_t> x_aroundMean,y_aroundMean,y_above,y_below;
+    separateData(totalMean,averagesVector,x_aroundMean,y_aroundMean,y_above,y_below);
+
+    vector <Double_t> y_movingAverage,x_movingAverage;
+    makingMovingAverage(y_movingAverage, x_movingAverage, averagesVector, y_aroundMean);
+    
     TGraph *gr_average = new TGraph (x_movingAverage.size(), &x_movingAverage[0], &y_movingAverage[0]);
     TGraph *gr_above = new TGraph (x_aroundMean.size(), &x_aroundMean[0], &y_above[0]);
     TGraph *gr_below = new TGraph (x_aroundMean.size(), &x_aroundMean[0], &y_below[0]);
@@ -189,7 +192,7 @@ void tempTrender::tempEx(){
     TF1* fitFunc = new TF1("fitFunc", "([0]*(x-1840)*cos([1]*x))", 1722, 2013);
 
     fitFunc->SetParameter(0, 0.6);
-    fitFunc->SetParameter(1, 0.5);
+    fitFunc->SetParameter(1, 0.125);
 
     fitFunc->SetLineColor(kGreen-3);
     fitFunc->SetLineWidth(3);
@@ -206,11 +209,13 @@ void tempTrender::tempEx(){
     leg->AddEntry(fitFunc, "fit", "l");
     leg->Draw();
 
-    double_t param0=fitFunc->GetParameter(0);
-    double_t param1=fitFunc->GetParameter(1);
+    float param0=fitFunc->GetParameter(0);
+    float param1=fitFunc->GetParameter(1);
     //return param0*(year-1840)*cos(param1*year);
-    int year=2050;
-    cout<<param0*(year-1840)*cos(param1*year)<<endl;
+    //int year=2050;
+    //cout<<param0*(year-1840)*cos(param1*year)<<endl;
     c2->SaveAs("extrapolatedData.jpg");
+
+    return param0*(year-1840)*cos(param1*year)+totalMean;
 
 }
