@@ -103,11 +103,24 @@ float totalAverage(vector <vector<float>>* averagesVectorPointer){
         totalSum+=averagesVectorPointer->at(i).at(1);
     }
     return totalSum/averagesVectorPointer->size();
-    
-
 } 
 
+void separateData(const float totalMean,const vector<vector <float>> &averagesVector,vector <Double_t> &x_aroundMean,vector <Double_t> &y_aroundMean,vector <Double_t> &y_above,vector <Double_t> &y_below){
+   Int_t n = averagesVector.size();
+   for (Int_t i=0; i<n; i++) {
+        x_aroundMean.push_back(averagesVector.at(i).at(0));
+        y_aroundMean.push_back(averagesVector.at(i).at(1)-totalMean);
+        if(y_aroundMean[i]<0){
+            y_below.push_back(y_aroundMean[i]);
+            y_above.push_back(0);
+        }
+        if(y_aroundMean[i]>=0){
+            y_above.push_back(y_aroundMean[i]);
+            y_below.push_back(0);
+        }
+   }
 
+}
 
 void tempTrender::tempEx(){
 
@@ -123,22 +136,8 @@ void tempTrender::tempEx(){
 
     float totalMean=totalAverage(averagesVectorPointer);
 
-
-
-   Int_t n = averagesVector.size();
-   vector <Double_t> x_aroundMean,y_aroundMean,y_above,y_below;
-   for (Int_t i=0; i<n; i++) {
-        x_aroundMean.push_back(averagesVector.at(i).at(0));
-        y_aroundMean.push_back(averagesVector.at(i).at(1)-totalMean);
-        if(y_aroundMean[i]<0){
-            y_below.push_back(y_aroundMean[i]);
-            y_above.push_back(0);
-        }
-        if(y_aroundMean[i]>=0){
-            y_above.push_back(y_aroundMean[i]);
-            y_below.push_back(0);
-        }
-   }
+    vector <Double_t> x_aroundMean,y_aroundMean,y_above,y_below;
+    separateData(totalMean,averagesVector,x_aroundMean,y_aroundMean,y_above,y_below);
 
     int groupSize=30;//they used 5
     vector <Double_t> y_movingAverage,x_movingAverage;
@@ -148,7 +147,7 @@ void tempTrender::tempEx(){
     int counter3=0;
     double sum=0;
     int initialYear=1723;//Hardcoded!
-    for(Int_t i=0;i<n;i++){
+    for(Int_t i=0;i<averagesVector.size();i++){
         counter+=1;
         sum+=y_aroundMean[i];
         counter3++;
@@ -161,8 +160,8 @@ void tempTrender::tempEx(){
             sum=0;
         }
     }
-y_movingAverage.push_back(sum/groupSize);
-x_movingAverage.push_back(initialYear+(counter2*groupSize)-(groupSize/2)+groupSize);
+    y_movingAverage.push_back(sum/groupSize);
+    x_movingAverage.push_back(initialYear+(counter2*groupSize)-(groupSize/2)+groupSize);
 
     TGraph *gr_average = new TGraph (x_movingAverage.size(), &x_movingAverage[0], &y_movingAverage[0]);
     TGraph *gr_above = new TGraph (x_aroundMean.size(), &x_aroundMean[0], &y_above[0]);
@@ -170,7 +169,7 @@ x_movingAverage.push_back(initialYear+(counter2*groupSize)-(groupSize/2)+groupSi
 
     TCanvas * c2= new TCanvas("c2", "random",1200,600);
     c2->DrawFrame(1722,-3.0,2013,3.0);
-TMultiGraph *mg = new TMultiGraph();
+    TMultiGraph *mg = new TMultiGraph();
 
     gr_above->SetFillColor(kRed-3);
     
@@ -189,13 +188,10 @@ TMultiGraph *mg = new TMultiGraph();
 
     mg->Draw();
 
-//working
-
     TF1* fitFunc = new TF1("fitFunc", "([0]*(x-1840)*cos([1]*x))", 1722, 2013);
 
     fitFunc->SetParameter(0, 0.6);
     fitFunc->SetParameter(1, 0.5);
-//
 
     fitFunc->SetLineColor(kGreen-3);
     fitFunc->SetLineWidth(3);
