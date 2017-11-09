@@ -1,9 +1,15 @@
 \begin{document}
 
+\begin{wrapfigure}{R}{0.3\textwidth}
+\includegraphics[scale=0.7]{flowcharttempday.png}
+\caption{\label{fig:flowcharttempday} Flow chart for the function that gives the temperature of a given day.}
+\end{wrapfigure}
 
-Two functions were created, both giving the temperature of a certain day. The difference is that one takes the date (month, day) as input and the other one takes the day number as input. To make it as simple as possible, the function that takes day number as input first coverts it into month and day, so that the functions after that is identical. 
+Knowing the temperature of a given day does not confirm global warming by itself, but it can be interesting with more detailed data on certain days for other reasons. For example, is the weather the same on midsummer and christmas? 
 
-The algorithm itself is straightforward. First, the dates in the data that matches the input date are found. Temperatures for every year is then stored in a vector, which is plotted in a histogram. A histogram for the 19$^{\text{th}}$ of July in Uppsala, for the years from 1722 to 2013, is shown in Fig. \ref{fig:tempOnDayNumber}.
+Two functions were created, both giving the temperature of a certain day. The difference is that one takes the date (month, day) as input and the other one takes the day number as input. To make it as simple as possible, the function that takes day number as input first coverts it into month and day, so that the functions thereafter are identical. 
+
+The algorithm itself is straightforward. First, the dates in the data that matches the input date are found. Then, the temperatures for all years are stored in a vector, which is plotted in a histogram. This process is shown in a flow chart in Fig. \ref{fig:flowcharttempday}. 
 
 \begin{figure}[ht]
 \begin{center}
@@ -12,7 +18,7 @@ The algorithm itself is straightforward. First, the dates in the data that match
 \end{center}
 \end{figure}
 
-From the histogram it is possible to get both the mean and the standard deviation. For Fig. \ref{fig:tempOnDayNumber}, the mean is 16.88 and the standard deviation is 2.96. If we want to know the probability for a certain temperature on the given day, we can use the mean and the standard deviation and assume a Gaussian distribution. The black line in Fig. \ref{fig:tempOnDayNumber} is a Gaussian fitted to the histogram, to see if it is a reasonable assumption. For Uppsala the data contains enough years to give 274 counts, so the Gaussian fit is sensible. Some of the other data sets would give a lot less data points, as in Fig. \ref{fig:tempOnDay}. The histogram contains only 35 entries for the 19$^{\text{th}}$ of July in Lund, and the Gaussian fit is not a good approximation. 
+A histogram for the 19$^{\text{th}}$ of July in Uppsala, for the years from 1722 to 2013, is shown in Fig. \ref{fig:tempOnDayNumber}. From the histogram it is possible to get both the mean and the standard deviation. For Fig. \ref{fig:tempOnDayNumber}, the mean is 16.88 and the standard deviation is 2.96. If we want to know the probability for a certain temperature on the given day, we can use the mean and the standard deviation and assume a Gaussian distribution. The black line in Fig. \ref{fig:tempOnDayNumber} is a Gaussian fitted to the histogram, to see if it is a reasonable assumption. For Uppsala, the data contains enough years to give 274 counts, so the Gaussian fit is sensible. Some of the other data sets would give a lot less data points, as in Fig. \ref{fig:tempOnDay}. The histogram contains only 35 entries for the 19$^{\text{th}}$ of July in Lund, and the Gaussian fit is not a good approximation. 
 
 \begin{figure}[ht]
 \begin{center}
@@ -22,12 +28,14 @@ From the histogram it is possible to get both the mean and the standard deviatio
 \end{figure}
 
 \begin{comment}
+Midsummer is celebrated in Sweden on a day between June 19 and June 26. Historically, beginning in the 4th century, Midsummer was celebrated on the 24th of June. Therefore, June 23 is chosen for the comparison since we celebrate on midsummers eve. In Sweden we now celebrate on the Friday between June 19 and June 26. The weather on midsummers eve is compared to the weather on christmas eve, both using the dataset from Uppsala, seen in Fig. \ref{fig:midsummerchristmas}.
+
 \begin{figure}[ht]
 \centering
-\subfloat[Uppsala]{\label{fig:tempOnDayNumber2}\includegraphics[width=0.5\textwidth]{tempOnDayNumber.png}} 
-\subfloat[Lund]{\label{fig:tempOnDay2}\includegraphics[width=0.5\textwidth]{tempOnDay.png}}\\
+\subfloat[Midsummers eve]{\label{fig:midsummer}\includegraphics[width=0.5\textwidth]{tempOnDayNumber.png}} 
+\subfloat[Christmas eve]{\label{fig:christmas}\includegraphics[width=0.5\textwidth]{tempOnDay.png}}\\
 \caption{The temperatures on July 19$^{th}$ in Uppsala for the years between 1722 and 2013 in (a). The black line is a Gaussian fitted to the histogram.}
-\label{fig:spring}
+\label{fig:midsummerchristmas}
 \end{figure}
 \end{comment}
 
