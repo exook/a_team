@@ -53,9 +53,6 @@ int isLeapYear(int year){
 
 void averages(vector<vector<float>>* dataVectorPointer,vector <vector<float>>* averagesVectorPointer){
 
-
-    //cout<<initialYear<<","<<endYear<<endl;
-
     ofstream writer;
     writer.open("bug.txt");
     
@@ -66,7 +63,6 @@ void averages(vector<vector<float>>* dataVectorPointer,vector <vector<float>>* a
             break;
         }
         else{
-            //cout<<"No first of january found"<<endl;
         }
     }
 
@@ -75,15 +71,13 @@ void averages(vector<vector<float>>* dataVectorPointer,vector <vector<float>>* a
 
     vector <float> thisYear;
 
-    for(int year = initialYear+1; year <= endYear;year++){//warning: comparison between signed and unsigned integer expressions [-Wsign-compare
+    for(int year = initialYear+1; year <= endYear;year++){
         float yearlySum=0;
         vector <float> thisYear;
         if(isLeapYear(year)){
             for(int day=1;day<=366;day++){
                 yearlySum+=dataVectorPointer->at(row).at(4);
                 row++;
-                //writer<<year<<":"<<day<<endl;
-                //writer<<dataVectorPointer->at(row).at(0)<<":"<<dataVectorPointer->at(row).at(1)<<":"<<dataVectorPointer->at(row).at(2)<<endl<<endl;
             }
         thisYear.push_back(year);
         thisYear.push_back(yearlySum/366);
@@ -93,8 +87,6 @@ void averages(vector<vector<float>>* dataVectorPointer,vector <vector<float>>* a
             for(int day=1;day<=365;day++){
                 yearlySum+=dataVectorPointer->at(row).at(4);
                 row++;
-                //writer<<year<<":"<<day<<endl;
-                //writer<<dataVectorPointer->at(row).at(0)<<":"<<dataVectorPointer->at(row).at(1)<<":"<<dataVectorPointer->at(row).at(2)<<endl<<endl;
             }
         thisYear.push_back(year);
         thisYear.push_back(yearlySum/366);
@@ -144,7 +136,6 @@ void tempTrender::tempEx(){
         }
    }
 
-    //int groupSize=20;
     int groupSize=30;//they used 5
     vector <Double_t> y_movingAverage,x_movingAverage;
 
@@ -155,9 +146,7 @@ void tempTrender::tempEx(){
     int initialYear=1723;//Hardcoded!
     for(Int_t i=0;i<n;i++){
         counter+=1;
-        //cout<<y[i]<<endl;
         sum+=y[i];
-        //cout<<"sum: "<<sum<<endl;
         counter3++;
         if(counter==groupSize){
             y_movingAverage.push_back(sum/groupSize);
@@ -200,18 +189,12 @@ TGraph *g = new TGraph(N,x,y);
 TMultiGraph *mg = new TMultiGraph();
 
     gr_above->SetFillColor(kRed-3);
-    //gr_above->Draw("B");
     
     gr_below->SetFillColor(kBlue-3);
-    //gr_below->Draw("B");
 
-    //gr_average->Draw("P");
     gr_average->SetLineWidth(3);
     gr_average->SetMarkerStyle(8);
     gr_average->SetMarkerSize(1.5);
-    
-    //gr_average->GetXaxis()->SetTitle("year");
-    //gr_average->Draw("L");
 
     mg->Add(gr_above,"B");
     mg->Add(gr_below,"B");
@@ -222,17 +205,12 @@ TMultiGraph *mg = new TMultiGraph();
 
     mg->Draw();
 
-    //2*cos((1/291)((110+104)/2)*x+a)*cos((1/291)((7)/2)*x+a); x from 1722 to 2013
-    //TF1* fitFunc = new TF1("fitFunc", "[0]*cos((1/291)((110+104)/2)*x+1.05)*cos((1/291)((7)/2)*x+1.05)", 1722, 2013);
-
-
-
 //working
 
     TF1* fitFunc = new TF1("fitFunc", "([0]*(x-1840)*cos([1]*x))", 1722, 2013);
 
     fitFunc->SetParameter(0, 0.6);
-    fitFunc->SetParameter(1, 0.025);
+    fitFunc->SetParameter(1, 0.5);
 //
 
     fitFunc->SetLineColor(kGreen-3);
