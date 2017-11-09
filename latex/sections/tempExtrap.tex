@@ -1,5 +1,20 @@
 \begin{document}
 
-This is the tempExtrap
+Global climate change and the greenhouse effect is often a reocurring political subject. From 1722-2013, the Swedish Meteorological and Hydrological Institute (SMHI) has collected daily temperature measurements from uppsala, Sweden. This data will be used to show the distribution of the yearly average temperature in uppsala from 1723-2013. Further more, analysis of this data will provide a moving average of the yearly average temperature. The moving average will be fitted with a $a(x-1840)\cdot cos(bx)$ function, trying to se if the future temperature is not only increasing, but actually oscillating more violently correlated to the human development since the industrial revolution in 1840.
+
+\subsection{Method}
+Dailytemperatures were read from raw data and put into a multi dimensional vector according to the readData function. After this was called from \texttt{tempExtrap} a simple for loop converted this into a 2-D data vector containing year and temperature, with one entry for each day. This data vector was made in two different variants. One containing all values from the uppsala data set, assuming a measurement was taken for every day. Another containing only the measurements from the uppsala location.
+
+The next step was to calculate the yearly averages from the data. For the uppsala only data, this was done by \texttt{averages1}. This iterated through all the elements of the data vector. If the year of the current element was not larger than the previous, then the temperature of the current element was added to a temperature sum and the number of days counted was incremented. When the current year became larger than the previous, the previous year was pushed into a dummy vector along with the average temperature. This dummy vector was then pushed into another vector, creating a 2D averages vector containing one element per year with that year's average temperature.
+
+For the complete set of data, the first year, 1722, was skipped because its measurement started after the 1st of January. After 1722 the data vector was iterated in steps of the years with two nested for loops. In the outer loop, if the year was a leap year, an inner for loop iterated from day 1 to 366 and pushed the average temperature and the year into a dummy vector, into an averages vector. And similarly if the year was not a leap year, it was then iterated 365 times and the average was calculated appropriately.
+
+With the data of yearly averages at hand, it was processed for plotting. To do this, the total average temeperature from all the yearly average temperatures was calculated. With a for loop iterating through the data elements and simple if statements, the average temperatures and corresponding year were pushed into one vector containing all temperatures above the total average, and one vector containing those below. These two new vectors are not used for further analysis, but purely used for plotting.
+
+The average temperature vector was then used to calculate a moving average. The goal of this moving average is to take the yearly averages in groups and take the average yearly temperature for that group.
+
+ 
+
+
 
 \end{document}
