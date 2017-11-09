@@ -11,6 +11,7 @@
 #include <TRandom3.h>
 #include <TGraph.h>
 #include <TLegend.h>
+#include <TMultiGraph.h>
 using namespace std;
 
 void readDataOld(vector<vector<float>>* dataVectorPointer){	
@@ -144,15 +145,12 @@ void tempTrender::tempEx(){
    }
 
     //int groupSize=20;
-    int groupSize=5;//they used 5
-    Double_t y_movingAverage[n/groupSize],x_movingAverage[n/groupSize];
-
-    //cout<<n<<endl;
-
-    //290
+    int groupSize=30;//they used 5
+    Double_t y_movingAverage[(n/groupSize)+1],x_movingAverage[(n/groupSize)+1];
 
     int counter=0;
-    int counter2=1;
+    int counter2=0;
+    int counter3=0;
     double sum=0;
     int initialYear=1723;//Hardcoded!
     for(Int_t i=0;i<n;i++){
@@ -160,15 +158,27 @@ void tempTrender::tempEx(){
         //cout<<y[i]<<endl;
         sum+=y[i];
         //cout<<"sum: "<<sum<<endl;
+        counter3++;
         if(counter==groupSize){
             y_movingAverage[i/groupSize]=sum/groupSize;
-            x_movingAverage[counter2]=initialYear+(counter2*groupSize);
+            x_movingAverage[counter2]=initialYear+(counter2*groupSize)-(groupSize/2)+groupSize;
             counter=0;
             counter2+=1;
-            //cout<<"Average: "<<y[i/groupSize]<<endl;
+            cout<<"Average: "<<y_movingAverage[i/groupSize]<<endl;
             sum=0;
         }
     }
+y_movingAverage[counter3/groupSize]=sum/groupSize;
+
+
+cout<<endl<<"Actual array: "<<endl<<endl;
+
+    for(int i=0;i<=n/groupSize;i++){
+        cout<<x_movingAverage[i]<<","<<y_movingAverage[i]<<endl;
+
+    }
+cout<<sum/groupSize<<endl;
+
 
     TGraph *gr_average = new TGraph (n/groupSize, x_movingAverage, y_movingAverage);
     TGraph *gr_above = new TGraph (n, x, y_above);
@@ -176,23 +186,35 @@ void tempTrender::tempEx(){
 
     TCanvas * c2= new TCanvas("c2", "random",1200,600);
     c2->DrawFrame(1722,-3.0,2013,3.0);
+TMultiGraph *mg = new TMultiGraph();
 
     gr_above->SetFillColor(kRed-3);
-    gr_above->Draw("B");
+    //gr_above->Draw("B");
     
     gr_below->SetFillColor(kBlue-3);
-    gr_below->Draw("B");
+    //gr_below->Draw("B");
 
-    gr_average->Draw("p");
+    //gr_average->Draw("P");
     gr_average->SetLineWidth(3);
-    gr_average->SetMarkerStyle(2);
+    gr_average->SetMarkerStyle(8);
     gr_average->SetMarkerSize(2);
-    gr_average->GetXaxis()->SetTitle("year");
-    gr_average->Draw("p");
+    
+    //gr_average->GetXaxis()->SetTitle("year");
+    //gr_average->Draw("L");
 
+    mg->Add(gr_above,"B");
+    mg->Add(gr_below,"B");
+    mg->Add(gr_average,"PL");
+
+    mg->GetXaxis()->SetTitle("Year");
+    mg->GetYaxis()->SetTitle("Temperature (C)");  
+
+    mg->Draw();
 
     //2*cos((1/291)((110+104)/2)*x+a)*cos((1/291)((7)/2)*x+a); x from 1722 to 2013
     //TF1* fitFunc = new TF1("fitFunc", "[0]*cos((1/291)((110+104)/2)*x+1.05)*cos((1/291)((7)/2)*x+1.05)", 1722, 2013);
+
+
 
 //working
 
@@ -206,9 +228,10 @@ void tempTrender::tempEx(){
     fitFunc->SetLineWidth(3);
     gr_average->Fit(fitFunc);
     
-    TLegend* leg = new TLegend(0.2,0.7,0.5,0.9);
+    TLegend* leg = new TLegend(0.25,0.8,0.45,0.9);
     leg->SetFillStyle(0); //Hollow fill (transparent)
     leg->SetBorderSize(0); //Get rid of the border
+    leg->SetNColumns(2);
     //leg->SetHeader("The Legend Title");
     leg->AddEntry(gr_average,"Average","f");
     leg->AddEntry(gr_above,"Above","f");
