@@ -123,7 +123,7 @@ void separateData(const float totalMean,const vector<vector <float>> &averagesVe
 
 }
 
-void tempTrender::tempEx(){
+float tempTrender::tempEx(int year){
 
     vector <vector <float>> dataVector;
     
@@ -208,8 +208,10 @@ void tempTrender::tempEx(){
     double_t param0=fitFunc->GetParameter(0);
     double_t param1=fitFunc->GetParameter(1);
     //return param0*(year-1840)*cos(param1*year);
-    int year=2050;
-    cout<<param0*(year-1840)*cos(param1*year)<<endl;
+    //int year=2050;
+    //cout<<param0*(year-1840)*cos(param1*year)<<endl;
     c2->SaveAs("extrapolatedData.jpg");
+
+    return param0*(year-1840)*cos(param1*year);
 
 }
