@@ -4,7 +4,7 @@ The warmest and coldest day of each year (Shi)
 The mean temperature of each year depending on latitude (Alex) 
 The day seasons start for each year (Jessamy)
     - day to year diagram 
-    - or entries to day histogram 
+    - entries to day histogram 
 
 Dataset: Lund and Uppsala 
 
