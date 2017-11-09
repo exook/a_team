@@ -25,8 +25,7 @@ Sveriges meteorologiska och hydrologiska institut (SMHI) uses two different defi
 \label{fig:flowchart}
 \end{wrapfigure}
 
-The temperature data of Lund from Sveriges meteorologiska och hydrologiska institut (SMHI) will be used to determined to beginning of the meteorological season for the years in the dataset.  The code used to produce the results on the beginning of the seasons can be found in \texttt{tempSeasons.cpp}, a number of member functions defined in \texttt{tempTrender.cpp} are also used.  The main function, which calls all other functions, of the section is \texttt{tempTrender::startDaySeasons}.  The first thing this function does is reading the data on Lund into a 2D vector with the use of \texttt{tempTrender::readData}. Since the meteorological definition of the seasons depends on the average temperature of a day, this is then calculated for every day in the dataset by  \texttt{calcAverageTemp}. Using the resulting average temperatures each first day of a season is determined for all seasons and years in the dataset. This is done using the function \texttt{tempTrender::beginningWinter} for winter,  \texttt{tempTrender::beginningSummer} for summer and \texttt{tempTrender::beginningSpringFall} for both spring and fall. \todo{merge functions} These functions are member variables since they use a member funtion \texttt{tempTrender::getDayOfYear}. The general flowchart of how each first day of all seasons is determined can be seen in \ref{fig:flowchart}. With the right temperature the temperature condition for a certain season is meant, which is smaller or equal to 0 degrees for winter, greater or equal to 10 degrees for summer and between 0 and 10 degrees for spring and fall. With the right day the condition on the number of subsequent is meant, which is 7 days for spring and 5 days for all other seasons. When a new season starts differs a lot between the seasons, for summer the only condition is that it occurs in a different year than the previous summer, because there is one summer per year. For spring and fall there is another condition that also needs to be satisfied, namely spring needs to occur after the first day of winter and fall needs to occur after the first day of summer. Because winter can cover part of the end of one year as well as the beginning of the next, winter does not always start once per year. There are four ways the first day of two consecutive winters can succeed each other. 
-\newline
+The temperature data of Lund from Sveriges meteorologiska och hydrologiska institut (SMHI) will be used to determined to beginning of the meteorological season for the years in the dataset.  The code used to produce the results on the beginning of the seasons can be found in \texttt{tempSeasons.cpp}, a number of member functions defined in \texttt{tempTrender.cpp} are also used.  The main function, which calls all other functions, of the section is \texttt{tempTrender::startDaySeasons}.  The first thing this function does is reading the data on Lund into a 2D vector with the use of \texttt{tempTrender::readData}. Since the meteorological definition of the seasons depends on the average temperature of a day, this is then calculated for every day in the dataset by  \texttt{calcAverageTemp}. Using the resulting average temperatures each first day of a season is determined for all seasons and years in the dataset. This is done using the function \texttt{tempTrender::beginningWinterSummer} for both winter and summer and \texttt{tempTrender::beginningSpringFall} for both spring and fall. These functions are member variables since they use a member funtion \texttt{tempTrender::getDayOfYear}. The general flowchart of how each first day of all seasons is determined can be seen in \ref{fig:flowchart}. With the right temperature the temperature condition for a certain season is meant, which is smaller or equal to 0 degrees for winter, greater or equal to 10 degrees for summer and between 0 and 10 degrees for spring and fall. With the right day the condition on the number of subsequent is meant, which is 7 days for spring and 5 days for all other seasons. When a new season starts differs a lot between the seasons, for summer the only condition is that it occurs in a different year than the previous summer, because there is one summer per year. For spring and fall there is another condition that also needs to be satisfied, namely spring needs to occur after the first day of winter and fall needs to occur after the first day of summer. Because winter can cover part of the end of one year as well as the beginning of the next, winter does not always start once per year. There are four ways the first day of two consecutive winters can succeed each other. 
 
 \begin{enumerate}
 \item The successive winters are both early in the year (before June)
@@ -40,6 +39,8 @@ If one of these cases is satisfied it is a new winter. Using the result for each
 \subsection{Results}
 %The date is represented by the day of the year (i.e. from 1 to 365 or 366).
 
+The first day of a season is plotted in a bar graph as a function the year. The date of the beginning of the season is represented by the day of the year (i.e. from 1 to 365 or 366 for a leap year). A histogram with the first days of the season is also plotted. The result for spring can be seen in Fig. \ref{fig:spring}. \\
+
 \begin{figure}[ht!]
 \centering
 \subfloat[Bar graph]{\label{fig:spring_bar}\includegraphics[width=0.5\textwidth]{springStart.png}} 
@@ -47,6 +48,8 @@ If one of these cases is satisfied it is a new winter. Using the result for each
 \caption{The first day on which spring starts for each year in Lund is shown in (a).  While (b) shows the number of times spring starts on a certain day in the year.}
 \label{fig:spring}
 \end{figure}
+
+There is no clear trend visible in the bar graph, clear increase or decrease as a function of year. There is however quite a large difference between the start of spring for different years. In the histogram this spread can also be seen. Spring is most frequently at the beginning of the year. \\
 
 \begin{figure}[ht!]
 \centering
@@ -56,6 +59,8 @@ If one of these cases is satisfied it is a new winter. Using the result for each
 \label{fig:summer}
 \end{figure}
 
+The results for summer are shown in Fig. \ref{fig:summer}. Again there is no trend in the first day of summer as a function of year. It is however interesting that the first day of summer does not vary much per year, it is very consistent. This can also be seen in the histogram, which shown a fairly narrow peak.  \\
+
 \begin{figure}[ht!]
 \centering
 \subfloat[Bar graph]{\label{fig:fall_bar}\includegraphics[width=0.5\textwidth]{fallStart.png}} 
@@ -64,6 +69,8 @@ If one of these cases is satisfied it is a new winter. Using the result for each
 \label{fig:fall}
 \end{figure}
 
+Fig. \ref{fig:fall} shows the result for fall. The bar graph shows a strange spread in the first day of fall which is not clearly correlated to the year. The histogram shows the peculiar divide of the first day of fall in two peaks, one between the $100^\text{th}$ and $150^\text{th}$ day and the other at the $250^\text{th}$ to the $300^\text{th}$ day of the year. \\
+
 \begin{figure}[ht!]
 \centering
 \subfloat[Bar graph]{\label{fig:winter_bar}\includegraphics[width=0.5\textwidth]{winterStart.png}} 
@@ -71,6 +78,8 @@ If one of these cases is satisfied it is a new winter. Using the result for each
 \caption{The first day on which winter starts for each year in Lund is shown in (a). The day is given relative to the start of a new year, all negative numbers are before the $1^{\text{st}}$ of January and all the positive numbers are on or after the $1^\text{st}$ of January.  The number of times spring starts on a certain day in the year in given in (b).}
 \label{fig:winter}
 \end{figure}
+
+The bar graph and histogram for winter are shown in Fig. \ref{fig:winter}. The bar graph shows the first day of winter relative to the start of the year, negative numbers are at the end of the year while positive numbers correspond to a day at the beginning of the year. There is no clear trend visible. However the graph shows that not every year has a winter according to the used definition, only 44 winters where found in 54 full years. The histogram shows that winter occurs at most frequently at the end of the year. 
 
 \end{document}
 

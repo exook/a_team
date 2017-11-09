@@ -10,14 +10,13 @@ void rootlogon() {
     gStyle->SetPadBottomMargin(0.16);
     gStyle->SetPadLeftMargin(0.16);
 
-    gROOT->ProcessLine(".L tempTrender.cpp+"); //Load the classes that we want to use automatically - Convenient!
+    //compile all files and run project()
+    gROOT->ProcessLine(".L tempTrender.cpp+");
     gROOT->ProcessLine(".L tempSeasons.cpp+");
     gROOT->ProcessLine(".L tempDay.cpp+");
     gROOT->ProcessLine(".L tempDayNumber.cpp+");
     gROOT->ProcessLine(".L tempHotCold.cpp+");
     gROOT->ProcessLine(".L tempExtrap.cpp+");
-    gROOT->ProcessLine(".L project.cpp+"); //The + means to recompile only if it changed sine last time
+    gROOT->ProcessLine(".L project.cpp+");
     gROOT->ProcessLine("project()");
-    //Now you can type project() to invoke the function defined in project
-    //You can also create and invoke functions in a temptrender manually by doing e.g. tempTrender t(pathToFile); t.hotCold();
 }
