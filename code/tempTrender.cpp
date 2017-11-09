@@ -5,7 +5,7 @@
 //constructor
 tempTrender::tempTrender(string filePath) {
     cout << endl;
-    cout << "This program calculates trends in the temparture datasets." << endl;
+    cout << "This program calculates trends in the temprature datasets." << endl;
     cout << "The path to the data files: " << endl;
     cout << filePath << endl;
     path = filePath;
@@ -112,6 +112,37 @@ void tempTrender::readData(string fileName, vector <vector <string> > &data) {
     dataFile.close();
 }
 
+
+// Test leap year
+bool tempTrender::testLeapYear(int year) {
+    bool check = false;
+    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+        check = true;
+    }
+    return check;
+}
+
+// Calculate day of year
+int tempTrender::getDayOfYear(int year, int month, int day) {
+    bool checkLeapYear = false;
+    int dayOfYear = 0;
+    checkLeapYear = testLeapYear(year);
+    int daysInMonthsNonLeap[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int daysInMonthsLeap[12] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (checkLeapYear == false) {
+        for (int k = 1; k < month; k++) {
+            dayOfYear = dayOfYear + daysInMonthsNonLeap[k-1];
+        }
+        dayOfYear = dayOfYear + day;
+    }
+    else {
+        for (int j = 1; j < month; j++) {
+            dayOfYear = dayOfYear + daysInMonthsLeap[j-1];
+        }
+        dayOfYear = dayOfYear + day;
+    }
+    return dayOfYear;
+}
 
 
 

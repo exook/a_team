@@ -1,6 +1,6 @@
 #include <iostream>
 #include "tempTrender.h"
-#include <sstream> // maybe include in tempTrender.h instead
+#include <sstream>
 // ROOT library objects
 #include <TF1.h> // 1d function class
 #include <TH1.h> // 1d histogram classes
@@ -74,10 +74,10 @@ void tempTrender::tempOnDayNumber(int dateToCalculate){
     double errorstdev = fitfunc->GetParError(2);
     
     // Create a legend
-    TLegend* leg = new TLegend(0.2,0.7,0.5,0.9);
+    TLegend* leg = new TLegend(0.6,0.7,0.9,0.9);
     leg->SetFillStyle(0); // Transparent
     leg->SetBorderSize(0); // Get rid of the border
-    leg->AddEntry(hist,"Temperature on 19/7","f");
+    leg->AddEntry(hist,"Temperature on 24/12","f");
     leg->AddEntry(fitfunc, "Gaussian fit", "l");
     leg->Draw();
    
