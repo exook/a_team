@@ -14,35 +14,6 @@
 #include <TMultiGraph.h>
 using namespace std;
 
-void readDataOld(vector<vector<float>> &dataVector){	
-	ifstream file("../datasets/uppsala_tm_1722-2013.dat");
-	//check if opened correctly
-    if (!file) {
-        cout << "Error could not read data file" << endl;
-    }
-    else {
-        cout << "Succesfully opened data file" << endl;
-    }
-
-    string value;
-
-    string line;
-    while (getline(file,line)){
-        istringstream helpstring(line);
-        vector <float> row;
-        while(getline(helpstring,value,' ')){
-            if (value.find_first_not_of(' ') != std::string::npos){
-                float number=strtof(value.c_str(),NULL);
-                row.push_back(number);
-            }
-        
-        }
-        dataVector.push_back(row);
-    }
-    file.close();
-}
-
-
 int isLeapYear(int year){
     if((year % 4 == 0 && year % 100 != 0) || ( year % 400 == 0)){
         return 1;
@@ -52,34 +23,7 @@ int isLeapYear(int year){
     }
 }
 
-void averages(vector<vector<float>> &dataVector,vector <vector<float>> &averagesVector){
-/*
-    int yearPrev=1722;
-    float tempSum=0;
-    int daySum=0;
-    vector <float> thisYear;
-    for(int i=0;i<int(dataVector.size());i++){
-        int currentYear=dataVector.at(i).at(0);
-        float temp=dataVector.at(i).at(1);
-        if(!(currentYear>yearPrev)){
-            tempSum+=temp;
-            daySum++;
-            }
-        else{
-            thisYear.push_back(yearPrev);
-            thisYear.push_back(tempSum/daySum);
-            averagesVector.push_back(thisYear);
-
-            vector <float> thisYear;
-            tempSum=temp;
-            daySum=0;
-            }
-    }
-}
-*/
-    //for(int i=0;i<int(averagesVector.size());i++){
-     //   cout<<averagesVector.at(i).at(0)<<":"<<averagesVector.at(i).at(1)<<endl;
-    //}
+void averages1(vector<vector<float>> &dataVector,vector <vector<float>> &averagesVector){
 
 
     float tempSum=0;
@@ -88,16 +32,11 @@ void averages(vector<vector<float>> &dataVector,vector <vector<float>> &averages
     vector <float> thisYear;
     for(int i=0;i<int(dataVector.size());i++){
         int currentYear=dataVector.at(i).at(0);
-        //cout<<dataVector.at(i).at(1)<<endl;
         if(!(currentYear>yearPrev)){
             tempSum+=dataVector.at(i).at(1);
-            //cout<<"TEMPSUM: "<<tempSum<<endl;
             daySum++;
         }
         else{
-        //cout<<dataVector.at(i).at(0)<<":"<<dataVector.at(i).at(1)<<endl;
-        //cout<<"HAPPY NEW YEAR"<<endl;
-        //cout<<"DAYSUM"<<daySum<<endl;
         vector <float> thisYear;
         thisYear.push_back(yearPrev);
         thisYear.push_back(tempSum/daySum);
@@ -111,15 +50,11 @@ void averages(vector<vector<float>> &dataVector,vector <vector<float>> &averages
         }
 
     }
-    
-    //for(int i=0;i<int(averagesVector.size());i++){
-    //    cout<<averagesVector.at(i).at(0)<<":"<<averagesVector.at(i).at(1)<<endl;
-    //}
 
 }
 
-/*
-void averages(vector<vector<float>> &dataVector,vector <vector<float>> &averagesVector){
+
+void averages2(vector<vector<float>> &dataVector,vector <vector<float>> &averagesVector){
     
     int row=0;
     for(size_t i = 0; i < int(dataVector.size()); ++i){
@@ -159,7 +94,7 @@ void averages(vector<vector<float>> &dataVector,vector <vector<float>> &averages
         }
     }
 }
-*/
+
 
 
 float totalAverage(vector <vector<float>> &averagesVector){
@@ -190,8 +125,6 @@ void separateData(const float totalMean,const vector<vector <float>> &averagesVe
 void tempTrender::tempEx(){
 
     vector <vector <string>> dataVector_str;
-    
-    //readDataOld(dataVector);
 
     readData("uppsala_tm_1722-2013.dat", dataVector_str);
 
@@ -208,17 +141,9 @@ void tempTrender::tempEx(){
         dataVector.push_back(row);
      }
 
-    //for(int i=0;i<int(dataVector.size());i++){
-    //    cout<<dataVector.at(i).at(0)<<":"<<dataVector.at(i).at(1)<<endl;
-    //}
-
-
-
-
-
     vector <vector<float>> averagesVector;
 
-    averages(dataVector,averagesVector);
+    averages1(dataVector,averagesVector);
 
     float totalMean=totalAverage(averagesVector);
 
@@ -252,7 +177,7 @@ void tempTrender::tempEx(){
     TGraph *gr_below = new TGraph (x_aroundMean.size(), &x_aroundMean[0], &y_below[0]);
 
     TCanvas * c2= new TCanvas("c2", "random",1200,600);
-    c2->DrawFrame(1722,-3.0,2013,3.0);
+    c2->DrawFrame(1722,-10.0,2013,10.0);
     TMultiGraph *mg = new TMultiGraph();
 
     gr_above->SetFillColor(kRed-3);
