@@ -133,5 +133,8 @@
 ./tempExtrap_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/TRandom.h
 ./tempExtrap_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/Math/TRandomEngine.h
 ./tempExtrap_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/TGraph.h
+./tempExtrap_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/TLegend.h
+./tempExtrap_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/TPave.h
+./tempExtrap_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/TBox.h
 ./tempExtrap_cpp.so: /usr/local/Cellar/root/6.10.08/include/root/RVersion.h /usr/local/Cellar/root/6.10.08/include/root/RConfig.h /usr/local/Cellar/root/6.10.08/include/root/TClass.h /usr/local/Cellar/root/6.10.08/include/root/TDictAttributeMap.h /usr/local/Cellar/root/6.10.08/include/root/TInterpreter.h /usr/local/Cellar/root/6.10.08/include/root/TROOT.h /usr/local/Cellar/root/6.10.08/include/root/TBuffer.h /usr/local/Cellar/root/6.10.08/include/root/TMemberInspector.h /usr/local/Cellar/root/6.10.08/include/root/TError.h /usr/local/Cellar/root/6.10.08/include/root/RtypesImp.h /usr/local/Cellar/root/6.10.08/include/root/TIsAProxy.h /usr/local/Cellar/root/6.10.08/include/root/TFileMergeInfo.h /usr/local/Cellar/root/6.10.08/include/root/TCollectionProxyInfo.h /usr/local/Cellar/root/6.10.08/bin/rootcling
 tempExtrap_cpp__ROOTBUILDVERSION= 6.10/08

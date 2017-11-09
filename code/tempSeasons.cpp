@@ -147,11 +147,16 @@ int dateToInt (const T vec, int line) {
 }
 
 //check if the second season date is after the start of the first season
-bool seasonsInOrder(int yearStart, int i, bool compareWinter,
+bool seasonsInOrder(int yearStart, int i, string season,
                      const vector <vector <double> > &secondSeason,
                      const vector <vector <int> > &firstSeason){
     
     bool rightOrder = true;
+    bool compareWinter = false;
+    
+    if (season == "spring") {
+        compareWinter = true;
+    }
 
     //loop trough first season to find corresponding year
     for (int j=0; j < int(firstSeason.size()); j++){
@@ -171,67 +176,6 @@ bool seasonsInOrder(int yearStart, int i, bool compareWinter,
     }
     
     return rightOrder;
-}
-
-//finds the first day of spring for each year and saves the date in a vector
-void tempTrender::beginningSpring(const vector <vector <double> > &averageTemp,
-                                  const vector <vector <int> > &beginDayWinter,
-                                  vector <vector <int> > &beginDaySpring){
-    
-    int yearPrevius = averageTemp.at(0).at(0) -1; //first year in data -1
-    int yearFirst = averageTemp.at(0).at(0)-1;
-    int monthFirst = 0;
-    int dayFirst = 0;
-    int counterDays = 0;
-    
-    cout << "Calculating the first day of spring for each year..." << endl;
-    
-    //loop through dates in the vector
-    for (int i=0; i < int(averageTemp.size()); i++){
-        
-        //is it a springtemperature
-        if (averageTemp.at(i).at(3) > 0 && averageTemp.at(i).at(3) < 10){
-            //remember date of first spring day
-            if (counterDays == 0) {
-                yearFirst = averageTemp.at(i).at(0);
-                monthFirst = averageTemp.at(i).at(1);
-                dayFirst = averageTemp.at(i).at(2);
-            }
-            counterDays++;
-            
-            //definition begining of spring
-            if (counterDays == 7) {
-                
-                //check if the first spring date is after the start of winter
-                bool afterWinter = seasonsInOrder(yearFirst, i-6, true, averageTemp, beginDayWinter);
-                
-                //a new spring
-                if ((yearFirst != yearPrevius) && afterWinter) {
-
-                    vector<int> outputLine;
-                    int dayOfYear = getDayOfYear(yearFirst, monthFirst, dayFirst);
-                    
-                    //save date of the first day spring of a year
-                    outputLine.push_back(yearFirst);
-                    outputLine.push_back(monthFirst);
-                    outputLine.push_back(dayFirst);
-                    
-                    outputLine.push_back(dayOfYear);
-                    
-                    beginDaySpring.push_back(outputLine);
-                    
-                    yearPrevius = averageTemp.at(i).at(0);
-                    counterDays = 0;
-                }
-                else {
-                    counterDays--;
-                }
-            }
-        }
-        else {
-            counterDays = 0;
-        }
-    }
 }
 
 //finds the first day of each summer and saves the date in a vector
@@ -284,26 +228,35 @@ void tempTrender::beginningSummer(const vector <vector <double> > &averageTemp,
     }
 }
 
-//finds the first day of fall for each year and saves the date in a vector
-//TODO generalize with beginningSpring
-void tempTrender::beginningFall(const vector <vector <double> > &averageTemp,
-                                const vector <vector <int> > &beginDaySummer,
-                                vector <vector <int> > &beginDayFall){
+//finds the first day of spring or fall for each year and saves the date in a vector
+void tempTrender::beginningSpringFall(const vector <vector <double> > &averageTemp,
+                                      const vector <vector <int> > &beginDayFirst,
+                                      vector <vector <int> > &beginDaySecond,
+                                      string season){
     
     int yearPrevius = averageTemp.at(0).at(0) -1; //first year in data -1
     int yearFirst = averageTemp.at(0).at(0)-1;
     int monthFirst = 0;
     int dayFirst = 0;
     int counterDays = 0;
+    int nDays = 0;
     
-    cout << "Calculating the first day of fall for each year..." << endl;
+    cout << Form("Calculating the first day of %s for each year...", season.c_str()) << endl;
+    
+    //how many days in a row between 0 and 10 degrees before the seasons starts
+    if (season == "spring") {
+        nDays = 7;
+    }
+    else if (season == "fall") {
+        nDays = 5;
+    }
     
     //loop through dates in the vector
     for (int i=0; i < int(averageTemp.size()); i++){
         
-        //is it a fall temperature
+        //is it a spring/fall temperature
         if (averageTemp.at(i).at(3) > 0 && averageTemp.at(i).at(3) < 10){
-            //remember date of first fall day
+            //remember date of first spring/fall day
             if (counterDays == 0) {
                 yearFirst = averageTemp.at(i).at(0);
                 monthFirst = averageTemp.at(i).at(1);
@@ -311,26 +264,26 @@ void tempTrender::beginningFall(const vector <vector <double> > &averageTemp,
             }
             counterDays++;
             
-            //definition begining of fall
-            if (counterDays == 5) {
+            //definition begining of spring/fall
+            if (counterDays == nDays) {
                 
-                //check if the first fall date is after the start of summer
-                bool afterSummer = seasonsInOrder(yearFirst, i-4, false, averageTemp, beginDaySummer);
+                //check if the first spring/fall date is after the start of winter/summer
+                bool afterFirst = seasonsInOrder(yearFirst, i-(nDays-1), season, averageTemp, beginDayFirst);
                 
                 //a new fall
-                if ((yearFirst != yearPrevius) && afterSummer) {
+                if ((yearFirst != yearPrevius) && afterFirst) {
                     
                     vector<int> outputLine;
                     int dayOfYear = getDayOfYear(yearFirst, monthFirst, dayFirst);
                     
-                    //save date of the first day fall of a year
+                    //save date of the first day spring/fall of a year
                     outputLine.push_back(yearFirst);
                     outputLine.push_back(monthFirst);
                     outputLine.push_back(dayFirst);
                     
                     outputLine.push_back(dayOfYear);
                     
-                    beginDayFall.push_back(outputLine);
+                    beginDaySecond.push_back(outputLine);
                     
                     yearPrevius = averageTemp.at(i).at(0);
                     counterDays = 0;
@@ -397,9 +350,10 @@ void plotSeason(const vector <vector <int> > &beginDaySeason, string season){
     gSeason->Draw("AB");
     
     //legend
-    TLegend* leg = new TLegend(0.7, 0.89, 0.949, 0.93);
+    TLegend* leg = new TLegend(0.58, 0.87, 0.949, 0.93);
     leg->SetBorderSize(0);
     leg->AddEntry(gSeason, Form("First day of %s", season.c_str()), "f");
+    leg->SetTextSize(.05);
     leg->Draw();
     
     cSeason->SaveAs(Form("tempSeasonPlots/%sStart.png", season.c_str()));
@@ -424,19 +378,23 @@ void histogram(const vector <vector <int> > &beginDaySeason, string season){
     
     hist->SetFillColor(kBlue + 3);
     hist->Draw();
+    hist->GetXaxis()->CenterTitle();
+    hist->GetYaxis()->CenterTitle();
     
     //legend
     if (season == "fall") {
         //at different position for fall histogram
-        TLegend* leg = new TLegend(0.2, 0.89, 0.449, 0.93);
+        TLegend* leg = new TLegend(0.2, 0.87, 0.549, 0.93);
         leg->SetBorderSize(0);
         leg->AddEntry(hist, Form("First day of %s", season.c_str()), "l");
+        leg->SetTextSize(.05);
         leg->Draw();
     }
     else {
-        TLegend* leg = new TLegend(0.7, 0.89, 0.949, 0.93);
+        TLegend* leg = new TLegend(0.58, 0.87, 0.949, 0.93);
         leg->SetBorderSize(0);
         leg->AddEntry(hist, Form("First day of %s", season.c_str()), "l");
+        leg->SetTextSize(.05);
         leg->Draw();
     }
     
@@ -459,7 +417,6 @@ void tempTrender::startDaySeasons(){
     //summer t_average >= 10 for 5 days
     //fall 0< t_average <10 for 5 days
     
-    
     vector <vector <string> > dataSeasons;
     vector <vector <double> > averageTempDay;
     vector <vector <int> > firstDayWinter;
@@ -472,26 +429,12 @@ void tempTrender::startDaySeasons(){
     
     //calculate start of seasons
     beginningWinter(averageTempDay, firstDayWinter);
-    beginningSpring(averageTempDay, firstDayWinter, firstDaySpring);
+    beginningSpringFall(averageTempDay, firstDayWinter, firstDaySpring, "spring");
     beginningSummer(averageTempDay, firstDaySummer);
-    beginningFall(averageTempDay, firstDaySummer, firstDayFall);
+    beginningSpringFall(averageTempDay, firstDaySummer, firstDayFall, "fall");
     
-    //print(dataSeasons, 5);
     //cout << endl << endl;
-    //print<vector <vector <double> >>(averageTempDay, int(averageTempDay.size()/2));
-//    cout << endl << endl;
-//    print<vector <vector <int> >>(firstDayWinter, 5);
-//    cout << endl << endl;
-//    cout << firstDayWinter.size() << endl;
-//    cout << firstDaySpring.size() << endl;
-//    cout << firstDaySummer.size() << endl;
-//    cout << firstDayFall.size() << endl;
-//    cout << endl;
-//    print<vector <vector <int> >>(firstDaySpring, 5);
-//    cout << endl << endl;
-//    print<vector <vector <int> >>(firstDaySummer, 5);
-//    cout << endl << endl;
-//    print<vector <vector <int> >>(firstDayFall, int(firstDayFall.size()));
+    //print<vector <vector <int> >>(firstDayFall, 5);
     
     //make bar graphs of the results
     cout << endl << "Plotting the results"<< endl;
