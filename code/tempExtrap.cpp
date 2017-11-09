@@ -147,7 +147,7 @@ void tempTrender::tempEx(){
     int counter3=0;
     double sum=0;
     int initialYear=1723;//Hardcoded!
-    for(Int_t i=0;i<averagesVector.size();i++){
+    for(int i=0;i<averagesVector.size();i++){
         counter+=1;
         sum+=y_aroundMean[i];
         counter3++;
@@ -210,9 +210,9 @@ void tempTrender::tempEx(){
 
     double_t param0=fitFunc->GetParameter(0);
     double_t param1=fitFunc->GetParameter(1);
-    int year=2250;
-    cout<<param0*(year-1840)*cos(param1*year);
-    
-    
+    //return param0*(year-1840)*cos(param1*year);
+    int year=2050;
+    cout<<param0*(year-1840)*cos(param1*year)<<endl;
+    c2->SaveAs("extrapolatedData.jpg");
 
 }
