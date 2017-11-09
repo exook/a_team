@@ -9,7 +9,7 @@ void rootlogon() {
     gStyle->SetPadRightMargin(0.05);
     gStyle->SetPadBottomMargin(0.16);
     gStyle->SetPadLeftMargin(0.16);
-
+	//gStyle->SetOptFit();
     gROOT->ProcessLine(".L tempTrender.cpp+"); //Load the classes that we want to use automatically - Convenient!
     gROOT->ProcessLine(".L tempSeasons.cpp+");
     gROOT->ProcessLine(".L tempDay.cpp+");

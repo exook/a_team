@@ -1,18 +1,61 @@
-Uppsala
+Uppsala 59.8586° N, 17.6389° E
 The mean for warmest days is 195.141
 Its uncertainty (warmest day) is 2.40556
 The mean for coldest days is 17.9464
 Its uncertainty (coldest day) is 3.73112
 
-Lund
+Lund 55.7047° N, 13.1910° E
 The mean for warmest days is 195.52
 Its uncertainty (warmest day) is 5.6855
 The mean for coldest days is 22.8866
 Its uncertainty (coldest day) is 7.58512
 
-Lulea
+Lulea 65.5848° N, 22.1567° E
 The mean for warmest days is 192.711
 Its uncertainty (warmest day) is 4.37887
 The mean for coldest days is 21.7732
 Its uncertainty (coldest day) is 3.18638
+
+Karlstad 59.4022° N, 13.5115° E
+The mean for warmest days is 199.927
+Its uncertainty (warmest day) is 4.75463
+The mean for coldest days is 25.5182
+Its uncertainty (coldest day) is 11.3849
+
+Boras 57.7210° N, 12.9398° E
+The mean for warmest days is 188.634
+Its uncertainty (warmest day) is 4.86423
+The mean for coldest days is 28.9741
+Its uncertainty (coldest day) is 13.4055
+
+Falsterbo 55.3971° N, 12.8415° E
+The mean for warmest days is 198.943
+Its uncertainty (warmest day) is 3.75961
+The mean for coldest days is 28.5823
+Its uncertainty (coldest day) is 5.43752
+
+Falun 60.6065° N, 15.6355° E
+The mean for warmest days is 196.803
+Its uncertainty (warmest day) is 4.76812
+The mean for coldest days is 19.0513
+Its uncertainty (coldest day) is 6.97416
+
+Soderarm 59° 20' 4.5276'' N 18° 3' 47.6640'' E
+The mean for warmest days is 209.107
+Its uncertainty (warmest day) is 2.86308
+The mean for coldest days is 34.6141
+Its uncertainty (coldest day) is 3.72177
+
+Umea 63.8258° N, 20.2630° E
+The mean for warmest days is 200.061
+Its uncertainty (warmest day) is 5.961
+The mean for coldest days is 29.5996
+Its uncertainty (coldest day) is 4.71
+
+Visby 57.6348° N, 18.2948° E
+The mean for warmest days is 197.755
+Its uncertainty (warmest day) is 3.97598
+The mean for coldest days is 44.2647
+Its uncertainty (coldest day) is 9.00391
+
 

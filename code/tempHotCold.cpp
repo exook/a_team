@@ -49,16 +49,17 @@ void tempTrender::hotCold(string fileName){
     location = determineLocation(fileName);
     
     // create canvas and histograms for warmest and coldest
-    int nbins = 50;
+    int nbins = 366;
+    int warmestHistRangeLeft = 0; // Change to -216 to see the entire range of the plot
+    int warmestHistRangeRight = 366; // Change to 516 to see the entire range of the plot
     TCanvas* c1 = new TCanvas("c1", "hot cold", 1200, 800);
-    TH1D* warmestHist = new TH1D("warmestHist", Form("The warmest day of %s; Day of year; Entries", location.c_str()), nbins, 0, 366);
-    //TH1D* warmestHist = new TH1D("warmestHist", Form("The warmest day of %s; Day of year; Entries", location.c_str()), 732, -216, 516);
+    TH1D* warmestHist = new TH1D("warmestHist", Form("The warmest day of %s; Day of year; Entries", location.c_str()), nbins, warmestHistRangeLeft, warmestHistRangeRight);
     TH1D* coldestHistLeft = new TH1D("coldestHistLeft", Form("The coldest day of %s; Day of year; Entries", location.c_str()), nbins, -166, 200);
     TH1D* coldestHistRight = new TH1D("coldestHistRight", Form("The coldest day of %s; Day of year; Entries", location.c_str()), nbins, 200, 566);
     // loading data
     vector <vector <string> > datahotCold;
     readData(fileName, datahotCold);
-    //print<vector <vector <string> > >(datahotCold, 3000);
+    //print<vector <vector <string> > >(datahotCold, 20);
     // define variables
     int yearPrevious = stoi(datahotCold.at(0).at(0));
     int monthPrevious = stoi(datahotCold.at(0).at(1));
@@ -128,7 +129,7 @@ void tempTrender::hotCold(string fileName){
 	funcCold->SetLineColor(kBlue);
 	coldestHistLeft->Fit(funcCold, "Q1R");
 	
-	
+	cout << "=============Results of hotCold function for "<<Form("%s",location.c_str())<<"==========="<<endl;
 	cout << "The mean for warmest days is " << funcHot->GetParameter(1) << endl;
 	cout << "Its uncertainty (warmest day) is " << funcHot->GetParError(1) << endl;
 	cout << "The mean for coldest days is " << funcCold->GetParameter(1) << endl;
@@ -155,6 +156,6 @@ void tempTrender::hotCold(string fileName){
 	leg->Draw(); //Legends are automatically drawn with "SAME"
 	
 	// Save the canvas as a picture
-	c1->SaveAs(Form("hotCold for %s.png", location.c_str()));
+	c1->SaveAs(Form("hotCold_for_%s.png", location.c_str()));
     
 }
