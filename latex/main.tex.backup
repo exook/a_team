@@ -1,12 +1,12 @@
 \documentclass[a4paper]{article}
 
-\usepackage[toc,page]{appendix}
+%\usepackage[toc,page]{appendix}
 \usepackage[utf8]{inputenc}
-\usepackage{gensymb}
+%\usepackage{gensymb}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
-\usepackage{siunitx}
+%\usepackage{siunitx}
 \usepackage{graphicx}
 \usepackage{subfig}
 \usepackage{url}
@@ -16,7 +16,7 @@
 \setlength{\parindent}{0pt}
 
 \usepackage{float}
-\usepackage{todonotes}
+%\usepackage{todonotes}
 \usepackage{comment} 
 \usepackage{braket}
 
