@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.11)  8 NOV 2017 17:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.11)  9 NOV 2017 12:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1090,7 +1090,11 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 \c@blind@randommax=\count199
 \c@blind@pangramcount=\count200
 \c@blind@pangrammax=\count201
-) (./main.aux)
+) (./main.aux
+
+LaTeX Warning: Label `fig:tempOnDayNumber' multiply defined.
+
+)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
@@ -1309,96 +1313,129 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 (./sections/introduction.tex) (./sections/hotandcold.tex)
 (./sections/tempSeasons.tex
-<images/springStart.png, id=4, 901.3675pt x 577.15625pt>
+<images/SVT_seasons.png, id=4, 440.14438pt x 464.73625pt>
+File: images/SVT_seasons.png Graphic file (type png)
+
+<use images/SVT_seasons.png>
+Package pdftex.def Info: images/SVT_seasons.png used on input line 8.
+(pdftex.def)             Requested size: 169.00642pt x 178.44534pt.
+
+<images/springStart.png, id=6, 901.3675pt x 577.15625pt>
 File: images/springStart.png Graphic file (type png)
 
 <use images/springStart.png>
-Package pdftex.def Info: images/springStart.png used on input line 13.
+Package pdftex.def Info: images/springStart.png used on input line 24.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
 
-<images/springHistogram.png, id=5, 901.3675pt x 577.15625pt>
+<images/springHistogram.png, id=7, 901.3675pt x 577.15625pt>
 File: images/springHistogram.png Graphic file (type png)
 
 <use images/springHistogram.png>
-Package pdftex.def Info: images/springHistogram.png used on input line 14.
+Package pdftex.def Info: images/springHistogram.png used on input line 25.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
 
-<images/summerStart.png, id=6, 901.3675pt x 577.15625pt>
+<images/summerStart.png, id=8, 901.3675pt x 577.15625pt>
 File: images/summerStart.png Graphic file (type png)
 
 <use images/summerStart.png>
-Package pdftex.def Info: images/summerStart.png used on input line 21.
+Package pdftex.def Info: images/summerStart.png used on input line 32.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
 
-<images/summerHistogram.png, id=7, 901.3675pt x 577.15625pt>
+<images/summerHistogram.png, id=9, 901.3675pt x 577.15625pt>
 File: images/summerHistogram.png Graphic file (type png)
 
 <use images/summerHistogram.png>
-Package pdftex.def Info: images/summerHistogram.png used on input line 22.
+Package pdftex.def Info: images/summerHistogram.png used on input line 33.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
 
-<images/fallStart.png, id=8, 901.3675pt x 577.15625pt>
+<images/fallStart.png, id=10, 901.3675pt x 577.15625pt>
 File: images/fallStart.png Graphic file (type png)
 
 <use images/fallStart.png>
-Package pdftex.def Info: images/fallStart.png used on input line 29.
+Package pdftex.def Info: images/fallStart.png used on input line 40.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
 
-<images/fallHistogram.png, id=9, 901.3675pt x 577.15625pt>
+<images/fallHistogram.png, id=11, 901.3675pt x 577.15625pt>
 File: images/fallHistogram.png Graphic file (type png)
 
 <use images/fallHistogram.png>
-Package pdftex.def Info: images/fallHistogram.png used on input line 30.
+Package pdftex.def Info: images/fallHistogram.png used on input line 41.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
 
-<images/winterStart.png, id=10, 901.3675pt x 577.15625pt>
+<images/winterStart.png, id=12, 901.3675pt x 577.15625pt>
 File: images/winterStart.png Graphic file (type png)
 
 <use images/winterStart.png>
-Package pdftex.def Info: images/winterStart.png used on input line 37.
+Package pdftex.def Info: images/winterStart.png used on input line 48.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
 
-<images/winterHistogram.png, id=11, 901.3675pt x 577.15625pt>
+<images/winterHistogram.png, id=13, 901.3675pt x 577.15625pt>
 File: images/winterHistogram.png Graphic file (type png)
 
 <use images/winterHistogram.png>
-Package pdftex.def Info: images/winterHistogram.png used on input line 38.
+Package pdftex.def Info: images/winterHistogram.png used on input line 49.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
-) (./sections/tempDay.tex
-<images/tempOnDay.png, id=12, 700.6175pt x 476.78125pt>
+) (./sections/tempDay.tex [1
+
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./image
+s/SVT_seasons.png>] <images/tempOnDayNumber.png, id=26, 700.6175pt x 476.78125p
+t>
+File: images/tempOnDayNumber.png Graphic file (type png)
+
+<use images/tempOnDayNumber.png>
+Package pdftex.def Info: images/tempOnDayNumber.png used on input line 10.
+(pdftex.def)             Requested size: 350.30789pt x 238.39003pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `fig:tempOnDay' on page 2 undefined on input line 14.
+
+[2 <./images/springStart.png> <./images/springHistogram.png> <./images/summerSt
+art.png> <./images/summerHistogram.png> <./images/fallStart.png> <./images/fall
+Histogram.png>] <images/tempOnDay.png, id=33, 700.6175pt x 476.78125pt>
 File: images/tempOnDay.png Graphic file (type png)
 
 <use images/tempOnDay.png>
-Package pdftex.def Info: images/tempOnDay.png used on input line 5.
+Package pdftex.def Info: images/tempOnDay.png used on input line 17.
 (pdftex.def)             Requested size: 350.30789pt x 238.39003pt.
-) (./sections/tempExtrap.tex) [1
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./image
-s/springStart.png> <./images/springHistogram.png>] [2 <./images/summerStart.png
-> <./images/summerHistogram.png> <./images/fallStart.png> <./images/fallHistogr
-am.png> <./images/winterStart.png> <./images/winterHistogram.png>] [3 <./images
-/tempOnDay.png>]
-(./main.aux) ) 
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (./sections/tempExtrap.tex) [3 <./images/winterStart.png> <./images/winterHis
+togram.png>] (./main.bbl) [4 <./images/tempOnDayNumber.png>] [5 <./images/tempO
+nDay.png>] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 23868 strings out of 493089
- 492900 string characters out of 6134842
- 483487 words of memory out of 5000000
- 26946 multiletter control sequences out of 15000+600000
+ 23885 strings out of 493089
+ 493227 string characters out of 6134842
+ 484540 words of memory out of 5000000
+ 26958 multiletter control sequences out of 15000+600000
  14633 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,10n,86p,10392b,643s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmbx8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-2.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.
-pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
-></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
-Output written on main.pdf (3 pages, 368630 bytes).
+ 62i,10n,86p,10392b,648s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
+cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loca
+l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on main.pdf (5 pages, 1303749 bytes).
 PDF statistics:
- 58 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
+ 76 PDF objects out of 1000 (max. 8388607)
+ 46 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 58 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 68 words of extra memory for PDF output out of 10000 (max. 10000000)
 
