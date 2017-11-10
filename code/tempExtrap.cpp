@@ -130,6 +130,9 @@ float tempTrender::tempEx(int year){
     int groupSize2=10;
 
     vector <vector <float>> dataVector;
+    
+    cout << "Extrapolation to find average temperature in " << year << endl;
+    
     //This puts the raw data into a 2D vector (dataVector)
     readAllData("../datasets/uppsala_tm_1722-2013.dat",dataVector);
 
@@ -209,7 +212,7 @@ float tempTrender::tempEx(int year){
     float param0=fitFunc->GetParameter(0);
     float param1=fitFunc->GetParameter(1);
     c2->SaveAs("extrapolatedDataFit.jpg");
+    c2->Close();
 
-    return param0*(year-1840)*cos(param1*year)+totalMean;//
-
+    return param0*(year-1840)*cos(param1*year)+totalMean;
 }

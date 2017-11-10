@@ -6,20 +6,20 @@
 void info()
 {
     cout << endl
-        << " _____________________________________________" << endl
-        << "| Welcome to Temperature Analysis!            |" << endl
-        << "|                                             |" << endl
-        << "| This program determines:                    |" << endl
-        << "|  - the temperature of a given day           |" << endl
-        << "|  - the warmest and coldest day of each year |" << endl
-        << "|  - the mean temperature of each year        |" << endl
-        << "|  - the beginning of the seasons             |" << endl
-        << "|                                             |" << endl
-        << "| Authors: Alexander Ekman   Date: 2017-11-10 |" << endl
-        << "|          Jessamy Mol                        |" << endl
-        << "|          Emelie Olsson                      |" << endl
-        << "|          Shi Qiu                            |" << endl
-        << "|_____________________________________________|" << endl
+        << " ______________________________________________" << endl
+        << "| Welcome to Temperature Analysis!             |" << endl
+        << "|                                              |" << endl
+        << "| This program determines:                     |" << endl
+        << "|  - the beginning of the seasons              |" << endl
+        << "|  - the extrapolation of the mean temperature |" << endl
+        << "|  - the temperature of a given day            |" << endl
+        << "|  - the warmest and coldest day of each year  |" << endl
+        << "|                                              |" << endl
+        << "| Authors: Alexander Ekman   Date: 2017-11-10  |" << endl
+        << "|          Jessamy Mol                         |" << endl
+        << "|          Emelie Olsson                       |" << endl
+        << "|          Shi Qiu                             |" << endl
+        << "|______________________________________________|" << endl
     << endl;
 }
 

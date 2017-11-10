@@ -3,12 +3,15 @@
 
 void project() {
 	string pathToFile = "../datasets/";
+    int year=2050;
+    double temperature;
+    
     tempTrender t(pathToFile); //Instantiate your analysis object
     
     t.startDaySeasons();
-//	int year=2050;
-//	cout<<"The temperature "<<year<<" will be: "<<t.tempEx(year)<<endl;
-
+    temperature = t.tempEx(year);
+    cout << endl << "The temperature in "<<year<<" will be: "
+         << temperature << " degrees" << endl;
 	t.tempOnDay(7, 19);
 	t.tempOnDayNumber(198);
 	t.hotCold("uppsala_tm_1722-2013.dat");
