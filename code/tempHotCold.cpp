@@ -49,15 +49,17 @@ void tempTrender::hotCold(string fileName){
     location = determineLocation(fileName);
     
     // create canvas and histograms for warmest and coldest
-    TCanvas* c1 = new TCanvas("c1", "hot cold", 900, 600);
-    TH1D* warmestHist = new TH1D("warmestHist", Form("The warmest day of %s; Day of year; Entries", location.c_str()), 100, 0, 366);
-    //TH1D* warmestHist = new TH1D("warmestHist", Form("The warmest day of %s; Day of year; Entries", location.c_str()), 732, -216, 516);
-    TH1D* coldestHistLeft = new TH1D("coldestHistLeft", Form("The coldest day of %s; Day of year; Entries", location.c_str()), 100, -166, 200);
-    TH1D* coldestHistRight = new TH1D("coldestHistRight", Form("The coldest day of %s; Day of year; Entries", location.c_str()), 100, 200, 566);
+    int nbins = 366;
+    int warmestHistRangeLeft = 0; // Change to -216 to see the entire range of the plot
+    int warmestHistRangeRight = 366; // Change to 516 to see the entire range of the plot
+    TCanvas* c1 = new TCanvas("c1", "hot cold", 1200, 800);
+    TH1D* warmestHist = new TH1D("warmestHist", Form("The warmest day of %s; Day of year; Entries", location.c_str()), nbins, warmestHistRangeLeft, warmestHistRangeRight);
+    TH1D* coldestHistLeft = new TH1D("coldestHistLeft", Form("The coldest day of %s; Day of year; Entries", location.c_str()), nbins, -166, 200);
+    TH1D* coldestHistRight = new TH1D("coldestHistRight", Form("The coldest day of %s; Day of year; Entries", location.c_str()), nbins, 200, 566);
     // loading data
     vector <vector <string> > datahotCold;
     readData(fileName, datahotCold);
-    //print<vector <vector <string> > >(datahotCold, 3000);
+    //print<vector <vector <string> > >(datahotCold, 20);
     // define variables
     int yearPrevious = stoi(datahotCold.at(0).at(0));
     int monthPrevious = stoi(datahotCold.at(0).at(1));
@@ -67,7 +69,7 @@ void tempTrender::hotCold(string fileName){
     int year, maxTempMonth = 0, maxTempDay = 0, minTempMonth = 0, minTempDay = 0, maxTempDayOfYear, minTempDayOfYear;
     double temp;
      
-
+	// fill histograms
     for (int i = 0; i < int(datahotCold.size()); i++) {
 		year = stoi(datahotCold.at(i).at(0));
 		temp = stod(datahotCold.at(i).at(6));
@@ -127,10 +129,10 @@ void tempTrender::hotCold(string fileName){
 	funcCold->SetLineColor(kBlue);
 	coldestHistLeft->Fit(funcCold, "Q1R");
 	
-	
-	cout << "The mean is for warmest days is " << funcHot->GetParameter(1) << endl;
+	cout << "=============Results of hotCold function for "<<Form("%s",location.c_str())<<"==========="<<endl;
+	cout << "The mean for warmest days is " << funcHot->GetParameter(1) << endl;
 	cout << "Its uncertainty (warmest day) is " << funcHot->GetParError(1) << endl;
-	cout << "The mean is for coldest days is " << funcCold->GetParameter(1) << endl;
+	cout << "The mean for coldest days is " << funcCold->GetParameter(1) << endl;
 	cout << "Its uncertainty (coldest day) is " << funcCold->GetParError(1) << endl;
     TLegend* leg = new TLegend(0.6, 0.75, 0.92, 0.92, "", "NDC");
 	leg->SetFillStyle(0); //Hollow fill (transparent)
@@ -138,8 +140,8 @@ void tempTrender::hotCold(string fileName){
 	leg->SetTextSize(0.035);
 	leg->AddEntry(warmestHist, "", "F"); //Use object title, draw fill
 	leg->AddEntry(coldestHistLeft, "", "F"); //Use custom title
-	leg->AddEntry(funcHot, "Fit for warmest day", "L");
-	leg->AddEntry(funcCold, "Fit for coldest day", "L");
+	leg->AddEntry(funcHot, "Fit for the warmest day", "L");
+	leg->AddEntry(funcCold, "Fit for the coldest day", "L");
 	// Plot histograms and fit
 	warmestHist->SetFillColor(kRed);
 	warmestHist->SetFillStyle(3003);
@@ -153,6 +155,10 @@ void tempTrender::hotCold(string fileName){
 	coldestHistRight->Draw("SAME");
 	leg->Draw(); //Legends are automatically drawn with "SAME"
 	
+
+	// Save the canvas as a picture
+	c1->SaveAs(Form("hotCold_for_%s.png", location.c_str()));
+    
     c1->SaveAs(Form("HotCold%s.png", location.c_str()));
     c1->Close();
     delete warmestHist;

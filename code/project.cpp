@@ -15,5 +15,4 @@ void project() {
 	t.tempOnDay(7, 19);
 	t.tempOnDayNumber(198);
 	t.hotCold("uppsala_tm_1722-2013.dat");
-	t.hotCold("smhi-opendata_Lulea.csv");
 }

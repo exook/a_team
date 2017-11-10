@@ -1,12 +1,12 @@
 \documentclass[a4paper]{article}
 
-\usepackage[toc,page]{appendix}
+%\usepackage[toc,page]{appendix}
 \usepackage[utf8]{inputenc}
-\usepackage{gensymb}
+%\usepackage{gensymb}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
-\usepackage{siunitx}
+%\usepackage{siunitx}
 \usepackage{graphicx}
 \usepackage{subfig}
 \usepackage{url}
@@ -16,20 +16,17 @@
 \setlength{\parindent}{0pt}
 
 \usepackage{float}
-\usepackage{todonotes}
+%\usepackage{todonotes}
 \usepackage{comment} 
 \usepackage{braket}
-\usepackage{wrapfig}
-\usepackage{multirow}
+
 \graphicspath{{images/}{../images/}}
  
 \usepackage{subfiles} 
  
 \usepackage{blindtext}
  
-\title{\textbf{Temperature analysis } \\ 
-\vspace{5pt}
-\large MNXB01 Project}
+\title{Subfile Example}
 \author{Alexander Ekman, Jessamy Mol, Emelie Olsson, Shi Qiu}
 \date{ }
  
@@ -44,32 +41,20 @@ the subfile
 
 \maketitle
 
-\vspace{-24pt}
 \section{Introduction}
  
 \subfile{sections/introduction}
 
-<<<<<<< HEAD
-\section{Read data function}
-\subfile{sections/readData}
-
-\section{The temperature of a given day}
-\subfile{sections/tempDay}
-
-\section{The warmest and coldest day of a year}
+\section{Hot and Cold}
 \subfile{sections/hotandcold}
-=======
-\section{The temperature of a given day}
-\subfile{sections/tempDay}
->>>>>>> 6215530b4a6def2541fe2e6d99bac5d0d84f9596
 
 \section{The beginning of the seasons}
 \subfile{sections/tempSeasons}
 
-\section{Hot and Cold}
-\subfile{sections/hotandcold}
+\section{The temperature of a given day}
+\subfile{sections/tempDay}
 
-\section{Extrapolation of the mean temperature}
+\section{tempExtrap}
 \subfile{sections/tempExtrap}
 
 \newpage
