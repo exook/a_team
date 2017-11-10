@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.11)  10 NOV 2017 11:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.11)  10 NOV 2017 11:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1506,11 +1506,7 @@ Underfull \hbox (badness 6625) in paragraph at lines 44--44
 \OT1/cmr/m/n/10 the mean of
  []
 
-) (./sections/tempExtrap.tex
-
-LaTeX Warning: Citation `industrial' on page 9 undefined on input line 3.
-
-[9 <./images/hotCold_Lulea.png>]
+) (./sections/tempExtrap.tex [9 <./images/hotCold_Lulea.png>]
 <images/extrapolatedDataFit.jpg, id=68, 1202.4925pt x 578.16pt>
 File: images/extrapolatedDataFit.jpg Graphic file (type jpg)
 
@@ -1518,40 +1514,43 @@ File: images/extrapolatedDataFit.jpg Graphic file (type jpg)
 Package pdftex.def Info: images/extrapolatedDataFit.jpg used on input line 26.
 (pdftex.def)             Requested size: 420.87868pt x 202.35902pt.
 
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 <images/notleap.jpg, id=69, 1202.4925pt x 578.16pt>
 File: images/notleap.jpg Graphic file (type jpg)
  <use images/notleap.jpg>
 Package pdftex.def Info: images/notleap.jpg used on input line 33.
 (pdftex.def)             Requested size: 420.87868pt x 202.35902pt.
 
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 [10]) [11 <./images/extrapolatedDataFit.jpg> <./images/notleap.jpg>]
 (./sections/readData.tex) [12
 
-] (./main.bbl) [13] (./main.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+] (./main.bbl) [13] (./main.aux) ) 
 Here is how much of TeX's memory you used:
  24028 strings out of 493089
  496076 string characters out of 6134842
- 488432 words of memory out of 5000000
+ 488435 words of memory out of 5000000
  27079 multiletter control sequences out of 15000+600000
  14940 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,10n,86p,10392b,708s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></u
-sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
-/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/l
-ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/loca
-l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/t
-exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
-xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texl
-ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (13 pages, 1626918 bytes).
+</usr/local/texlive/2015/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmsy7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmtt10.pfb>
+Output written on main.pdf (13 pages, 1627369 bytes).
 PDF statistics:
  119 PDF objects out of 1000 (max. 8388607)
  68 compressed objects within 1 object stream
