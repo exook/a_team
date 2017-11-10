@@ -2,10 +2,30 @@
 #include <sstream>
 #include "tempTrender.h"
 
+//info
+void info()
+{
+    cout << endl
+        << " _____________________________________________" << endl
+        << "| Welcome to Temperature Analysis!            |" << endl
+        << "|                                             |" << endl
+        << "| This program determines:                    |" << endl
+        << "|  - the temperature of a given day           |" << endl
+        << "|  - the warmest and coldest day of each year |" << endl
+        << "|  - the mean temperature of each year        |" << endl
+        << "|  - the beginning of the seasons             |" << endl
+        << "|                                             |" << endl
+        << "| Authors: Alexander Ekman   Date: 2017-11-10 |" << endl
+        << "|          Jessamy Mol                        |" << endl
+        << "|          Emelie Olsson                      |" << endl
+        << "|          Shi Qiu                            |" << endl
+        << "|_____________________________________________|" << endl
+    << endl;
+}
+
 //constructor
 tempTrender::tempTrender(string filePath) {
-    cout << endl;
-    cout << "This program calculates trends in the temprature datasets." << endl;
+    info();
     cout << "The path to the data files: " << endl;
     cout << filePath << endl;
     path = filePath;
@@ -142,6 +162,32 @@ int tempTrender::getDayOfYear(int year, int month, int day) {
         dayOfYear = dayOfYear + day;
     }
     return dayOfYear;
+}
+
+void tempTrender::readAllData(string fileName,vector<vector<float>> &dataVector){	
+	ifstream file(fileName);
+	//check if opened correctly
+    if (!file) {
+        cout << "Error could not read data file" << endl;
+    }
+    else {
+        cout << "Succesfully opened data file" << endl;
+    }
+
+    string value;
+    string line;
+    while (getline(file,line)){
+        istringstream helpstring(line);
+        vector <float> row;
+        while(getline(helpstring,value,' ')){
+            if (value.find_first_not_of(' ') != std::string::npos){
+                float number=strtof(value.c_str(),NULL);
+                row.push_back(number);
+            }
+        }
+        dataVector.push_back(row);
+    }
+    file.close();
 }
 
 

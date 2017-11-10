@@ -14,8 +14,13 @@ Branch off and start working on average temperature function (Jessamy)
 2017-11-05 : Wrote the function to find the first day of fall and began to work on plotting the data from the summer (Jessamy)
 2017-11-07 : Finalize the hotCold function that is able to plot fit function correctly. (Shi)
 2017-11-07 : Wrote a function to plot the results in bar graphs and histograms and started working on the Latex file (Jessamy). Finished temperature on a certain day functions, with histograms and legends (Emelie).
+<<<<<<< HEAD
 2017-11-08 : Started working on my section in on the report in Latex (Emelie)
 2017-11-09 : Started working on hotCold section in Latex (Shi)
 2017-11-09 : Wrote introduction, added more images to report and created slides for presentation (Emelie).
+=======
+2017-11-08 : Started working on my section in on the report in Latex (Emelie). Optimisations in code and put all images in Latex file (Jessamy). 
+2017-11-09 : Wrote introduction, added more images to report and created slides for presentation (Emelie). Wrote Latex report (Jessamy) 
+>>>>>>> 6215530b4a6def2541fe2e6d99bac5d0d84f9596
 
 
