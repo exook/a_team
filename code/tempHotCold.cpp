@@ -153,5 +153,9 @@ void tempTrender::hotCold(string fileName){
 	coldestHistRight->Draw("SAME");
 	leg->Draw(); //Legends are automatically drawn with "SAME"
 	
-    
+    c1->SaveAs(Form("HotCold%s.png", location.c_str()));
+    c1->Close();
+    delete warmestHist;
+    delete coldestHistLeft;
+    delete coldestHistRight;
 }

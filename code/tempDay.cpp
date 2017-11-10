@@ -71,6 +71,7 @@ void tempTrender::tempOnDay(int monthToCalculate, int dayToCalculate){
     
     // Save the canvas as a picture
     c1->SaveAs("tempOnDay.png");
+    c1->Close();
     
     cout << "Data mean: "<<mean << endl;
     cout << "Data standard deviation: "<<stdev<< endl;
