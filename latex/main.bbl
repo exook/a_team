@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{smhidata}
+Sveriges meteorologiska och hydrologiska~institut (SMHI).
+\newblock Dataset.
+\newblock \url{https://www.smhi.se/klimatdata/meteorologi/temperatur}.
+
 \bibitem{SVT}
 SVT Nyheter.
 \newblock Vintern 2017-2018.
@@ -8,7 +13,7 @@ SVT Nyheter.
 
 \bibitem{SMHI}
 Sveriges meteorologiska och hydrologiska~institut (SMHI).
-\newblock Årstider.
+\newblock {\AA}rstider.
 \newblock \url{https://www.smhi.se/kunskapsbanken/meteorologi/arstider-1.1082}.
 \newblock Accessed: 2017-11-09.
 
