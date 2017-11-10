@@ -40,7 +40,6 @@
  %\subfile{myFilePath/myFile}
  
  %Write without .tex and do not use any ``\usepackage'' or ``documentclass'' in 
-the subfile
 
 \maketitle
 
@@ -49,28 +48,24 @@ the subfile
  
 \subfile{sections/introduction}
 
-<<<<<<< HEAD
-\section{Read data function}
-\subfile{sections/readData}
-
 \section{The temperature of a given day}
 \subfile{sections/tempDay}
-
-\section{The warmest and coldest day of a year}
-\subfile{sections/hotandcold}
-=======
-\section{The temperature of a given day}
-\subfile{sections/tempDay}
->>>>>>> 6215530b4a6def2541fe2e6d99bac5d0d84f9596
 
 \section{The beginning of the seasons}
 \subfile{sections/tempSeasons}
 
-\section{Hot and Cold}
+\section{The warmest and coldest day of a year}
 \subfile{sections/hotandcold}
 
 \section{Extrapolation of the mean temperature}
 \subfile{sections/tempExtrap}
+
+\clearpage
+\newpage
+\appendix 
+\section{Read data function}
+\label{appendix}
+\subfile{sections/readData}
 
 \newpage
 \bibliographystyle{unsrt}
