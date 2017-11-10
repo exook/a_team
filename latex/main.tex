@@ -19,14 +19,17 @@
 \usepackage{todonotes}
 \usepackage{comment} 
 \usepackage{braket}
-
+\usepackage{wrapfig}
+\usepackage{multirow}
 \graphicspath{{images/}{../images/}}
  
 \usepackage{subfiles} 
  
 \usepackage{blindtext}
  
-\title{Subfile Example}
+\title{\textbf{Temperature analysis } \\ 
+\vspace{5pt}
+\large MNXB01 Project}
 \author{Alexander Ekman, Jessamy Mol, Emelie Olsson, Shi Qiu}
 \date{ }
  
@@ -45,14 +48,17 @@ the subfile
  
 \subfile{sections/introduction}
 
-\section{Hot and Cold}
+\section{Read data function}
+\subfile{sections/readData}
+
+\section{The temperature of a given day}
+\subfile{sections/tempDay}
+
+\section{The warmest and coldest day of a year}
 \subfile{sections/hotandcold}
 
 \section{The beginning of the seasons}
 \subfile{sections/tempSeasons}
-
-\section{The temperature of a given day}
-\subfile{sections/tempDay}
 
 \section{tempExtrap}
 \subfile{sections/tempExtrap}

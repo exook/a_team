@@ -1,0 +1,58 @@
+\begin{document}
+The temperature data are provided for various locations, including Falsterbo, Lund, Visby, Boras, Soderarm, Karlstad, Uppsala, Falun, Umea and Lulea, in Sweden. The period of the record ranges from 1951 or 1961 to 2015 for all locations except for Uppsala. Uppsala data has a much longer record of the temperature, which starts from 1722 and ends at 2013 for the data provided. It should be noted that the Uppsala data are not strictly from Uppsala and a small portion of the data is from nearby regions such as Stockholm, Betna and Risinge. The location information is recorded in the so called dataID column in the Uppsala, with 1 and 2 to 6 representing data recorded in Uppsala and other five locations, respectively. 
+
+To obtain the data from all locations except for Uppsala, we used \texttt{getline} function to read the data file line by line and chose delimiters in the correct order that corresponds to the data file, since the data are separated by different delimiters, such as "-"  used to separate date, and ":" used to separate time. Each data file except for Uppsala has some text to describe the data file at the beginning. It can be skipped by using "Datum" as an indication of the start of the data since "Datum" always occurs above the row of actual data. The data are stored in a two dimensional vector. 
+
+Each column of the data from Uppsala is separated by a space. We can directly use \texttt{>>} to output the data for each row and pass it to a two dimensional vector. It should be noted that our general data output function, the one that can be used to read all data file, only includes temperature data strictly from Uppsala, while we have another separate read data function specifically for Uppsala data that read all data from it. The reason for writing another dedicated read data function for the entire Uppsala data is due to the need for the analysis of the mean temperature of each year. 
+
+A summary of the output format of the data read function is shown in Table \ref{readDataOutPut}. Since we want the output format from the general data read function being compatible for the same code, it is important to match the format of them. The Uppsala data do not have the time and air quality data as other data files. Therefore, the time columns are filled with fictitious data, "-1", and the air quality is filled with "-N". Note that some text occasionally occurs at end of some rows for data from all location except for Uppsala, which is inevitably recorded at the last column of the vector, but it has no effect on the data analysis. 
+
+\begin{table}[H]
+\centering
+
+\begin{tabular}{l|lllllllll}
+\hline
+  & \multicolumn{9}{c}{Format of the output data} \\ \hline\hline
+\multirow{2}{1.9cm}{Data except for Uppsala} & Year & Month & Day & Hour & Min & Sec & Temp          & Air & Some text                  \\ \cline{2-10} 
+                                         & 1961 & 01    & 01  & 12   & 00  & 00  & 0.4           & G           & Kvaliteskontroll... \\ \hline
+\multirow{2}{1.9cm}{Uppsala Data}            & Year & Month & Day & Hour & Min & Sec & Temp & Air & Temp (urban corr.) \\ \cline{2-10} 
+                                         & 1722 & 1     & 12  & -1   & -1  & -1  & 1.9           & -N          & 1.8                        \\ \hline
+\end{tabular}
+\caption{A summary of the output format of the data read function. The hour, min, sec and air quality data are not recorded for Uppsala. In order to match the same output format as other data, all three time data are filled with "-1" and the air quality is filled with "-N" for Uppsala. Note that Upssala has one more column of temperature data, the temperature with urban correction, which is put to the last column of the output data vector.}
+\label{readDataOutPut}
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -7,6 +7,8 @@ void project() {
     
 //    t.startDaySeasons();
 //	t.tempEx();
+//	cout<<"The temperature will be: "<<t.tempEx(2050)<<endl;
+
 
 //	t.tempOnDay(7, 19);
 //	t.tempOnDayNumber(200);

@@ -134,7 +134,7 @@ void tempTrender::hotCold(string fileName){
 	cout << "Its uncertainty (warmest day) is " << funcHot->GetParError(1) << endl;
 	cout << "The mean for coldest days is " << funcCold->GetParameter(1) << endl;
 	cout << "Its uncertainty (coldest day) is " << funcCold->GetParError(1) << endl;
-    TLegend* leg = new TLegend(0.645, 0.75, 0.92, 0.92, "", "NDC");
+    TLegend* leg = new TLegend(0.6, 0.75, 0.92, 0.92, "", "NDC");
 	leg->SetFillStyle(0); //Hollow fill (transparent)
 	leg->SetBorderSize(0); //Get rid of the border
 	leg->SetTextSize(0.035);
