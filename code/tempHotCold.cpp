@@ -155,7 +155,13 @@ void tempTrender::hotCold(string fileName){
 	coldestHistRight->Draw("SAME");
 	leg->Draw(); //Legends are automatically drawn with "SAME"
 	
+
 	// Save the canvas as a picture
 	c1->SaveAs(Form("hotCold_for_%s.png", location.c_str()));
     
+    c1->SaveAs(Form("HotCold%s.png", location.c_str()));
+    c1->Close();
+    delete warmestHist;
+    delete coldestHistLeft;
+    delete coldestHistRight;
 }
