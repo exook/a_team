@@ -164,6 +164,32 @@ int tempTrender::getDayOfYear(int year, int month, int day) {
     return dayOfYear;
 }
 
+void tempTrender::readAllData(string fileName,vector<vector<float>> &dataVector){	
+	ifstream file(fileName);
+	//check if opened correctly
+    if (!file) {
+        cout << "Error could not read data file" << endl;
+    }
+    else {
+        cout << "Succesfully opened data file" << endl;
+    }
+
+    string value;
+    string line;
+    while (getline(file,line)){
+        istringstream helpstring(line);
+        vector <float> row;
+        while(getline(helpstring,value,' ')){
+            if (value.find_first_not_of(' ') != std::string::npos){
+                float number=strtof(value.c_str(),NULL);
+                row.push_back(number);
+            }
+        }
+        dataVector.push_back(row);
+    }
+    file.close();
+}
+
 
 
 
