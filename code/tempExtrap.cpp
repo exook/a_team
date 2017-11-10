@@ -192,7 +192,7 @@ float tempTrender::tempEx(int year){
     gr_average1->Fit(fitFunc);
     
     //Create legend
-    TLegend* leg = new TLegend(0.25,0.8,0.45,0.9);
+    TLegend* leg = new TLegend(0.25,0.75,0.55,0.95);
     leg->SetFillStyle(0); //Hollow fill (transparent)
     leg->SetBorderSize(0); //Get rid of the border
     leg->SetNColumns(2);
