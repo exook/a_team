@@ -24,6 +24,7 @@ class tempTrender {
 	private:
     string path;
     void readData(string fileName, vector <vector <string> > &data);
+    void readAllData(string fileName, vector<vector<float>> &dataVector);
     int getDayOfYear(int year, int month, int day);
     bool testLeapYear(int year);
     template <class T> void print(T vec, int lines);
