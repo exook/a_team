@@ -47,6 +47,7 @@ void averages(vector<vector<float>> &dataVector,vector <vector<float>> &averages
     for(int year = initialYear+1; year <= endYear;year++){
         float yearlySum=0;
         vector <float> thisYear;
+        //if(testLeapYear(year)){
         if(isLeapYear(year)){
             for(int day=1;day<=366;day++){
                 yearlySum+=dataVector.at(row).at(4);
