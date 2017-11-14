@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.11)  10 NOV 2017 11:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.11)  13 NOV 2017 18:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1370,26 +1370,26 @@ sons.png>]
 File: images/start_season_diagram.png Graphic file (type png)
 
 <use images/start_season_diagram.png>
-Package pdftex.def Info: images/start_season_diagram.png used on input line 22.
+Package pdftex.def Info: images/start_season_diagram.png used on input line 23.
 
 (pdftex.def)             Requested size: 151.7656pt x 372.63875pt.
 
-Overfull \hbox (3.88014pt too wide) in paragraph at lines 22--23
+Overfull \hbox (3.88014pt too wide) in paragraph at lines 23--24
 [][] 
  []
 
 
-Underfull \hbox (badness 1077) in paragraph at lines 28--29
+Underfull \hbox (badness 1077) in paragraph at lines 29--30
 \OT1/cmr/m/n/10 the years in the dataset. The code used to pro-duce
  []
 
 
-Underfull \hbox (badness 1152) in paragraph at lines 28--29
+Underfull \hbox (badness 1152) in paragraph at lines 29--30
 \OT1/cmr/m/n/10 tion, which calls all other func-tions, of the sec-tion is
  []
 
 [4 <./images/start_season_diagram.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 42--43
+Underfull \hbox (badness 10000) in paragraph at lines 43--44
 
  []
 
@@ -1397,17 +1397,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 42--43
 File: images/springStart.png Graphic file (type png)
 
 <use images/springStart.png>
-Package pdftex.def Info: images/springStart.png used on input line 46.
+Package pdftex.def Info: images/springStart.png used on input line 47.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
 
 <images/springHistogram.png, id=40, 901.3675pt x 577.15625pt>
 File: images/springHistogram.png Graphic file (type png)
 
 <use images/springHistogram.png>
-Package pdftex.def Info: images/springHistogram.png used on input line 47.
+Package pdftex.def Info: images/springHistogram.png used on input line 48.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 52--53
+Underfull \hbox (badness 10000) in paragraph at lines 53--54
 
  []
 
@@ -1415,17 +1415,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 52--53
 File: images/summerStart.png Graphic file (type png)
 
 <use images/summerStart.png>
-Package pdftex.def Info: images/summerStart.png used on input line 56.
+Package pdftex.def Info: images/summerStart.png used on input line 57.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
 
 <images/summerHistogram.png, id=42, 901.3675pt x 577.15625pt>
 File: images/summerHistogram.png Graphic file (type png)
 
 <use images/summerHistogram.png>
-Package pdftex.def Info: images/summerHistogram.png used on input line 57.
+Package pdftex.def Info: images/summerHistogram.png used on input line 58.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--63
+Underfull \hbox (badness 10000) in paragraph at lines 63--64
 
  []
 
@@ -1433,17 +1433,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 62--63
 File: images/fallStart.png Graphic file (type png)
 
 <use images/fallStart.png>
-Package pdftex.def Info: images/fallStart.png used on input line 66.
+Package pdftex.def Info: images/fallStart.png used on input line 67.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
 
 <images/fallHistogram.png, id=44, 901.3675pt x 577.15625pt>
 File: images/fallHistogram.png Graphic file (type png)
 
 <use images/fallHistogram.png>
-Package pdftex.def Info: images/fallHistogram.png used on input line 67.
+Package pdftex.def Info: images/fallHistogram.png used on input line 68.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--73
+Underfull \hbox (badness 10000) in paragraph at lines 73--74
 
  []
 
@@ -1451,19 +1451,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 72--73
 File: images/winterStart.png Graphic file (type png)
 
 <use images/winterStart.png>
-Package pdftex.def Info: images/winterStart.png used on input line 76.
+Package pdftex.def Info: images/winterStart.png used on input line 77.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
 
 <images/winterHistogram.png, id=46, 901.3675pt x 577.15625pt>
 File: images/winterHistogram.png Graphic file (type png)
 
 <use images/winterHistogram.png>
-Package pdftex.def Info: images/winterHistogram.png used on input line 77.
+Package pdftex.def Info: images/winterHistogram.png used on input line 78.
 (pdftex.def)             Requested size: 211.26126pt x 135.27066pt.
  [5 <./images/springStart.png> <./images/springHistogram.png> <./images/summerS
-tart.png> <./images/summerHistogram.png>])
-(./sections/hotandcold.tex [6 <./images/fallStart.png> <./images/fallHistogram.
-png> <./images/winterStart.png> <./images/winterHistogram.png>]
+tart.png> <./images/summerHistogram.png>]
+[6 <./images/fallStart.png> <./images/fallHistogram.png> <./images/winterStart.
+png> <./images/winterHistogram.png>]) (./sections/hotandcold.tex
 <images/hotCold_Uppsala_entire.png, id=53, 1603.9925pt x 778.91pt>
 File: images/hotCold_Uppsala_entire.png Graphic file (type png)
 
@@ -1476,27 +1476,28 @@ Overfull \hbox (15.99948pt too wide) in paragraph at lines 11--12
  [][] 
  []
 
-<images/hotCold_Uppsala.png, id=54, 1202.4925pt x 778.91pt>
+[7 <./images/hotCold_Uppsala_entire.png>]
+<images/hotCold_Uppsala.png, id=58, 1202.4925pt x 778.91pt>
 File: images/hotCold_Uppsala.png Graphic file (type png)
 
 <use images/hotCold_Uppsala.png>
 Package pdftex.def Info: images/hotCold_Uppsala.png used on input line 21.
 (pdftex.def)             Requested size: 338.0193pt x 218.94905pt.
- [7 <./images/hotCold_Uppsala_entire.png>]
+
 <images/hotCold_Lund.png, id=59, 1202.4925pt x 778.91pt>
 File: images/hotCold_Lund.png Graphic file (type png)
 
 <use images/hotCold_Lund.png>
 Package pdftex.def Info: images/hotCold_Lund.png used on input line 28.
 (pdftex.def)             Requested size: 338.0193pt x 218.94905pt.
-
-<images/hotCold_Lulea.png, id=60, 1202.4925pt x 778.91pt>
+ [8 <./images/hotCold_Uppsala.png>]
+<images/hotCold_Lulea.png, id=63, 1202.4925pt x 778.91pt>
 File: images/hotCold_Lulea.png Graphic file (type png)
 
 <use images/hotCold_Lulea.png>
 Package pdftex.def Info: images/hotCold_Lulea.png used on input line 35.
 (pdftex.def)             Requested size: 338.0193pt x 218.94905pt.
- [8 <./images/hotCold_Uppsala.png> <./images/hotCold_Lund.png>]
+
 Underfull \hbox (badness 3260) in paragraph at lines 44--44
 \OT1/cmr/m/n/10 mean of the
  []
@@ -1506,36 +1507,36 @@ Underfull \hbox (badness 6625) in paragraph at lines 44--44
 \OT1/cmr/m/n/10 the mean of
  []
 
-) (./sections/tempExtrap.tex
-
-LaTeX Warning: Citation `industrial' on page 9 undefined on input line 3.
-
-[9 <./images/hotCold_Lulea.png>]
-<images/extrapolatedDataFit.jpg, id=68, 1202.4925pt x 578.16pt>
+[9 <./images/hotCold_Lund.png> <./images/hotCold_Lulea.png>])
+(./sections/tempExtrap.tex [10]
+<images/extrapolatedDataFit.jpg, id=71, 1202.4925pt x 578.16pt>
 File: images/extrapolatedDataFit.jpg Graphic file (type jpg)
 
 <use images/extrapolatedDataFit.jpg>
 Package pdftex.def Info: images/extrapolatedDataFit.jpg used on input line 26.
 (pdftex.def)             Requested size: 420.87868pt x 202.35902pt.
 
-<images/notleap.jpg, id=69, 1202.4925pt x 578.16pt>
+<images/notleap.jpg, id=72, 1202.4925pt x 578.16pt>
 File: images/notleap.jpg Graphic file (type jpg)
  <use images/notleap.jpg>
 Package pdftex.def Info: images/notleap.jpg used on input line 33.
 (pdftex.def)             Requested size: 420.87868pt x 202.35902pt.
 
-[10]) [11 <./images/extrapolatedDataFit.jpg> <./images/notleap.jpg>]
-(./sections/readData.tex) [12
 
-] (./main.bbl) [13] (./main.aux)
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Warning: There were undefined references.
+[11 <./images/extrapolatedDataFit.jpg>]) [12 <./images/notleap.jpg>]
+(./sections/readData.tex) [13
+
+] (./main.bbl) [14] (./main.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
  24028 strings out of 493089
  496076 string characters out of 6134842
- 488432 words of memory out of 5000000
+ 490435 words of memory out of 5000000
  27079 multiletter control sequences out of 15000+600000
  14940 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1551,10 +1552,10 @@ l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/t
 exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
 xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texl
 ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (13 pages, 1626918 bytes).
+Output written on main.pdf (14 pages, 1629234 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
- 68 compressed objects within 1 object stream
+ 122 PDF objects out of 1000 (max. 8388607)
+ 70 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  118 words of extra memory for PDF output out of 10000 (max. 10000000)
 

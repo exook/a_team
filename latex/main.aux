@@ -27,7 +27,7 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Method}{4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The code used for the calculation of the start of a season represented in a flowchart.\relax }}{4}}
 \newlabel{fig:flowchart}{{6}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Results and Conclusion}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Results}{5}}
 \newlabel{fig:spring_bar}{{7a}{5}}
 \newlabel{sub@fig:spring_bar}{{(a)}{a}}
 \newlabel{fig:spring_hist}{{7b}{5}}
@@ -44,6 +44,7 @@
 \newlabel{fig:summer}{{8}{5}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Bar graph}}}{5}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Histogram}}}{5}}
+\citation{SMHI}
 \newlabel{fig:fall_bar}{{9a}{6}}
 \newlabel{sub@fig:fall_bar}{{(a)}{a}}
 \newlabel{fig:fall_hist}{{9b}{6}}
@@ -60,33 +61,35 @@
 \newlabel{fig:winter}{{10}{6}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Bar graph}}}{6}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Histogram}}}{6}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}The warmest and coldest day of a year}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Discussion and Conclusion}{6}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}The warmest and coldest day of a year}{7}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Method}{7}}
 \@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces A demonstration of the method we used to fit the distribution of the coldest day of a year. \relax }}{7}}
 \newlabel{hotColdUppsalaFit}{{11}{7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Results}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Results}{8}}
 \@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces The distribution of the warmest and the coldest day for each year in Uppsala from 1722 to 2013. A Gaussian function is fit to each of the distribution with $\chi ^2/\text  {dof}$ determined to be 0.90. Note that the temperature for some years was not recorded or partially recorded for Uppsala. Only the data that are strictly from Uppsala are read by the \texttt  {readData} function. \relax }}{8}}
 \newlabel{hotColdUppsala}{{12}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces The distribution of the warmest and the coldest day for each year in Lund from 1961 to 2015. A Gaussian function is fit to each of the distribution with $\chi ^2/\text  {dof}$ determined to be 1.18.\relax }}{8}}
-\newlabel{hotColdLund}{{13}{8}}
-\citation{industrial}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces The distribution of the warmest and the coldest day for each year in Lund from 1961 to 2015. A Gaussian function is fit to each of the distribution with $\chi ^2/\text  {dof}$ determined to be 1.18.\relax }}{9}}
+\newlabel{hotColdLund}{{13}{9}}
 \@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces The distribution of the warmest and the coldest day for each year in Lulea from 1951 to 2015. A Gaussian function is fit to each of the distribution with $\chi ^2/\text  {dof}$ determined to be 0.37.\relax }}{9}}
 \newlabel{hotColdLulea}{{14}{9}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Calculation of the mean of the warmest day and the coldest day from the Gaussian fit. The uncertainty for each mean value is evaluated. The order of the place is chosen to start from low latitude to high latitude. \relax }}{9}}
-\newlabel{hotColdResult}{{1}{9}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Extrapolation of the mean temperature}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Method}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Results and Conclusion}{10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces \relax }}{11}}
+\citation{industrial}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Calculation of the mean of the warmest day and the coldest day from the Gaussian fit. The uncertainty for each mean value is evaluated. The order of the place is chosen to start from low latitude to high latitude. \relax }}{10}}
+\newlabel{hotColdResult}{{1}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Extrapolation of the mean temperature}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Method}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Results and Conclusion}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Shows the yearly average temperature around an average of 5.9 $^{\circ }$C from data taken in the Stockholm region form 1723-2013. The thick and thin black lines show moving averages with a grouping size of 30 and 10 respectively. The green fit is of the form $A*(x-1840)*cos(B*x))$\relax }}{11}}
 \newlabel{fig:extrap1}{{15}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces \relax }}{11}}
-\newlabel{fig:extrap2}{{16}{11}}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Read data function}{12}}
-\newlabel{appendix}{{A}{12}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces A summary of the output format of the data read function. The hour, min, sec and air quality data are not recorded for Uppsala. In order to match the same output format as other data, all three time data are filled with "-1" and the air quality is filled with "-N" for Uppsala. Note that Upssala has one more column of temperature data, the temperature with urban correction, which is put to the last column of the output data vector.\relax }}{12}}
-\newlabel{readDataOutPut}{{2}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Shows the yearly average temperature around an average of 5.9 $^{\circ }$C from data taken only in Uppsala 1722-2013. This does not consist of data taken daily. The thick and thin black lines show moving averages with a grouping size of 30 and 10 respectively. The green fit is of the form $A*(x-1840)*cos(B*x))$\relax }}{12}}
+\newlabel{fig:extrap2}{{16}{12}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Read data function}{13}}
+\newlabel{appendix}{{A}{13}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces A summary of the output format of the data read function. The hour, min, sec and air quality data are not recorded for Uppsala. In order to match the same output format as other data, all three time data are filled with "-1" and the air quality is filled with "-N" for Uppsala. Note that Upssala has one more column of temperature data, the temperature with urban correction, which is put to the last column of the output data vector.\relax }}{13}}
+\newlabel{readDataOutPut}{{2}{13}}
 \bibstyle{unsrt}
 \bibdata{bibliography.bib}
 \bibcite{smhidata}{1}
 \bibcite{SVT}{2}
 \bibcite{SMHI}{3}
+\bibcite{industrial}{4}
