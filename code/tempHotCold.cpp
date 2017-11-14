@@ -157,8 +157,6 @@ void tempTrender::hotCold(string fileName){
 	
 
 	// Save the canvas as a picture
-	c1->SaveAs(Form("hotCold_for_%s.png", location.c_str()));
-    
     c1->SaveAs(Form("HotCold%s.png", location.c_str()));
     c1->Close();
     delete warmestHist;
