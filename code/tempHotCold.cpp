@@ -86,10 +86,6 @@ void tempTrender::hotCold(string fileName){
 			}
 		}
 		else if (year > yearPrevious) {
-			/*cout << "year === " << year << endl;
-			cout << "yearPrevious === " << yearPrevious << endl;
-			cout << "maxTemp ==== " << maxTemp << endl;
-			cout << "minTemp ==== " << minTemp << endl;*/
 			bool checkLeapYear = testLeapYear(yearPrevious);
 			maxTempDayOfYear = getDayOfYear(yearPrevious, maxTempMonth, maxTempDay);
 			minTempDayOfYear = getDayOfYear(yearPrevious, minTempMonth, minTempDay);
@@ -106,14 +102,8 @@ void tempTrender::hotCold(string fileName){
 			// set max and min temp to the first day of next year
 			maxTemp = stod(datahotCold.at(i).at(6));
 			minTemp = stod(datahotCold.at(i).at(6));
-			/*cout << "test new max min temp" << endl;
-			cout << "datahotCold.at("<<i<<").at(6) === " << datahotCold.at(i).at(6) << endl;
-			cout << "stoi(datahotCold.at("<<i<<").at(6)) === " << stod(datahotCold.at(i).at(6)) << endl;
-			cout << "maxTemp ~~~~ " << maxTemp << endl;
-			cout << "minTemp ~~~~ " << minTemp << endl;*/
 			yearPrevious = year;
 		}
-		
 	}
 	
     
