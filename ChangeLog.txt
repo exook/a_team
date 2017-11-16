@@ -7,7 +7,7 @@ Branch off and start working on average temperature function (Jessamy)
 2017-11-02 : Started working on the hotCold function. (Shi)
 2017-11-02 : Created the function for temperature on a certain day, that takes day and month as input (Emelie)
 2017-11-03 : Wrote the function finding the first day of winter (Jessamy). Created the function for temperature on a certain day, that takes number of day as input (Emelie).
-2017-11-04 : Wrote the function calculating the day of year that takes date as input. 
+2017-11-04 : Wrote the function calculating the day of year that takes date as input. (Shi)
 2017-11-04 : Wrote the function finding the first day of spring and a function finding the first day of summer, and a general print function (different types of vectors) (Jessamy)
 2017-11-04 : Finished the main structure of the hotCold function that is able to plot histogram correctly. (Shi)
 2017-11-05 : Added extra part in readData function that is able to read Uppsala data as well. Also add my function that calculate the day of year to the head file for everyone to use. (Shi)
@@ -18,6 +18,6 @@ Branch off and start working on average temperature function (Jessamy)
 Optimisations in code and put all images in Latex file (Jessamy).
 2017-11-09 : Started working on hotCold section in Latex (Shi)
 2017-11-09 : Wrote introduction, added more images to report and created slides for presentation (Emelie). Wrote Latex report (Jessamy)
-2017-11-15 : Improved the report (Jessamy)
+2017-11-15 : Improved the report (Jessamy
 2017-11-15 : Improved the report and slightly modified the code. (Shi)
 
