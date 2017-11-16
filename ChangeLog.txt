@@ -18,7 +18,7 @@ Branch off and start working on average temperature function (Jessamy)
 Optimisations in code and put all images in Latex file (Jessamy).
 2017-11-09 : Started working on hotCold section in Latex (Shi)
 2017-11-09 : Wrote introduction, added more images to report and created slides for presentation (Emelie). Wrote Latex report (Jessamy)
-2017-11-15 : Improved the report (Jessamy)
+2017-11-15 : Improved the report (Jessamy
 2017-11-15 : Improved the report and slightly modified the code. (Shi)
 
 
