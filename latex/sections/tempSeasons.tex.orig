@@ -83,7 +83,11 @@ Fig. \ref{fig:fall} shows the result for fall. The bar graph shows a strange spr
 The bar graph and histogram for winter are shown in Fig. \ref{fig:winter}. The bar graph shows the first day of winter relative to the start of the year, negative numbers are at the end of the year while positive numbers correspond to a day at the beginning of the year. There is no clear trend visible. However the graph shows that not every year has a winter according to the used definition, only 44 winters where found in 54 full years. The histogram shows that winter occurs at most frequently at the end of the year. 
 
 \subsection{Discussion and Conclusion}
+<<<<<<< HEAD
 %Speciella fï¿½rhï¿½llanden as solution to early fall (still no winter, and is possible no summer):
+=======
+%Speciella förhållanden as solution to early fall (still no winter, and is possible no summer):
+>>>>>>> 5b247f6f31bba2fbb39eb1ed23bbd1ae322cb053
 % February 15 as the earliest date of the spring's arrival 
 % February 14 as the last possible date of the fall
 % 1 August the earliest possible date of fall 
