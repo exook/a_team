@@ -1,9 +1,7 @@
 \begin{thebibliography}{1}
 
-\bibitem{smhidata}
-Sveriges meteorologiska och hydrologiska~institut (SMHI).
-\newblock Dataset.
-\newblock \url{https://www.smhi.se/klimatdata/meteorologi/temperatur}.
+\bibitem{git}
+\url{https://github.com/exook/a_team}.
 
 \bibitem{SVT}
 SVT Nyheter.
@@ -21,5 +19,8 @@ Sveriges meteorologiska och hydrologiska~institut (SMHI).
 David~S. Landes.
 \newblock The unbound prometheus.
 \newblock Press Syndicate of the University of Cambridge, (1969).
+
+\bibitem{git_ref}
+\url{https://github.com/exook/a_team/commit/e35aab4204d8da82b897e5ed4eff8865cf3fb4f6}.
 
 \end{thebibliography}
