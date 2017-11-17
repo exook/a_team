@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{smhidata}
+Sveriges meteorologiska och hydrologiska~institut (SMHI).
+\newblock Dataset.
+\newblock \url{https://www.smhi.se/klimatdata/meteorologi/temperatur}.
+
 \bibitem{git}
 \url{https://github.com/exook/a_team}.
 
